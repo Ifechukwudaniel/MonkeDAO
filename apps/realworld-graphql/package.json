@@ -1,8 +1,7 @@
 {
   "name": "realworld-graphql",
   "version": "0.0.1",
-  "description": "RealWorld GraphQL",
-  "author": "vndevteam",
+  "description": "GraphQL Api",
   "private": true,
   "license": "MIT",
   "scripts": {
