@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "eslint \"{src,app,test}/**/*.{ts,tsx}\" --fix"
   },
-  "dependencies": {
-    "@monkedeals/ui": "workspace:*",
+  "dependencies": { 
     "next": "15.3.2",
     "react": "19.1.0",
     "react-dom": "19.1.0"
