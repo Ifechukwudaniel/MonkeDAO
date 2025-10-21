@@ -9,8 +9,8 @@
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky || true"
+    "_format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "_prepare": "husky || true"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",

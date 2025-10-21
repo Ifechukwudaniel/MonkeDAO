@@ -15,30 +15,30 @@ services:
     networks:
       - nestjs-turbo-network
 
-  redis:
-    image: redis/redis-stack:latest
-    restart: always
-    ports:
-      - "6379:6379"
-      - "8001:8001"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
-    environment:
-      REDIS_ARGS: "--requirepass redispass"
-    networks:
-      - nestjs-turbo-network
+  # redis:
+  #   image: redis/redis-stack:latest
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #     - "8001:8001"
+  #   volumes:
+  #     - redis_data:/data
+  #   healthcheck:
+  #     test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+  #   environment:
+  #     REDIS_ARGS: "--requirepass redispass"
+  #   networks:
+  #     - nestjs-turbo-network
 
-  maildev:
-    build:
-      context: .
-      dockerfile: maildev.Dockerfile
-    ports:
-      - ${MAIL_CLIENT_PORT}:1080
-      - ${MAIL_PORT}:1025
-    networks:
-      - nestjs-turbo-network
+  # maildev:
+  #   build:
+  #     context: .
+  #     dockerfile: maildev.Dockerfile
+  #   ports:
+  #     - ${MAIL_CLIENT_PORT}:1080
+  #     - ${MAIL_PORT}:1025
+  #   networks:
+  #     - nestjs-turbo-network
 
   pgadmin:
     container_name: pgadmin
