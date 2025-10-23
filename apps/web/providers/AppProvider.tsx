@@ -21,7 +21,8 @@ export const modal = createAppKit({
     analytics: true,
   },
   themeVariables: {
-    '--w3m-accent': '#000000',
+    '--w3m-font-family': 'spaceGrotesk',
+    '--w3m-accent': '#ffffff20',
   },
 });
 

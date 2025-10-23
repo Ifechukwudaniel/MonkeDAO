@@ -10,14 +10,15 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen  text-white px-6 py-12">
-      <div className="container mx-auto">
+      <div className="container mx-auto flex flex-col items-center">
         <section className=" mx-auto text-center mb-16 mt-12">
-          <h1 className="text-5xl font-bold mb-4">
+          <h1 className="text-5xl font-bold mb-4 mx-auto">
             Discover the best onchain deals
           </h1>
-          <p className="text-neutral-300 text-lg">
-            From NFTs to real-world perks — find exclusive offers, drops, and
-            access all in one place.
+          <p className=" text-base max-w-140 mx-auto text-center">
+            From digital collectibles to real-world rewards — explore exclusive
+            deals, early drops, and unique access passes you won’t find anywhere
+            else.
           </p>
         </section>
 

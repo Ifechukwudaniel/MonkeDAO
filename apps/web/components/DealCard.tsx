@@ -56,15 +56,15 @@ export const DealCard: React.FC<DealProps> = ({
   }, [expiryISO]);
 
   return (
-    <article className="w-full max-w-sm  rounded-2xl shadow-md overflow-hidden border border-[#86C994] bg-transparent p-3">
-      <div className="relative h-44 md:h-54 w-full rounded-lg">
+    <article className="w-full max-w-sm  rounded shadow-md overflow-hidden border border-[#C4C4C4] bg-transparent p-3">
+      <div className="relative h-44 md:h-54 w-full rounded">
         {!imgError ? (
           <Image
             src={imageUrl}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover w-full h-full rounded-lg"
+            className="object-cover w-full h-full rounded"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -80,10 +80,10 @@ export const DealCard: React.FC<DealProps> = ({
         </div>
       </div>
 
-      <div className="p-4">
-        <h3 className="text-lg font-semibold leading-tight text-neutral-900 dark:text-neutral-100">
+      <div className="py-4">
+        <span className="text-base text-black font-medium leading-tight  ">
           {title}
-        </h3>
+        </span>
         <div className="mt-2 flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
           <div className="flex items-center gap-2">
             <span className="text-xs uppercase bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-full">
@@ -108,7 +108,7 @@ export const DealCard: React.FC<DealProps> = ({
           {!isOwned ? (
             <button
               onClick={() => onBuy?.(id)}
-              className="flex-1 px-3 py-2.5 rounded-full font-semibold text-sm shadow-sm hover:shadow-md hover:border hover:border-[#86C994] border border-transparent  transition-all bg-[#ffffff20] text-[#f3efcd]  tajiraj cursor-pointer "
+              className="flex-1 px-3 py-2.5 rounded-sm font-medium text-sm hover:border hover:border-[#86C994] border border-transparent  transition-all bg-[#4A8E5D] text-white uppercase cursor-pointer "
             >
               Buy / Claim
             </button>

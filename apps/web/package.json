@@ -13,6 +13,7 @@
     "@reown/appkit": "^1.8.11",
     "@reown/appkit-adapter-solana": "^1.8.11",
     "@tailwindcss/postcss": "^4.1.15",
+    "lucide-react": "^0.546.0",
     "next": "15.3.2",
     "postcss": "^8.5.6",
     "react": "19.1.0",

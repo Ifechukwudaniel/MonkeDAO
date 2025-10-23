@@ -1,9 +1,16 @@
-'use client';
+import { useAppKit } from '@reown/appkit/react';
 
-export const ConnectButton = () => {
+export default function ConnectButton() {
+  const { open } = useAppKit();
+
   return (
-    <div>
-      <appkit-button />
-    </div>
+    <>
+      <button
+        onClick={() => open()}
+        className="text-sm text-black bg-white rounded-full "
+      >
+        Connect Wallet
+      </button>
+    </>
   );
-};
+}

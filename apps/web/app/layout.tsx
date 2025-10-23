@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { Space_Grotesk as SpaceGrotesk } from 'next/font/google';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import AppProvider from '../providers/AppProvider';
+
 import './globals.css';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
+const spaceGrotesk = SpaceGrotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  adjustFontFallback: false,
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-space-grotesk',
 });
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AppProvider>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className={`${spaceGrotesk.className} ${spaceGrotesk.variable} `}>
           <Header />
           {children}
           <Footer />
