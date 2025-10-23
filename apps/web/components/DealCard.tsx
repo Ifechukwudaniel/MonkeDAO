@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 export interface DealProps {
@@ -30,6 +31,7 @@ export const DealCard: React.FC<DealProps> = ({
   onList,
 }) => {
   const [timeLeft, setTimeLeft] = useState<string>('--:--:--');
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     if (!expiryISO) return;
@@ -54,17 +56,26 @@ export const DealCard: React.FC<DealProps> = ({
   }, [expiryISO]);
 
   return (
-    <article className="w-full max-w-sm bg-white dark:bg-neutral-900 rounded-2xl shadow-md overflow-hidden border border-neutral-100 dark:border-neutral-800">
-      <div className="relative h-44 md:h-48 w-full">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="object-cover w-full h-full"
-        />
-        <div className="absolute left-3 top-3 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+    <article className="w-full max-w-sm  rounded-2xl shadow-md overflow-hidden border border-[#86C994] bg-transparent p-3">
+      <div className="relative h-44 md:h-54 w-full rounded-lg">
+        {!imgError ? (
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover w-full h-full rounded-lg"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="flex items-center justify-center w-full h-full bg-[#F3EFCD] text-[#0b3d2e]/50 text-sm rounded-lg">
+            Image unavailable
+          </div>
+        )}
+        <div className="absolute left-3 top-3 bg-[#f3efcd] border border-black text-black px-3 py-1 rounded-full text-xs font-semibold">
           {discountPercent}% OFF
         </div>
-        <div className="absolute right-3 top-3 bg-neutral-800/70 text-white px-2 py-1 rounded text-xs">
+        <div className="absolute right-3 top-3 bg-[#184623] text-white px-2 py-1 rounded-lg text-xs">
           {merchantName}
         </div>
       </div>
@@ -97,7 +108,7 @@ export const DealCard: React.FC<DealProps> = ({
           {!isOwned ? (
             <button
               onClick={() => onBuy?.(id)}
-              className="flex-1 px-3 py-2 rounded-lg font-semibold text-sm shadow-sm hover:shadow-md transition-all bg-gradient-to-r from-indigo-600 to-violet-500 text-white"
+              className="flex-1 px-3 py-2.5 rounded-full font-semibold text-sm shadow-sm hover:shadow-md hover:border hover:border-[#86C994] border border-transparent  transition-all bg-[#ffffff20] text-[#f3efcd]  tajiraj cursor-pointer "
             >
               Buy / Claim
             </button>
@@ -105,13 +116,13 @@ export const DealCard: React.FC<DealProps> = ({
             <>
               <button
                 onClick={() => onClaim?.(id)}
-                className="flex-1 px-3 py-2 rounded-lg font-semibold text-sm border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
+                className="flex-1 px-3 py-2.5 rounded-lg font-semibold text-sm border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition tajiraj cursor-pointer "
               >
                 Redeem
               </button>
               <button
                 onClick={() => onList?.(id)}
-                className="px-3 py-2 rounded-lg font-semibold text-sm border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
+                className="px-3 py-2.5 rounded-lg font-semibold text-sm border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition tajiraj "
               >
                 List
               </button>
