@@ -4,7 +4,9 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import ConnectButton from './ConnectButton';
+import { ActionIcons } from '../ActionIcons';
+import ConnectButton from '../ConnectButton';
+import { Searchbar } from '../Searchbar';
 
 // 🎨 Interface / Props Definition
 // =====================================
@@ -18,11 +20,11 @@ const NavItems = [
 
 // Header Component
 // =====================================
-export const Header = () => {
+export const PublicHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-transparent ">
+    <header className="w-full mt-1 bg-transparent ">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3">
         {/* ✦ BRAND LOGO ✦ */}
         <Link href="/" className="flex items-center gap-2">
@@ -42,21 +44,11 @@ export const Header = () => {
           </span>
         </Link>
 
-        {/* ✦ DESKTOP NAVIGATION ✦ */}
-        <nav className="hidden md:flex items-center gap-6 bg-[#16381c] rounded-full px-6  py-2.5 ">
-          {NavItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[#ffffffaa]   font-medium text-sm"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <Searchbar />
 
         {/* ✦ CONNECT BUTTON ✦ */}
         <div className="hidden md:flex items-center">
+          <ActionIcons />
           <ConnectButton />
         </div>
 

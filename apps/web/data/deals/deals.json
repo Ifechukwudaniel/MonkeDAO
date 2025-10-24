@@ -1,0 +1,1025 @@
+{
+  "platform": {
+    "name": "DecentraDeals",
+    "version": "1.0.0",
+    "blockchain": "ethereum",
+    "lastUpdated": "2025-10-24T00:00:00Z"
+  },
+  "deals": [
+    {
+      "id": "deal_001",
+      "slug": "radisson-blu-aqua-chicago-millennium-park",
+      "category": "travel",
+      "subCategory": "hotels",
+      "title": "Radisson Blu Aqua Hotel Chicago - Luxury Stay Near Millennium Park with Breakfast & Valet",
+      "shortDescription": "Member-exclusive luxury hotel experience in downtown Chicago",
+      "bannerImage": "https://images.deals.web3/radisson-blu-aqua-banner.jpg",
+      "images": [
+        "https://images.deals.web3/radisson-blu-aqua-1.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-2.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-3.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-room.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-pool.jpg"
+      ],
+      "merchant": {
+        "id": "merchant_rad_001",
+        "name": "Radisson Hotels",
+        "walletAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+        "dateJoined": "2024-03-15T00:00:00Z",
+        "totalDeals": 47,
+        "verifiedMerchant": true,
+        "merchantRating": 4.7,
+        "totalReviews": 1243,
+        "responseRate": 98,
+        "responseTime": "within 2 hours"
+      },
+      "pricing": {
+        "originalPrice": 170.44,
+        "discountedPrice": 153.7,
+        "currency": "USD",
+        "priceUnit": "per night",
+        "discountPercentage": 10,
+        "savings": 16.74,
+        "includesFees": true,
+        "taxesIncluded": true
+      },
+      "dealScore": 92,
+      "rating": {
+        "average": 4.5,
+        "totalReviews": 46,
+        "breakdown": {
+          "5star": 28,
+          "4star": 12,
+          "3star": 4,
+          "2star": 1,
+          "1star": 1
+        }
+      },
+      "tags": [
+        "Member Exclusive",
+        "Best Rated",
+        "Downtown",
+        "Breakfast Included",
+        "Parking Included",
+        "Pet Friendly"
+      ],
+      "location": {
+        "address": "221 N Columbus Dr, Chicago, IL 60601",
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA",
+        "coordinates": {
+          "lat": 41.8868,
+          "lng": -87.6217
+        },
+        "distanceFromCenter": 0.5
+      },
+      "description": "Experience luxury in the heart of downtown Chicago at the stunning Radisson Blu Aqua Hotel. This architectural masterpiece features floor-to-ceiling windows with breathtaking views of Lake Michigan and the Chicago skyline. Each room is elegantly appointed with modern amenities, plush bedding, and spa-inspired bathrooms. Enjoy complimentary breakfast at the on-site restaurant, valet parking included, and easy access to Millennium Park, Navy Pier, and the Magnificent Mile. The hotel features a rooftop bar, fitness center, indoor pool, and business facilities. Perfect for both leisure and business travelers seeking a premium Chicago experience.",
+      "amenities": [
+        "Free WiFi",
+        "Breakfast Included",
+        "Valet Parking",
+        "Rooftop Bar",
+        "Indoor Pool",
+        "Fitness Center",
+        "24/7 Front Desk",
+        "Concierge Service",
+        "Room Service",
+        "Business Center"
+      ],
+      "options": [
+        {
+          "id": "opt_001_1",
+          "name": "Standard Queen Room",
+          "originalPrice": 170.44,
+          "discountedPrice": 153.7,
+          "available": true,
+          "maxGuests": 2
+        },
+        {
+          "id": "opt_001_2",
+          "name": "Deluxe King with Lake View",
+          "originalPrice": 220.5,
+          "discountedPrice": 198.45,
+          "available": true,
+          "maxGuests": 2
+        },
+        {
+          "id": "opt_001_3",
+          "name": "Executive Suite",
+          "originalPrice": 310.0,
+          "discountedPrice": 279.0,
+          "available": true,
+          "maxGuests": 4
+        }
+      ],
+      "availability": {
+        "startDate": "2025-10-25",
+        "endDate": "2026-03-31",
+        "bookingDeadline": "2026-03-28",
+        "blackoutDates": [
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-31",
+          "2026-01-01"
+        ]
+      },
+      "nftDetails": {
+        "mintable": true,
+        "tokenStandard": "ERC-1155",
+        "royaltyPercentage": 2.5,
+        "transferable": true,
+        "maxSupply": 1000,
+        "currentMinted": 342
+      },
+      "reviews": [
+        {
+          "id": "rev_001_1",
+          "userId": "user_0x7a3c",
+          "userName": "Sarah Mitchell",
+          "walletAddress": "0x7a3c8F9d2E1b4A5c6D8e9F0a1B2c3D4e5F6a7B8c",
+          "rating": 5,
+          "date": "2025-10-15T14:30:00Z",
+          "title": "Absolutely Stunning Hotel!",
+          "comment": "The Radisson Blu Aqua exceeded all expectations. The room was immaculate, the views were breathtaking, and the staff went above and beyond. The complimentary breakfast was excellent with plenty of options. The location is perfect - walked to Millennium Park in minutes. The rooftop bar is a must-visit for sunset drinks. Will definitely return!",
+          "verifiedPurchase": true,
+          "helpful": 24,
+          "reputation": {
+            "level": "Gold Reviewer",
+            "totalReviews": 87,
+            "badges": ["Verified Traveler", "Top Contributor"]
+          },
+          "images": [
+            "https://reviews.web3/user_rev_001_1_img1.jpg",
+            "https://reviews.web3/user_rev_001_1_img2.jpg"
+          ]
+        },
+        {
+          "id": "rev_001_2",
+          "userId": "user_0x9b2d",
+          "userName": "Michael Chen",
+          "walletAddress": "0x9b2d7E4f3A1c5B6e8D9f0A2b3C4d5E6f7A8b9C0d",
+          "rating": 4,
+          "date": "2025-10-10T09:15:00Z",
+          "title": "Great Location, Minor Issues",
+          "comment": "Overall a wonderful stay. The architecture is unique and the rooms are modern. Location is unbeatable for exploring Chicago. Only downside was some noise from the street at night, but earplugs solved that. Valet service was quick and professional. Would recommend requesting a higher floor for quieter experience.",
+          "verifiedPurchase": true,
+          "helpful": 18,
+          "reputation": {
+            "level": "Silver Reviewer",
+            "totalReviews": 34,
+            "badges": ["Verified Traveler"]
+          }
+        },
+        {
+          "id": "rev_001_3",
+          "userId": "user_0x4e8a",
+          "userName": "Jennifer Rodriguez",
+          "walletAddress": "0x4e8a6C2d9F1b3E5a7D8c0B1f2A3c4D5e6F7a8B9c",
+          "rating": 5,
+          "date": "2025-10-05T16:45:00Z",
+          "title": "Perfect for Business Trip",
+          "comment": "Stayed here for a conference and it was ideal. Fast WiFi, comfortable workspace in room, and excellent business center. The breakfast saved me time in the mornings. Staff was very accommodating with late checkout request. The fitness center is well-equipped. Highly recommend for business travelers.",
+          "verifiedPurchase": true,
+          "helpful": 15,
+          "reputation": {
+            "level": "Platinum Reviewer",
+            "totalReviews": 156,
+            "badges": [
+              "Verified Traveler",
+              "Business Expert",
+              "Top Contributor"
+            ]
+          }
+        }
+      ],
+      "purchaseStats": {
+        "totalPurchased": 2847,
+        "purchasedLast24h": 23,
+        "viewsLast24h": 456,
+        "trending": true
+      },
+      "blockchain": {
+        "contractAddress": "0x1234567890123456789012345678901234567890",
+        "tokenId": "deal_001_nft",
+        "chainId": 1
+      }
+    },
+    {
+      "id": "deal_002",
+      "slug": "great-wolf-lodge-chicago-gurnee-waterpark",
+      "category": "travel",
+      "subCategory": "resorts",
+      "title": "Great Wolf Lodge Chicago/Gurnee - Ultimate Waterpark Resort Family Adventure",
+      "shortDescription": "All-inclusive waterpark resort perfect for families",
+      "bannerImage": "https://images.deals.web3/great-wolf-gurnee-banner.jpg",
+      "images": [
+        "https://images.deals.web3/great-wolf-gurnee-1.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-2.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-waterpark.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-suite.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-arcade.jpg"
+      ],
+      "merchant": {
+        "id": "merchant_gwl_001",
+        "name": "Great Wolf Resorts",
+        "walletAddress": "0x8F3d4B2a7C1e9D5f6A8b3E4c2D1f5A6b7C8d9E0f",
+        "dateJoined": "2024-01-10T00:00:00Z",
+        "totalDeals": 93,
+        "verifiedMerchant": true,
+        "merchantRating": 4.6,
+        "totalReviews": 8956,
+        "responseRate": 99,
+        "responseTime": "within 1 hour"
+      },
+      "pricing": {
+        "originalPrice": 249.0,
+        "discountedPrice": 149.0,
+        "currency": "USD",
+        "priceUnit": "per night",
+        "discountPercentage": 40,
+        "savings": 100.0,
+        "includesFees": false,
+        "taxesIncluded": false,
+        "additionalFees": {
+          "resortFee": 25.0,
+          "taxRate": 8.5
+        }
+      },
+      "dealScore": 96,
+      "rating": {
+        "average": 4.5,
+        "totalReviews": 5604,
+        "breakdown": {
+          "5star": 3890,
+          "4star": 1234,
+          "3star": 345,
+          "2star": 89,
+          "1star": 46
+        }
+      },
+      "tags": [
+        "5000+ Bought",
+        "Best Rated",
+        "Great for Groups",
+        "Family Friendly",
+        "Waterpark Included",
+        "Trending"
+      ],
+      "location": {
+        "address": "1700 Nations Dr, Gurnee, IL 60031",
+        "city": "Gurnee",
+        "state": "IL",
+        "country": "USA",
+        "coordinates": {
+          "lat": 42.3714,
+          "lng": -87.9595
+        },
+        "distanceFromCenter": 38.5
+      },
+      "description": "Dive into the ultimate family adventure at Great Wolf Lodge Chicago/Gurnee! This premier waterpark resort features an enormous 84-degree indoor waterpark spanning over 80,000 square feet, ensuring year-round fun regardless of weather. Enjoy thrilling water slides, wave pools, lazy rivers, and a dedicated area for young children. Beyond the waterpark, discover endless entertainment including MagiQuest interactive game, arcade, mini golf, rope courses, and nightly story time. Spacious suites accommodate families of all sizes with themed decor options. On-site dining offers multiple restaurants from casual to fine dining, plus a food court for quick bites. The perfect destination where memories are made!",
+      "amenities": [
+        "Indoor Waterpark Access",
+        "Multiple Restaurants",
+        "Arcade & Game Room",
+        "MagiQuest Adventure",
+        "Spa Services",
+        "Fitness Center",
+        "Gift Shop",
+        "Free Parking",
+        "Free WiFi",
+        "Character Appearances"
+      ],
+      "options": [
+        {
+          "id": "opt_002_1",
+          "name": "Standard Family Suite (Sleeps 4)",
+          "originalPrice": 249.0,
+          "discountedPrice": 149.0,
+          "available": true,
+          "maxGuests": 4,
+          "beds": "1 Queen + 1 Sofa Bed"
+        },
+        {
+          "id": "opt_002_2",
+          "name": "Wolf Den Suite (Sleeps 6)",
+          "originalPrice": 329.0,
+          "discountedPrice": 199.0,
+          "available": true,
+          "maxGuests": 6,
+          "beds": "1 Queen + 1 Bunk Bed + 1 Sofa Bed"
+        },
+        {
+          "id": "opt_002_3",
+          "name": "Grand Bear Suite (Sleeps 8)",
+          "originalPrice": 449.0,
+          "discountedPrice": 299.0,
+          "available": true,
+          "maxGuests": 8,
+          "beds": "2 Queens + 2 Bunk Beds"
+        }
+      ],
+      "availability": {
+        "startDate": "2025-10-25",
+        "endDate": "2026-04-30",
+        "bookingDeadline": "2026-04-27",
+        "blackoutDates": [
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-31",
+          "2026-01-01"
+        ]
+      },
+      "nftDetails": {
+        "mintable": true,
+        "tokenStandard": "ERC-1155",
+        "royaltyPercentage": 3.0,
+        "transferable": true,
+        "maxSupply": 5000,
+        "currentMinted": 4127
+      },
+      "reviews": [
+        {
+          "id": "rev_002_1",
+          "userId": "user_0x5c9f",
+          "userName": "Amanda Thompson",
+          "walletAddress": "0x5c9f2D8e1A4b3C6f9E7a2D5b8C1e4F7a9B3d6E8c",
+          "rating": 5,
+          "date": "2025-10-18T11:20:00Z",
+          "title": "Kids Had a Blast!",
+          "comment": "This was our third visit and it never disappoints! The waterpark is huge with something for all ages. My 3-year-old loved the shallow areas while my 10-year-old conquered all the big slides. The MagiQuest game kept them entertained in the evening. Room was clean and spacious. Staff was incredibly friendly and helpful. The wolf walk at night was adorable. Already planning our next trip!",
+          "verifiedPurchase": true,
+          "helpful": 89,
+          "reputation": {
+            "level": "Gold Reviewer",
+            "totalReviews": 64,
+            "badges": ["Verified Traveler", "Family Expert"]
+          },
+          "images": ["https://reviews.web3/user_rev_002_1_img1.jpg"]
+        },
+        {
+          "id": "rev_002_2",
+          "userId": "user_0x7e4a",
+          "userName": "Robert Johnson",
+          "walletAddress": "0x7e4a9C3f1D6b2E8a5F7c9D4e1A3b6C8d2E5f7A9b",
+          "rating": 4,
+          "date": "2025-10-12T15:30:00Z",
+          "title": "Great Value for Families",
+          "comment": "Overall excellent experience. The waterpark alone is worth the price. We upgraded to the Wolf Den suite which was perfect for our family of 5. The themed decor really added to the experience. Food prices were a bit high but quality was good. The only downside was it gets very crowded on weekends - try to go mid-week if possible. The arcade can get expensive quickly, so set limits with kids!",
+          "verifiedPurchase": true,
+          "helpful": 67,
+          "reputation": {
+            "level": "Silver Reviewer",
+            "totalReviews": 28,
+            "badges": ["Verified Traveler"]
+          }
+        },
+        {
+          "id": "rev_002_3",
+          "userId": "user_0x2b8d",
+          "userName": "Lisa Martinez",
+          "walletAddress": "0x2b8d5F1c9A3e7D4b6C8a1E3f5B7d9C2e4A6f8B1d",
+          "rating": 5,
+          "date": "2025-10-08T13:45:00Z",
+          "title": "Perfect Winter Getaway",
+          "comment": "Visited during a snowstorm and it was amazing to be swimming while watching the snow fall outside! The 84-degree waterpark temperature was perfect. My kids are still talking about the bucket dump and wave pool. The story time before bed was a nice touch. Housekeeping was excellent. Restaurant options were good though we wish there were more healthy choices. Can't wait to return!",
+          "verifiedPurchase": true,
+          "helpful": 54,
+          "reputation": {
+            "level": "Platinum Reviewer",
+            "totalReviews": 142,
+            "badges": ["Verified Traveler", "Top Contributor", "Family Expert"]
+          }
+        }
+      ],
+      "purchaseStats": {
+        "totalPurchased": 6824,
+        "purchasedLast24h": 87,
+        "viewsLast24h": 1234,
+        "trending": true
+      },
+      "blockchain": {
+        "contractAddress": "0x2345678901234567890123456789012345678901",
+        "tokenId": "deal_002_nft",
+        "chainId": 1
+      }
+    },
+    {
+      "id": "deal_001",
+      "slug": "radisson-blu-aqua-chicago-millennium-park",
+      "category": "travel",
+      "subCategory": "hotels",
+      "title": "Radisson Blu Aqua Hotel Chicago - Luxury Stay Near Millennium Park with Breakfast & Valet",
+      "shortDescription": "Member-exclusive luxury hotel experience in downtown Chicago",
+      "bannerImage": "https://images.deals.web3/radisson-blu-aqua-banner.jpg",
+      "images": [
+        "https://images.deals.web3/radisson-blu-aqua-1.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-2.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-3.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-room.jpg",
+        "https://images.deals.web3/radisson-blu-aqua-pool.jpg"
+      ],
+      "merchant": {
+        "id": "merchant_rad_001",
+        "name": "Radisson Hotels",
+        "walletAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+        "dateJoined": "2024-03-15T00:00:00Z",
+        "totalDeals": 47,
+        "verifiedMerchant": true,
+        "merchantRating": 4.7,
+        "totalReviews": 1243,
+        "responseRate": 98,
+        "responseTime": "within 2 hours"
+      },
+      "pricing": {
+        "originalPrice": 170.44,
+        "discountedPrice": 153.7,
+        "currency": "USD",
+        "priceUnit": "per night",
+        "discountPercentage": 10,
+        "savings": 16.74,
+        "includesFees": true,
+        "taxesIncluded": true
+      },
+      "dealScore": 92,
+      "rating": {
+        "average": 4.5,
+        "totalReviews": 46,
+        "breakdown": {
+          "5star": 28,
+          "4star": 12,
+          "3star": 4,
+          "2star": 1,
+          "1star": 1
+        }
+      },
+      "tags": [
+        "Member Exclusive",
+        "Best Rated",
+        "Downtown",
+        "Breakfast Included",
+        "Parking Included",
+        "Pet Friendly"
+      ],
+      "location": {
+        "address": "221 N Columbus Dr, Chicago, IL 60601",
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA",
+        "coordinates": {
+          "lat": 41.8868,
+          "lng": -87.6217
+        },
+        "distanceFromCenter": 0.5
+      },
+      "description": "Experience luxury in the heart of downtown Chicago at the stunning Radisson Blu Aqua Hotel. This architectural masterpiece features floor-to-ceiling windows with breathtaking views of Lake Michigan and the Chicago skyline. Each room is elegantly appointed with modern amenities, plush bedding, and spa-inspired bathrooms. Enjoy complimentary breakfast at the on-site restaurant, valet parking included, and easy access to Millennium Park, Navy Pier, and the Magnificent Mile. The hotel features a rooftop bar, fitness center, indoor pool, and business facilities. Perfect for both leisure and business travelers seeking a premium Chicago experience.",
+      "amenities": [
+        "Free WiFi",
+        "Breakfast Included",
+        "Valet Parking",
+        "Rooftop Bar",
+        "Indoor Pool",
+        "Fitness Center",
+        "24/7 Front Desk",
+        "Concierge Service",
+        "Room Service",
+        "Business Center"
+      ],
+      "options": [
+        {
+          "id": "opt_001_1",
+          "name": "Standard Queen Room",
+          "originalPrice": 170.44,
+          "discountedPrice": 153.7,
+          "available": true,
+          "maxGuests": 2
+        },
+        {
+          "id": "opt_001_2",
+          "name": "Deluxe King with Lake View",
+          "originalPrice": 220.5,
+          "discountedPrice": 198.45,
+          "available": true,
+          "maxGuests": 2
+        },
+        {
+          "id": "opt_001_3",
+          "name": "Executive Suite",
+          "originalPrice": 310.0,
+          "discountedPrice": 279.0,
+          "available": true,
+          "maxGuests": 4
+        }
+      ],
+      "availability": {
+        "startDate": "2025-10-25",
+        "endDate": "2026-03-31",
+        "bookingDeadline": "2026-03-28",
+        "blackoutDates": [
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-31",
+          "2026-01-01"
+        ]
+      },
+      "nftDetails": {
+        "mintable": true,
+        "tokenStandard": "ERC-1155",
+        "royaltyPercentage": 2.5,
+        "transferable": true,
+        "maxSupply": 1000,
+        "currentMinted": 342
+      },
+      "reviews": [
+        {
+          "id": "rev_001_1",
+          "userId": "user_0x7a3c",
+          "userName": "Sarah Mitchell",
+          "walletAddress": "0x7a3c8F9d2E1b4A5c6D8e9F0a1B2c3D4e5F6a7B8c",
+          "rating": 5,
+          "date": "2025-10-15T14:30:00Z",
+          "title": "Absolutely Stunning Hotel!",
+          "comment": "The Radisson Blu Aqua exceeded all expectations. The room was immaculate, the views were breathtaking, and the staff went above and beyond. The complimentary breakfast was excellent with plenty of options. The location is perfect - walked to Millennium Park in minutes. The rooftop bar is a must-visit for sunset drinks. Will definitely return!",
+          "verifiedPurchase": true,
+          "helpful": 24,
+          "reputation": {
+            "level": "Gold Reviewer",
+            "totalReviews": 87,
+            "badges": ["Verified Traveler", "Top Contributor"]
+          },
+          "images": [
+            "https://reviews.web3/user_rev_001_1_img1.jpg",
+            "https://reviews.web3/user_rev_001_1_img2.jpg"
+          ]
+        },
+        {
+          "id": "rev_001_2",
+          "userId": "user_0x9b2d",
+          "userName": "Michael Chen",
+          "walletAddress": "0x9b2d7E4f3A1c5B6e8D9f0A2b3C4d5E6f7A8b9C0d",
+          "rating": 4,
+          "date": "2025-10-10T09:15:00Z",
+          "title": "Great Location, Minor Issues",
+          "comment": "Overall a wonderful stay. The architecture is unique and the rooms are modern. Location is unbeatable for exploring Chicago. Only downside was some noise from the street at night, but earplugs solved that. Valet service was quick and professional. Would recommend requesting a higher floor for quieter experience.",
+          "verifiedPurchase": true,
+          "helpful": 18,
+          "reputation": {
+            "level": "Silver Reviewer",
+            "totalReviews": 34,
+            "badges": ["Verified Traveler"]
+          }
+        },
+        {
+          "id": "rev_001_3",
+          "userId": "user_0x4e8a",
+          "userName": "Jennifer Rodriguez",
+          "walletAddress": "0x4e8a6C2d9F1b3E5a7D8c0B1f2A3c4D5e6F7a8B9c",
+          "rating": 5,
+          "date": "2025-10-05T16:45:00Z",
+          "title": "Perfect for Business Trip",
+          "comment": "Stayed here for a conference and it was ideal. Fast WiFi, comfortable workspace in room, and excellent business center. The breakfast saved me time in the mornings. Staff was very accommodating with late checkout request. The fitness center is well-equipped. Highly recommend for business travelers.",
+          "verifiedPurchase": true,
+          "helpful": 15,
+          "reputation": {
+            "level": "Platinum Reviewer",
+            "totalReviews": 156,
+            "badges": [
+              "Verified Traveler",
+              "Business Expert",
+              "Top Contributor"
+            ]
+          }
+        }
+      ],
+      "purchaseStats": {
+        "totalPurchased": 2847,
+        "purchasedLast24h": 23,
+        "viewsLast24h": 456,
+        "trending": true
+      },
+      "blockchain": {
+        "contractAddress": "0x1234567890123456789012345678901234567890",
+        "tokenId": "deal_001_nft",
+        "chainId": 1
+      }
+    },
+    {
+      "id": "deal_002",
+      "slug": "great-wolf-lodge-chicago-gurnee-waterpark",
+      "category": "travel",
+      "subCategory": "resorts",
+      "title": "Great Wolf Lodge Chicago/Gurnee - Ultimate Waterpark Resort Family Adventure",
+      "shortDescription": "All-inclusive waterpark resort perfect for families",
+      "bannerImage": "https://images.deals.web3/great-wolf-gurnee-banner.jpg",
+      "images": [
+        "https://images.deals.web3/great-wolf-gurnee-1.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-2.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-waterpark.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-suite.jpg",
+        "https://images.deals.web3/great-wolf-gurnee-arcade.jpg"
+      ],
+      "merchant": {
+        "id": "merchant_gwl_001",
+        "name": "Great Wolf Resorts",
+        "walletAddress": "0x8F3d4B2a7C1e9D5f6A8b3E4c2D1f5A6b7C8d9E0f",
+        "dateJoined": "2024-01-10T00:00:00Z",
+        "totalDeals": 93,
+        "verifiedMerchant": true,
+        "merchantRating": 4.6,
+        "totalReviews": 8956,
+        "responseRate": 99,
+        "responseTime": "within 1 hour"
+      },
+      "pricing": {
+        "originalPrice": 249.0,
+        "discountedPrice": 149.0,
+        "currency": "USD",
+        "priceUnit": "per night",
+        "discountPercentage": 40,
+        "savings": 100.0,
+        "includesFees": false,
+        "taxesIncluded": false,
+        "additionalFees": {
+          "resortFee": 25.0,
+          "taxRate": 8.5
+        }
+      },
+      "dealScore": 96,
+      "rating": {
+        "average": 4.5,
+        "totalReviews": 5604,
+        "breakdown": {
+          "5star": 3890,
+          "4star": 1234,
+          "3star": 345,
+          "2star": 89,
+          "1star": 46
+        }
+      },
+      "tags": [
+        "5000+ Bought",
+        "Best Rated",
+        "Great for Groups",
+        "Family Friendly",
+        "Waterpark Included",
+        "Trending"
+      ],
+      "location": {
+        "address": "1700 Nations Dr, Gurnee, IL 60031",
+        "city": "Gurnee",
+        "state": "IL",
+        "country": "USA",
+        "coordinates": {
+          "lat": 42.3714,
+          "lng": -87.9595
+        },
+        "distanceFromCenter": 38.5
+      },
+      "description": "Dive into the ultimate family adventure at Great Wolf Lodge Chicago/Gurnee! This premier waterpark resort features an enormous 84-degree indoor waterpark spanning over 80,000 square feet, ensuring year-round fun regardless of weather. Enjoy thrilling water slides, wave pools, lazy rivers, and a dedicated area for young children. Beyond the waterpark, discover endless entertainment including MagiQuest interactive game, arcade, mini golf, rope courses, and nightly story time. Spacious suites accommodate families of all sizes with themed decor options. On-site dining offers multiple restaurants from casual to fine dining, plus a food court for quick bites. The perfect destination where memories are made!",
+      "amenities": [
+        "Indoor Waterpark Access",
+        "Multiple Restaurants",
+        "Arcade & Game Room",
+        "MagiQuest Adventure",
+        "Spa Services",
+        "Fitness Center",
+        "Gift Shop",
+        "Free Parking",
+        "Free WiFi",
+        "Character Appearances"
+      ],
+      "options": [
+        {
+          "id": "opt_002_1",
+          "name": "Standard Family Suite (Sleeps 4)",
+          "originalPrice": 249.0,
+          "discountedPrice": 149.0,
+          "available": true,
+          "maxGuests": 4,
+          "beds": "1 Queen + 1 Sofa Bed"
+        },
+        {
+          "id": "opt_002_2",
+          "name": "Wolf Den Suite (Sleeps 6)",
+          "originalPrice": 329.0,
+          "discountedPrice": 199.0,
+          "available": true,
+          "maxGuests": 6,
+          "beds": "1 Queen + 1 Bunk Bed + 1 Sofa Bed"
+        },
+        {
+          "id": "opt_002_3",
+          "name": "Grand Bear Suite (Sleeps 8)",
+          "originalPrice": 449.0,
+          "discountedPrice": 299.0,
+          "available": true,
+          "maxGuests": 8,
+          "beds": "2 Queens + 2 Bunk Beds"
+        }
+      ],
+      "availability": {
+        "startDate": "2025-10-25",
+        "endDate": "2026-04-30",
+        "bookingDeadline": "2026-04-27",
+        "blackoutDates": [
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-31",
+          "2026-01-01"
+        ]
+      },
+      "nftDetails": {
+        "mintable": true,
+        "tokenStandard": "ERC-1155",
+        "royaltyPercentage": 3.0,
+        "transferable": true,
+        "maxSupply": 5000,
+        "currentMinted": 4127
+      },
+      "reviews": [
+        {
+          "id": "rev_002_1",
+          "userId": "user_0x5c9f",
+          "userName": "Amanda Thompson",
+          "walletAddress": "0x5c9f2D8e1A4b3C6f9E7a2D5b8C1e4F7a9B3d6E8c",
+          "rating": 5,
+          "date": "2025-10-18T11:20:00Z",
+          "title": "Kids Had a Blast!",
+          "comment": "This was our third visit and it never disappoints! The waterpark is huge with something for all ages. My 3-year-old loved the shallow areas while my 10-year-old conquered all the big slides. The MagiQuest game kept them entertained in the evening. Room was clean and spacious. Staff was incredibly friendly and helpful. The wolf walk at night was adorable. Already planning our next trip!",
+          "verifiedPurchase": true,
+          "helpful": 89,
+          "reputation": {
+            "level": "Gold Reviewer",
+            "totalReviews": 64,
+            "badges": ["Verified Traveler", "Family Expert"]
+          },
+          "images": ["https://reviews.web3/user_rev_002_1_img1.jpg"]
+        },
+        {
+          "id": "rev_002_2",
+          "userId": "user_0x7e4a",
+          "userName": "Robert Johnson",
+          "walletAddress": "0x7e4a9C3f1D6b2E8a5F7c9D4e1A3b6C8d2E5f7A9b",
+          "rating": 4,
+          "date": "2025-10-12T15:30:00Z",
+          "title": "Great Value for Families",
+          "comment": "Overall excellent experience. The waterpark alone is worth the price. We upgraded to the Wolf Den suite which was perfect for our family of 5. The themed decor really added to the experience. Food prices were a bit high but quality was good. The only downside was it gets very crowded on weekends - try to go mid-week if possible. The arcade can get expensive quickly, so set limits with kids!",
+          "verifiedPurchase": true,
+          "helpful": 67,
+          "reputation": {
+            "level": "Silver Reviewer",
+            "totalReviews": 28,
+            "badges": ["Verified Traveler"]
+          }
+        },
+        {
+          "id": "rev_002_3",
+          "userId": "user_0x2b8d",
+          "userName": "Lisa Martinez",
+          "walletAddress": "0x2b8d5F1c9A3e7D4b6C8a1E3f5B7d9C2e4A6f8B1d",
+          "rating": 5,
+          "date": "2025-10-08T13:45:00Z",
+          "title": "Perfect Winter Getaway",
+          "comment": "Visited during a snowstorm and it was amazing to be swimming while watching the snow fall outside! The 84-degree waterpark temperature was perfect. My kids are still talking about the bucket dump and wave pool. The story time before bed was a nice touch. Housekeeping was excellent. Restaurant options were good though we wish there were more healthy choices. Can't wait to return!",
+          "verifiedPurchase": true,
+          "helpful": 54,
+          "reputation": {
+            "level": "Platinum Reviewer",
+            "totalReviews": 142,
+            "badges": ["Verified Traveler", "Top Contributor", "Family Expert"]
+          }
+        }
+      ],
+      "purchaseStats": {
+        "totalPurchased": 6824,
+        "purchasedLast24h": 87,
+        "viewsLast24h": 1234,
+        "trending": true
+      },
+      "blockchain": {
+        "contractAddress": "0x2345678901234567890123456789012345678901",
+        "tokenId": "deal_002_nft",
+        "chainId": 1
+      }
+    },
+    {
+      "id": "deal_003",
+      "slug": "downtown-steakhouse-fine-dining-experience",
+      "category": "food",
+      "subCategory": "fineDining",
+      "title": "Morton's The Steakhouse - Premium 3-Course Dinner for Two with Wine Pairing",
+      "shortDescription": "Indulge in world-class steaks and exceptional service",
+      "bannerImage": "https://images.deals.web3/mortons-steakhouse-banner.jpg",
+      "images": [
+        "https://images.deals.web3/mortons-steakhouse-1.jpg",
+        "https://images.deals.web3/mortons-steakhouse-interior.jpg",
+        "https://images.deals.web3/mortons-steakhouse-steak.jpg",
+        "https://images.deals.web3/mortons-steakhouse-wine.jpg",
+        "https://images.deals.web3/mortons-steakhouse-dessert.jpg"
+      ],
+      "merchant": {
+        "id": "merchant_mort_001",
+        "name": "Morton's Steakhouse Group",
+        "walletAddress": "0x9C4f2E7a1D5b3A8c6F9e2B4d7A1c5E8f3B6d9C2a",
+        "dateJoined": "2024-05-20T00:00:00Z",
+        "totalDeals": 28,
+        "verifiedMerchant": true,
+        "merchantRating": 4.8,
+        "totalReviews": 3421,
+        "responseRate": 100,
+        "responseTime": "within 30 minutes"
+      },
+      "pricing": {
+        "originalPrice": 280.0,
+        "discountedPrice": 179.0,
+        "currency": "USD",
+        "priceUnit": "per voucher",
+        "discountPercentage": 36,
+        "savings": 101.0,
+        "includesFees": true,
+        "taxesIncluded": false,
+        "gratuityIncluded": false
+      },
+      "dealScore": 94,
+      "rating": {
+        "average": 4.8,
+        "totalReviews": 892,
+        "breakdown": {
+          "5star": 734,
+          "4star": 128,
+          "3star": 21,
+          "2star": 6,
+          "1star": 3
+        }
+      },
+      "tags": [
+        "Best Rated",
+        "1000+ Bought",
+        "Date Night",
+        "Special Occasion",
+        "Wine Included",
+        "Downtown"
+      ],
+      "location": {
+        "address": "65 E Wacker Pl, Chicago, IL 60601",
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA",
+        "coordinates": {
+          "lat": 41.8872,
+          "lng": -87.6267
+        },
+        "distanceFromCenter": 0.8
+      },
+      "description": "Experience the pinnacle of fine dining at Morton's The Steakhouse, where premium cuts meet impeccable service. This exclusive offer includes a carefully curated 3-course dinner for two featuring your choice of signature appetizers (including the famous Morton's Salad or French Onion Soup), premium aged steaks cooked to perfection (24oz Porterhouse, 16oz New York Strip, or 14oz Ribeye options), and decadent desserts. Complemented by expert wine pairings selected by our sommelier, each course is designed to elevate your dining experience. The elegant ambiance, featuring warm lighting and classic decor, creates the perfect atmosphere for romantic dinners, business meetings, or celebrating life's special moments.",
+      "amenities": [
+        "Valet Parking",
+        "Private Dining Rooms",
+        "Full Bar",
+        "Wine Cellar",
+        "Live Music (Weekends)",
+        "Wheelchair Accessible",
+        "Dress Code: Business Casual"
+      ],
+      "options": [
+        {
+          "id": "opt_003_1",
+          "name": "Classic 3-Course for Two",
+          "originalPrice": 280.0,
+          "discountedPrice": 179.0,
+          "available": true,
+          "includes": [
+            "2 Appetizers",
+            "2 Entrees",
+            "2 Desserts",
+            "Wine Pairing"
+          ]
+        },
+        {
+          "id": "opt_003_2",
+          "name": "Premium 4-Course for Two",
+          "originalPrice": 380.0,
+          "discountedPrice": 249.0,
+          "available": true,
+          "includes": [
+            "2 Appetizers",
+            "2 Soups/Salads",
+            "2 Premium Entrees",
+            "2 Desserts",
+            "Premium Wine Pairing"
+          ]
+        },
+        {
+          "id": "opt_003_3",
+          "name": "Chef's Tasting Menu for Two",
+          "originalPrice": 480.0,
+          "discountedPrice": 329.0,
+          "available": true,
+          "includes": [
+            "5-Course Tasting Menu",
+            "Champagne Reception",
+            "Premium Wine Pairing",
+            "Coffee/Tea Service"
+          ]
+        }
+      ],
+      "availability": {
+        "startDate": "2025-10-25",
+        "endDate": "2026-02-28",
+        "bookingDeadline": "2026-02-25",
+        "daysAvailable": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Sunday"
+        ],
+        "timeSlots": ["5:00 PM - 6:30 PM", "8:30 PM - 10:00 PM"],
+        "advanceBookingRequired": 48,
+        "blackoutDates": [
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-31",
+          "2026-01-01",
+          "2026-02-14"
+        ]
+      },
+      "nftDetails": {
+        "mintable": true,
+        "tokenStandard": "ERC-1155",
+        "royaltyPercentage": 2.0,
+        "transferable": true,
+        "maxSupply": 2000,
+        "currentMinted": 1456
+      },
+      "reviews": [
+        {
+          "id": "rev_003_1",
+          "userId": "user_0x3d7b",
+          "userName": "David Williams",
+          "walletAddress": "0x3d7b8C4e2F9a1D5c6B8e3A7f1C4d9E2b5A8c6D3f",
+          "rating": 5,
+          "date": "2025-10-20T19:45:00Z",
+          "title": "Perfect Anniversary Dinner",
+          "comment": "Celebrated our 10th anniversary here and it was absolutely perfect. The porterhouse was cooked exactly as requested - perfectly medium rare with a beautiful char. The wine pairing was spot-on, enhancing each course beautifully. Our server was attentive without being intrusive. The atmosphere was romantic and sophisticated. The chocolate lava cake for dessert was the perfect ending. This deal is an incredible value for the quality you receive. Highly recommend for special occasions!",
+          "verifiedPurchase": true,
+          "helpful": 145,
+          "reputation": {
+            "level": "Platinum Reviewer",
+            "totalReviews": 203,
+            "badges": ["Verified Diner", "Top Contributor", "Food Expert"]
+          },
+          "images": [
+            "https://reviews.web3/user_rev_003_1_img1.jpg",
+            "https://reviews.web3/user_rev_003_1_img2.jpg"
+          ]
+        },
+        {
+          "id": "rev_003_2",
+          "userId": "user_0x8a5c",
+          "userName": "Patricia Anderson",
+          "walletAddress": "0x8a5c3E1f7B2d9C4a6F8e1D3b5C7f9A2e4D6c8B1a",
+          "rating": 5,
+          "date": "2025-10-14T20:15:00Z",
+          "title": "Outstanding Service and Food",
+          "comment": "From the moment we walked in, we were treated like VIPs. The hostess was welcoming, our server knew the menu inside and out, and even the sommelier came by to explain our wine selections. The ribeye was incredibly tender and flavorful. My husband's New York strip was equally impressive. The portions are generous - we barely had room for dessert but I'm glad we did. The deal made this experience affordable for us. Will definitely return!",
+          "verifiedPurchase": true,
+          "helpful": 98,
+          "reputation": {
+            "level": "Gold Reviewer",
+            "totalReviews": 76,
+            "badges": ["Verified Diner", "Food Expert"]
+          }
+        },
+        {
+          "id": "rev_003_3",
+          "userId": "user_0x6c2e",
+          "userName": "James Taylor",
+          "walletAddress": "0x6c2e9A4f1D7b3C5a8E2f6B9d1C4a7E3f5B8d2A6c",
+          "rating": 4,
+          "date": "2025-10-09T18:30:00Z",
+          "title": "Excellent Food, Busy Night",
+          "comment": "The food quality is undeniable - everything was cooked to perfection and beautifully presented. The wine selection was excellent. We went on a Saturday night and it was quite busy, so service was a bit slower than expected, though our server was apologetic and professional. The noise level was also higher due to the crowd. Despite these minor issues, the meal itself was outstanding and the deal makes it a great value. Would recommend going on a weeknight for a quieter experience.",
+          "verifiedPurchase": true,
+          "helpful": 72,
+          "reputation": {
+            "level": "Silver Reviewer",
+            "totalReviews": 45,
+            "badges": ["Verified Diner"]
+          }
+        }
+      ],
+      "purchaseStats": {
+        "totalPurchased": 1892,
+        "purchasedLast24h": 34,
+        "viewsLast24h": 678,
+        "trending": true
+      },
+      "blockchain": {
+        "contractAddress": "0x3456789012345678901234567890123456789012",
+        "tokenId": "deal_003_nft",
+        "chainId": 1
+      }
+    }
+  ]
+}

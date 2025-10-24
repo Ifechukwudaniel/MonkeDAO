@@ -1,15 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import DealCard from '../components/DealCard';
-import { deals } from '../data/deals';
+import { CategoryLinks } from '../../components/CategoryLinks';
+import DealCard from '../../components/DealCard';
+import { productDeals } from '../../types';
 
 export default function HomePage() {
-  const trendingDeals = deals.filter((deal) => deal.isTrending);
-  const featuredDeals = deals.slice(0, 3);
+  const trendingDeals = productDeals
+    .filter((deal) => deal.purchaseStats.trending)
+    .slice(0, 5);
+  const featuredDeals = productDeals.slice(0, 3);
 
   return (
     <main className="min-h-screen  text-white px-6 py-12">
+      <CategoryLinks />
       <div className="container mx-auto flex flex-col items-center">
         <section className=" mx-auto text-center mb-16 mt-12">
           <h1 className="text-5xl font-bold mb-4 mx-auto">
@@ -27,7 +31,7 @@ export default function HomePage() {
           <div className="flex gap-6 overflow-x-auto pb-2">
             {trendingDeals.map((deal) => (
               <div key={deal.id} className="min-w-[280px] flex-shrink-0">
-                <DealCard {...deal} />
+                <DealCard deal={deal} />
               </div>
             ))}
           </div>
@@ -37,7 +41,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-semibold mb-4">Featured Deals</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredDeals.map((deal) => (
-              <DealCard key={deal.id} {...deal} />
+              <DealCard key={deal.id} deal={deal} />
             ))}
           </div>
         </section>

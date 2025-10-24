@@ -13,6 +13,7 @@
     "@reown/appkit": "^1.8.11",
     "@reown/appkit-adapter-solana": "^1.8.11",
     "@tailwindcss/postcss": "^4.1.15",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.546.0",
     "next": "15.3.2",
     "postcss": "^8.5.6",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@monkedeals/eslint-config": "workspace:*",
     "@monkedeals/typescript-config": "workspace:*",
+    "@monkedeals/ui": "workspace:*",
     "@types/node": "^24.7.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",

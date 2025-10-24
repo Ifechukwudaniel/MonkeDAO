@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk as SpaceGrotesk } from 'next/font/google';
 import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
 import AppProvider from '../providers/AppProvider';
 
 import './globals.css';
@@ -28,7 +27,6 @@ export default function RootLayout({
     <html lang="en">
       <AppProvider>
         <body className={`${spaceGrotesk.className} ${spaceGrotesk.variable} `}>
-          <Header />
           {children}
           <Footer />
         </body>

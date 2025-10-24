@@ -2,8 +2,10 @@
 
 import { createAppKit } from '@reown/appkit/react';
 import { type ReactNode } from 'react';
-import { networks, projectId, solanaWeb3JsAdapter } from '../app/config';
+import { networks, projectId, solanaWeb3JsAdapter } from '../config';
 
+// 🎨 constants
+// =====================================
 const metadata = {
   name: 'next-reown-appkit',
   description: 'next-reown-appkit',
@@ -11,6 +13,8 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/179229932'],
 };
 
+// ⚙️ AppKit instance
+// =====================================
 export const modal = createAppKit({
   adapters: [solanaWeb3JsAdapter],
   projectId,
@@ -21,11 +25,12 @@ export const modal = createAppKit({
     analytics: true,
   },
   themeVariables: {
-    '--w3m-font-family': 'spaceGrotesk',
     '--w3m-accent': '#ffffff20',
   },
 });
 
+// AppProvider
+// =====================================
 function AppProvider({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }

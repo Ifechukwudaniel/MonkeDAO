@@ -1,9 +1,9 @@
 {
-  "extends": "@sandworm/typescript-config/react-library.json",
+  "extends": "@monkedeals/typescript-config/react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@sandworm/ui/*": ["./src/*"]
+      "@monkedeals/ui/*": ["./src/*"]
     }
   },
   "include": ["."],
