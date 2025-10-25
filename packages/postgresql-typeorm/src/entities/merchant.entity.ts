@@ -45,6 +45,12 @@ export class MerchantEntity extends AbstractEntity {
   country?: string;
 
   @Column({ nullable: true })
+  walletAddress?: string;
+
+  @Column({ default: false })
+  verifiedMerchant!: boolean;
+
+  @Column({ nullable: true })
   city?: string;
 
   @Column({ nullable: true })
