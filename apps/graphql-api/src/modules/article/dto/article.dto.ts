@@ -1,5 +1,5 @@
-import { ArgsType, InputType, PartialType } from '@nestjs/graphql';
 import { StringField, StringFieldOptional } from '@monkedeals/graphql';
+import { ArgsType, InputType, PartialType } from '@nestjs/graphql';
 
 @ArgsType()
 export class SlugArgs {

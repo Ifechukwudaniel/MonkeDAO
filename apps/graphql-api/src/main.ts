@@ -1,6 +1,15 @@
 import compression from '@fastify/compress';
 import helmet from '@fastify/helmet';
 import {
+  AsyncContextProvider,
+  Environment,
+  FastifyLoggerEnv,
+  FastifyPinoLogger,
+  fastifyPinoOptions,
+  genReqId,
+  REQUEST_ID_HEADER,
+} from '@monkedeals/nest-common';
+import {
   HttpStatus,
   UnprocessableEntityException,
   ValidationError,
@@ -12,15 +21,6 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import {
-  AsyncContextProvider,
-  Environment,
-  FastifyLoggerEnv,
-  FastifyPinoLogger,
-  fastifyPinoOptions,
-  genReqId,
-  REQUEST_ID_HEADER,
-} from '@monkedeals/nest-common';
 import { AppModule } from './app.module';
 import { AllConfigType } from './config/config.type';
 import { GlobalGqlExceptionFilter } from './filters/global-gql-exception.filter';

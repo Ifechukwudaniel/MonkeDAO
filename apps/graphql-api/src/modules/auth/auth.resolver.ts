@@ -1,5 +1,5 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Public } from '@monkedeals/nest-common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { User } from '../user/model/user.model';
 import { AuthService } from './auth.service';
 import { LoginInput } from './dto/auth.dto';

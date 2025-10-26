@@ -1,3 +1,4 @@
+import { CurrentUser, getFieldNames } from '@monkedeals/graphql';
 import { Logger } from '@nestjs/common';
 import {
   Args,
@@ -8,7 +9,6 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CurrentUser, getFieldNames } from '@monkedeals/graphql';
 import type { GraphQLResolveInfo } from 'graphql';
 import { Profile } from '../profile/model/profile.model';
 import { ArticleDataLoader } from './article.loader';

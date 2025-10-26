@@ -1,6 +1,10 @@
+import {
+  ArticleEntity,
+  TagEntity,
+  UserEntity,
+} from '@monkedeals/postgresql-typeorm';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ArticleEntity, TagEntity, UserEntity } from '@monkedeals/postgresql-typeorm';
 import { ArticleDataLoader } from './article.loader';
 import { ArticleResolver } from './article.resolver';
 import { ArticleService } from './article.service';

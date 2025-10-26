@@ -1,6 +1,6 @@
-import { Args, Info, Mutation, Resolver } from '@nestjs/graphql';
 import { CurrentUser } from '@monkedeals/graphql/decorators/current-user.decorator';
 import { getFieldNames } from '@monkedeals/graphql/utils/graphql-fields.util';
+import { Args, Info, Mutation, Resolver } from '@nestjs/graphql';
 import type { GraphQLResolveInfo } from 'graphql';
 import { Article } from '../model/article.model';
 import { FavoriteService } from './favorite.service';

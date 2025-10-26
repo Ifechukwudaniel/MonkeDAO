@@ -1,5 +1,5 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CurrentUser } from '@monkedeals/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsernameArgs } from './dto/profile.dto';
 import { Profile } from './model/profile.model';
 import { ProfileService } from './profile.service';

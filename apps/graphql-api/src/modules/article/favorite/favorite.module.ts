@@ -1,6 +1,6 @@
+import { ArticleEntity, UserEntity } from '@monkedeals/postgresql-typeorm';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ArticleEntity, UserEntity } from '@monkedeals/postgresql-typeorm';
 import { FavoriteResolver } from './favorite.resolver';
 import { FavoriteService } from './favorite.service';
 

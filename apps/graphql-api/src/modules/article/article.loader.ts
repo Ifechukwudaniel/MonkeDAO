@@ -1,6 +1,6 @@
+import { ArticleEntity, UserEntity } from '@monkedeals/postgresql-typeorm';
 import { Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArticleEntity, UserEntity } from '@monkedeals/postgresql-typeorm';
 import DataLoader from 'dataloader';
 import { In, Repository } from 'typeorm';
 

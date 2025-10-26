@@ -1,8 +1,8 @@
 import { ErrorCode } from '@/constants/error-code.constant';
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ValidationException } from '@monkedeals/graphql';
 import { UserEntity, UserFollowsEntity } from '@monkedeals/postgresql-typeorm';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Profile } from './model/profile.model';
 

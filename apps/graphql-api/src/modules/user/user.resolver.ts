@@ -1,3 +1,5 @@
+import { CurrentUser } from '@monkedeals/graphql';
+import { Public } from '@monkedeals/nest-common';
 import {
   Args,
   Mutation,
@@ -6,8 +8,6 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CurrentUser } from '@monkedeals/graphql';
-import { Public } from '@monkedeals/nest-common';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserInput, UpdateUserInput } from './dto/user.dto';
 import { User } from './model/user.model';

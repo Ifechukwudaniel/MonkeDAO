@@ -1,8 +1,8 @@
 import { ErrorCode } from '@/constants/error-code.constant';
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ValidationException } from '@monkedeals/graphql';
 import { UserEntity } from '@monkedeals/postgresql-typeorm';
+import { Injectable, Logger } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserInput, UpdateUserInput } from './dto/user.dto';
