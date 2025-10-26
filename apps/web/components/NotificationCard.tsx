@@ -32,7 +32,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
   };
 
   return (
-    <div className="flex gap-3 p-4  border  border-[#C4C4C4]   hover:border-[#4A8F5D] transition-all">
+    <div className="flex gap-3 p-4  border  border-[#C4C4C4]   hover:border-[#4A8F5D] hover:bg-[#86C99440] transition-all cursor-pointer">
       <div className="flex-shrink-0">{renderIcon()}</div>
       <div className="flex-1">
         <p className="text-sm font-semibold text-gray-800">{title}</p>

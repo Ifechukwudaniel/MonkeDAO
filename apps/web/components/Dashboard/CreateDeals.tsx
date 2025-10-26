@@ -70,7 +70,7 @@ export const CreateDealForm: React.FC = () => {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto bg-white border border-gray-100 shadow-md">
+    <Card className="max-w-2xl mx-auto border rounded-none">
       <CardHeader>
         <h2 className="text-2xl font-semibold text-green-700">
           Share a Deal or Coupon

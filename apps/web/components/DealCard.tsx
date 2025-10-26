@@ -29,9 +29,9 @@ export const DealCard: React.FC<{ deal: ProductDeal }> = ({ deal }) => {
 
   return (
     <Link href={`/products/${deal.id}`}>
-      <article className="w-full max-w-sm rounded-xl overflow-hidden border border-[#C4C4C4] bg-white/5 backdrop-blur-sm p-3 hover:shadow-md transition-all duration-200">
+      <article className="w-full max-w-sm rounded-none overflow-hidden border border-[#C4C4C4] bg-white/5 backdrop-blur-sm p-3 hover:shadow-md transition-all duration-200">
         {/* Banner */}
-        <div className="relative h-48 w-full rounded-lg overflow-hidden">
+        <div className="relative h-48 w-full rounded-none overflow-hidden">
           {!imgError ? (
             <Image
               src={deal.bannerImage}

@@ -1,3 +1,9 @@
+import { MerchantDashboardHome } from 'components/merchant/MerchantHome';
+
 export default function DashboardHome() {
-  return <div></div>;
+  return (
+    <div>
+      <MerchantDashboardHome />
+    </div>
+  );
 }

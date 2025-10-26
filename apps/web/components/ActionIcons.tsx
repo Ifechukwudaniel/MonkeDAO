@@ -1,8 +1,10 @@
 'use client';
 
-import { Bell, Heart, ShoppingCart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { MiniCart } from './MiniCart';
+import { MiniNotificationIcon } from './MiniNotification';
 
 interface ActionIconProps {
   icon: React.ReactNode;
@@ -39,18 +41,9 @@ export const ActionIcons = () => {
         href="/wishlist"
         label="Wishlist"
       />
-      <ActionIcon
-        icon={<ShoppingCart size={20} />}
-        count={cartCount}
-        href="/cart"
-        label="Cart"
-      />
-      <ActionIcon
-        icon={<Bell size={20} />}
-        count={notifCount}
-        href="/notifications"
-        label="Notifications"
-      />
+      <MiniCart />
+
+      <MiniNotificationIcon />
     </div>
   );
 };

@@ -23,7 +23,7 @@ const navigationItems = [
     id: 'create-deal',
     label: 'Create Deal',
     icon: PlusCircle,
-    href: '/deals/create',
+    href: '/dashboard/deals/create',
   },
   { id: 'deals', label: 'My Deals', icon: Tag, href: '/deals' },
   { id: 'redeem', label: 'Redeem Coupon', icon: Ticket, href: '/redeem' },
@@ -96,7 +96,7 @@ export const AppSidebar = () => {
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         {!isCollapsed && (
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Groupon</h1>
+            <h1 className="text-xl font-bold text-gray-900">Monkedeals</h1>
             <p className="text-xs text-gray-500">Merchant Portal</p>
           </div>
         )}
