@@ -1,4 +1,4 @@
-# RealWorld API
+# monkedeals API
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Backend API for the RealWorld application, built with NestJS. This is part of the NestJS Turborepo monorepo.
+Backend API for the monkedeals application, built with NestJS. This is part of the NestJS Turborepo monorepo.
 
 ## Tech Stack
 
@@ -86,15 +86,15 @@ Important environment variables:
 PORT=3000
 
 # Database
-DATABASE_URL=postgresql://user:password@localhost:5432/realworld
+DATABASE_URL=postgresql://user:password@localhost:5432/monkedeals
 
 # JWT
 JWT_SECRET=your-secret-key
 JWT_EXPIRES_IN=7d
 
 # Swagger
-SWAGGER_TITLE=RealWorld API
-SWAGGER_DESCRIPTION=API documentation for RealWorld application
+SWAGGER_TITLE=monkedeals API
+SWAGGER_DESCRIPTION=API documentation for monkedeals application
 SWAGGER_VERSION=1.0
 ```
 
@@ -102,10 +102,10 @@ SWAGGER_VERSION=1.0
 
 ```bash
 # Run in development mode
-pnpm --filter=realworld-api start:dev
+pnpm --filter=monkedeals-api start:dev
 
 # Run with hot-reload
-pnpm --filter=realworld-api start:debug
+pnpm --filter=monkedeals-api start:debug
 
 # Database Migrations
 # Run pending migrations
@@ -125,23 +125,23 @@ pnpm --filter=@monkedeals/postgresql-typeorm migration:show
 
 ```bash
 # Build application
-pnpm --filter=realworld-api build
+pnpm --filter=monkedeals-api build
 
 # Run in production mode
-pnpm --filter=realworld-api start:prod
+pnpm --filter=monkedeals-api start:prod
 ```
 
 ## Testing
 
 ```bash
 # Run unit tests
-pnpm --filter=realworld-api test
+pnpm --filter=monkedeals-api test
 
 # Run e2e tests
-pnpm --filter=realworld-api test:e2e
+pnpm --filter=monkedeals-api test:e2e
 
 # Check test coverage
-pnpm --filter=realworld-api test:cov
+pnpm --filter=monkedeals-api test:cov
 ```
 
 ## API Documentation
@@ -154,10 +154,10 @@ Access Swagger UI at: `http://localhost:8001/api-docs`
 
 ```bash
 # Build image
-docker build -t realworld-api .
+docker build -t monkedeals-api .
 
 # Run container
-docker run -p 3000:3000 realworld-api
+docker run -p 3000:3000 monkedeals-api
 ```
 
 ### With PM2
@@ -167,7 +167,7 @@ docker run -p 3000:3000 realworld-api
 npm install -g pm2
 
 # Run application
-pm2 start dist/main.js --name realworld-api
+pm2 start dist/main.js --name monkedeals-api
 ```
 
 ## Development Process

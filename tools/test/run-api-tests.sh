@@ -8,7 +8,7 @@ USERNAME=${USERNAME:-u$(date +%s)}
 EMAIL=${EMAIL:-$USERNAME@mail.com}
 PASSWORD=${PASSWORD:-password}
 
-pnpm dlx newman run "$SCRIPTDIR"/realworld-api.postman_collection.json \
+pnpm dlx newman run "$SCRIPTDIR"/monkedeals-api.postman_collection.json \
   --delay-request 500 \
   --global-var "APIURL=$APIURL" \
   --global-var "USERNAME=$USERNAME" \

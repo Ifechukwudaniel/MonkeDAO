@@ -26,8 +26,8 @@ This is a monorepo built with [Turborepo](https://turbo.build/monkedeals) and [N
 
 ### Applications (Apps)
 
-- `apps/realworld-api`: API backend for RealWorld application
-- `apps/realworldx-api`: Extended API backend for RealWorld application
+- `apps/monkedeals-api`: API backend for monkedeals application
+- `apps/monkedealsx-api`: Extended API backend for monkedeals application
 - `apps/web`: Web frontend application
 - `apps/docs`: Project documentation
 
@@ -57,8 +57,8 @@ git clone https://github.com/vndevteam/nestjs-turbo.git
 pnpm install
 
 # Create environment files
-cp apps/realworld-api/.env.example apps/realworld-api/.env
-cp apps/realworldx-api/.env.example apps/realworldx-api/.env
+cp apps/monkedeals-api/.env.example apps/monkedeals-api/.env
+cp apps/monkedealsx-api/.env.example apps/monkedealsx-api/.env
 ```
 
 ## Development
@@ -68,7 +68,7 @@ cp apps/realworldx-api/.env.example apps/realworldx-api/.env
 pnpm dev
 
 # Run a specific application
-pnpm dev --filter=realworld-api
+pnpm dev --filter=monkedeals-api
 pnpm dev --filter=web
 ```
 
@@ -79,7 +79,7 @@ pnpm dev --filter=web
 pnpm build
 
 # Build a specific application
-pnpm build --filter=realworld-api
+pnpm build --filter=monkedeals-api
 ```
 
 ## Testing
@@ -89,7 +89,7 @@ pnpm build --filter=realworld-api
 pnpm test
 
 # Run tests for a specific application
-pnpm test --filter=realworld-api
+pnpm test --filter=monkedeals-api
 ```
 
 ## Deployment

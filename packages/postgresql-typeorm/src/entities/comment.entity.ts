@@ -6,9 +6,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  type Relation,
 } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { ArticleEntity } from './article.entity';
+import { DealEntity } from './deal.entity';
+import { MerchantEntity } from './merchant.entity';
 import { UserEntity } from './user.entity';
 
 @Entity('comment')
@@ -21,20 +23,13 @@ export class CommentEntity extends AbstractEntity {
   @PrimaryGeneratedColumn({ primaryKeyConstraintName: 'PK_comment_id' })
   id!: number;
 
-  @Column()
+  @Column('text')
   body!: string;
 
-  @Column({ name: 'article_id' })
-  articleId!: number;
+  @Column({ type: 'int', default: 0 })
+  rating!: number; // optional 1–5 score, useful for reviews
 
-  @ManyToOne(() => ArticleEntity, (article) => article.comments)
-  @JoinColumn({
-    name: 'article_id',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'FK_comment_article',
-  })
-  article: ArticleEntity;
-
+  /** Author Relationship **/
   @Column({ name: 'author_id' })
   authorId!: number;
 
@@ -44,7 +39,37 @@ export class CommentEntity extends AbstractEntity {
     referencedColumnName: 'id',
     foreignKeyConstraintName: 'FK_comment_user',
   })
-  author: UserEntity;
+  author!: Relation<UserEntity>;
+
+  /** Deal Relationship (optional) **/
+  @Column({ name: 'deal_id', nullable: true })
+  dealId?: number;
+
+  @ManyToOne(() => DealEntity, (deal) => deal.comments, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({
+    name: 'deal_id',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'FK_comment_deal',
+  })
+  deal?: Relation<DealEntity>;
+
+  /** Merchant Relationship (optional) **/
+  @Column({ name: 'merchant_id', nullable: true })
+  merchantId?: number;
+
+  @ManyToOne(() => MerchantEntity, (merchant) => merchant.comments, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({
+    name: 'merchant_id',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'FK_comment_merchant',
+  })
+  merchant?: Relation<MerchantEntity>;
 
   @CreateDateColumn({
     name: 'created_at',
@@ -52,7 +77,7 @@ export class CommentEntity extends AbstractEntity {
     default: () => 'CURRENT_TIMESTAMP',
     nullable: false,
   })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({
     name: 'updated_at',
@@ -60,5 +85,5 @@ export class CommentEntity extends AbstractEntity {
     default: () => 'CURRENT_TIMESTAMP',
     nullable: false,
   })
-  updatedAt: Date;
+  updatedAt!: Date;
 }

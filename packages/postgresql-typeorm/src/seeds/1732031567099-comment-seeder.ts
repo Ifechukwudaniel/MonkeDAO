@@ -1,7 +1,12 @@
 import { getRandomInt } from '@monkedeals/nest-common';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
-import { ArticleEntity, CommentEntity, UserEntity } from '../entities';
+import {
+  CommentEntity,
+  DealEntity,
+  MerchantEntity,
+  UserEntity,
+} from '../entities';
 
 export class CommentSeeder1732031567099 implements Seeder {
   track = false;
@@ -10,34 +15,51 @@ export class CommentSeeder1732031567099 implements Seeder {
     dataSource: DataSource,
     factoryManager: SeederFactoryManager,
   ): Promise<any> {
-    // Get random users
     const userRepository = dataSource.getRepository(UserEntity);
-    const numberOfUsers = await userRepository.count();
-    const randomOffset = getRandomInt(0, numberOfUsers - 1);
+    const dealRepository = dataSource.getRepository(DealEntity);
+    const merchantRepository = dataSource.getRepository(MerchantEntity);
 
+    // Get random users
+    const numberOfUsers = await userRepository.count();
+    const randomUserOffset = getRandomInt(0, Math.max(0, numberOfUsers - 10));
     const users = await userRepository
       .createQueryBuilder('user')
-      .skip(randomOffset)
+      .skip(randomUserOffset)
       .take(10)
       .getMany();
 
-    // Get random articles
-    const articleRepository = dataSource.getRepository(ArticleEntity);
-    const numberOfArticles = await articleRepository.count();
-    const randomArticleOffset = getRandomInt(0, numberOfArticles - 1);
+    // Get random deals
+    const numberOfDeals = await dealRepository.count();
+    const randomDealOffset = getRandomInt(0, Math.max(0, numberOfDeals - 10));
+    const deals = await dealRepository
+      .createQueryBuilder('deal')
+      .skip(randomDealOffset)
+      .take(10)
+      .getMany();
 
-    const articles = await articleRepository
-      .createQueryBuilder('article')
-      .skip(randomArticleOffset)
+    // Get random merchants
+    const numberOfMerchants = await merchantRepository.count();
+    const randomMerchantOffset = getRandomInt(
+      0,
+      Math.max(0, numberOfMerchants - 10),
+    );
+    const merchants = await merchantRepository
+      .createQueryBuilder('merchant')
+      .skip(randomMerchantOffset)
       .take(10)
       .getMany();
 
     const commentFactory = factoryManager.get(CommentEntity);
+
+    // Seed comments linking random users → random deals & merchants
     for (const user of users) {
-      const randomArticleNumber = getRandomInt(0, articles.length - 1);
+      const deal = deals[getRandomInt(0, deals.length - 1)];
+      const merchant = merchants[getRandomInt(0, merchants.length - 1)];
+
       await commentFactory.saveMany(5, {
         authorId: user.id,
-        articleId: articles[randomArticleNumber].id,
+        dealId: deal?.id,
+        merchantId: merchant?.id,
       });
     }
   }

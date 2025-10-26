@@ -6,7 +6,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: realworld_api
+      MYSQL_DATABASE: monkedeals_api
       MYSQL_ROOT_PASSWORD: 12345678
     ports:
       - "13306:3306"
