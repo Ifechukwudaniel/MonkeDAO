@@ -18,7 +18,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: rgb(252, 251, 242);
-    --foreground: #ededed;
+    --foreground: #171717;
   }
 }
 
@@ -33,11 +33,6 @@ h1,
 h2,
 h3 {
   font-family: 'Taviraj', serif;
-  color: #000;
-}
-
-p {
-  color: #000;
 }
 
 .tajiraj {

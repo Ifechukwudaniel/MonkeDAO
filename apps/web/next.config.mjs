@@ -7,6 +7,9 @@ const nextConfig = {
       'images.web3deals.io',
       'cdn.web3deals.io',
       'images.web3',
+      'i.pravatar.cc',
+      'images.unsplash.com',
+      'prod-image-cdn.tensor.trade',
     ],
   },
 };

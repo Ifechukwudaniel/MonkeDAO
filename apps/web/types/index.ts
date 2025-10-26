@@ -175,7 +175,8 @@ export const productDeals: ProductDeal[] = [
       totalReviews: 1243,
       responseRate: 98,
       responseTime: 'within 2 hours',
-      logoUrl: 'https://images.web3/logos/radisson.png',
+      logoUrl:
+        'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg',
     },
     pricing: {
       originalPrice: 170.44,
@@ -288,8 +289,8 @@ export const productDeals: ProductDeal[] = [
           badges: ['Verified Traveler', 'Top Contributor'],
         },
         images: [
-          'https://reviews.web3/user_rev_001_1_img1.jpg',
-          'https://reviews.web3/user_rev_001_1_img2.jpg',
+          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg',
+          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg',
         ],
       },
     ],
@@ -317,9 +318,9 @@ export const productDeals: ProductDeal[] = [
     bannerImage:
       'https://images.pexels.com/photos/8720270/pexels-photo-8720270.jpeg',
     images: [
-      'https://images.web3deals.io/adobe-suite-1.jpg',
-      'https://images.web3deals.io/adobe-suite-2.jpg',
-      'https://images.web3deals.io/adobe-suite-3.jpg',
+      'https://images.pexels.com/photos/8720271/pexels-photo-8720271.jpeg',
+      'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg',
+      'https://images.pexels.com/photos/34411122/pexels-photo-34411122.jpeg',
     ],
     merchant: {
       id: 'merchant_softvault_001',
@@ -332,7 +333,8 @@ export const productDeals: ProductDeal[] = [
       totalReviews: 842,
       responseRate: 97,
       responseTime: 'within 3 hours',
-      logoUrl: 'https://cdn.web3deals.io/logos/softvault.png',
+      logoUrl:
+        'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg',
     },
     pricing: {
       originalPrice: 899,

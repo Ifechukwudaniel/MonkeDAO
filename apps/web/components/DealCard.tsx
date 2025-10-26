@@ -60,9 +60,7 @@ export const DealCard: React.FC<{ deal: ProductDeal }> = ({ deal }) => {
 
         {/* Body */}
         <div className="py-3">
-          <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2">
-            {deal.title}
-          </h3>
+          <h3 className="text-base font-semibold line-clamp-2">{deal.title}</h3>
           <p className="text-sm text-neutral-500 mt-1 line-clamp-2">
             {deal.shortDescription}
           </p>

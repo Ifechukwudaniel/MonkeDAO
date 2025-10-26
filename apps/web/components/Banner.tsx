@@ -18,7 +18,7 @@ export const Banner = ({ announcement, className = '' }: BannerProps) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className={`absolute  top-0 left-0 w-full z-50 bg-[#184623] text-white overflow-hidden ${className}`}
+          className={` w-full  bg-[#184623] text-white overflow-hidden ${className}`}
         >
           <div className="flex items-center justify-between px-4 py-2">
             <div className="relative flex-1 overflow-hidden whitespace-nowrap">

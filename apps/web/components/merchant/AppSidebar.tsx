@@ -14,51 +14,22 @@ import {
   Users,
   Wallet,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const navigationItems = [
-  {
-    id: 'home',
-    label: 'Home',
-    icon: Home,
-    href: '/dashboard',
-  },
+  { id: 'home', label: 'Home', icon: Home, href: '/dashboard' },
   {
     id: 'create-deal',
     label: 'Create Deal',
     icon: PlusCircle,
     href: '/deals/create',
   },
-  {
-    id: 'deals',
-    label: 'My Deals',
-    icon: Tag,
-    href: '/deals',
-  },
-  {
-    id: 'redeem',
-    label: 'Redeem Coupon',
-    icon: Ticket,
-    href: '/redeem',
-  },
-  {
-    id: 'analytics',
-    label: 'Analytics',
-    icon: BarChart3,
-    href: '/analytics',
-  },
-  {
-    id: 'customers',
-    label: 'Customers',
-    icon: Users,
-    href: '/customers',
-  },
-  {
-    id: 'payments',
-    label: 'Payments',
-    icon: Wallet,
-    href: '/payments',
-  },
+  { id: 'deals', label: 'My Deals', icon: Tag, href: '/deals' },
+  { id: 'redeem', label: 'Redeem Coupon', icon: Ticket, href: '/redeem' },
+  { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/analytics' },
+  { id: 'customers', label: 'Customers', icon: Users, href: '/customers' },
+  { id: 'payments', label: 'Payments', icon: Wallet, href: '/payments' },
 ];
 
 const bottomNavigationItems = [
@@ -66,38 +37,24 @@ const bottomNavigationItems = [
     id: 'notifications',
     label: 'Notifications',
     icon: Bell,
-    href: '/notifications',
+    href: '/dashboard/notifications',
     badge: 3,
   },
-  {
-    id: 'help',
-    label: 'Help & Support',
-    icon: HelpCircle,
-    href: '/help',
-  },
-  {
-    id: 'settings',
-    label: 'Settings',
-    icon: Settings,
-    href: '/settings',
-  },
+  { id: 'help', label: 'Help & Support', icon: HelpCircle, href: '/help' },
+  { id: 'settings', label: 'Settings', icon: Settings, href: '/settings' },
 ];
 
-// Sidebar navigation item component
-const SidebarNavItem = ({ item, isActive, isCollapsed, onClick }) => {
+// Sidebar navigation item component using Link
+const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
   const Icon = item.icon;
 
   return (
-    <button
-      onClick={() => onClick(item.id)}
+    <Link
+      href={item.href}
       className={`
         w-full flex items-center gap-3 px-3 py-2.5 rounded-lg
         transition-all duration-200 relative group
-        ${
-          isActive
-            ? 'bg-blue-50 text-blue-600 font-medium'
-            : 'text-gray-700 hover:bg-gray-100'
-        }
+        ${isActive ? 'text-white bg-[#4A8F5D] font-medium' : 'text-gray-700 hover:bg-[#4A8F5D20]'}
         ${isCollapsed ? 'justify-center' : ''}
       `}
     >
@@ -123,7 +80,7 @@ const SidebarNavItem = ({ item, isActive, isCollapsed, onClick }) => {
           )}
         </div>
       )}
-    </button>
+    </Link>
   );
 };
 
@@ -131,18 +88,9 @@ export const AppSidebar = () => {
   const [activeItem, setActiveItem] = useState('home');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const handleNavigation = (itemId) => {
-    setActiveItem(itemId);
-    console.log(`Navigating to: ${itemId}`);
-  };
-
   return (
     <div
-      className={`
-      h-screen bg-white border-r border-gray-200 flex flex-col
-      transition-all duration-300 ease-in-out
-      ${isCollapsed ? 'w-20' : 'w-64'}
-    `}
+      className={`h-screen border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}
     >
       {/* Header */}
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
@@ -172,7 +120,6 @@ export const AppSidebar = () => {
             item={item}
             isActive={activeItem === item.id}
             isCollapsed={isCollapsed}
-            onClick={handleNavigation}
           />
         ))}
       </nav>
@@ -185,7 +132,6 @@ export const AppSidebar = () => {
             item={item}
             isActive={activeItem === item.id}
             isCollapsed={isCollapsed}
-            onClick={handleNavigation}
           />
         ))}
       </div>

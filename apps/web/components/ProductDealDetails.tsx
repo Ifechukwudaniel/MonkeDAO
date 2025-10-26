@@ -2,6 +2,7 @@
 
 import { Clock, GitBranch, Heart, MapPin, Share2, Tag } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 import type { ProductDeal } from '../types/index';
 
@@ -49,9 +50,9 @@ const DealGallery: React.FC<{
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`shrink-0 relative h-16 w-24 rounded-md overflow-hidden border ${
+              className={`shrink-0 my-2 relative h-16 w-24 rounded-md overflow-hidden border ${
                 i === active
-                  ? 'ring-2 ring-offset-1 ring-indigo-400'
+                  ? 'ring-2 ring-offset-1 ring-green-500'
                   : 'border-neutral-200'
               }`}
             >
@@ -78,7 +79,7 @@ const TagsRow: React.FC<{ tags: string[] }> = ({ tags }) => {
       {tags.map((t) => (
         <span
           key={t}
-          className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700"
+          className="inline-flex items-center gap-2 rounded-full border border-[#C4C4C4] px-3 py-1 text-xs font-medium text-neutral-700"
         >
           <Tag className="w-3 h-3" /> {t}
         </span>
@@ -104,21 +105,21 @@ const DealHeader: React.FC<{
 
       <div className="mt-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-4">
-          <div className="inline-flex items-center gap-2 rounded-full bg-neutral-50 px-3 py-1 text-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C4C4C4] px-3 py-1 text-sm">
             <MapPin className="w-4 h-4 text-neutral-600" />
             <span className="text-xs text-neutral-600">
               {deal.location.city ?? deal.location.country}
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full bg-neutral-50 px-3 py-1 text-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C4C4C4] px-3 py-1 text-sm">
             <Clock className="w-4 h-4 text-neutral-600" />
             <span className="text-xs text-neutral-600">
               {deal.availability.startDate} → {deal.availability.endDate}
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full bg-neutral-50 px-3 py-1 text-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C4C4C4] px-3 py-1 text-sm">
             <GitBranch className="w-4 h-4 text-neutral-600" />
             <span className="text-xs text-neutral-600">
               DealScore: {deal.dealScore}
@@ -132,8 +133,8 @@ const DealHeader: React.FC<{
             aria-label="Add to wishlist"
             className={`inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition ${
               liked
-                ? 'bg-rose-50 text-rose-600'
-                : 'bg-neutral-50 text-neutral-700'
+                ? 'border border-[#C4C4C4] text-rose-600'
+                : 'border border-[#C4C4C4] text-neutral-700'
             }`}
           >
             <Heart className="w-4 h-4" />
@@ -143,7 +144,7 @@ const DealHeader: React.FC<{
           <button
             onClick={onShare}
             aria-label="Share deal"
-            className="inline-flex items-center gap-2 rounded-md px-3 py-2 bg-neutral-50 text-neutral-700 text-sm font-medium"
+            className="inline-flex items-center gap-2 rounded-md px-3 py-2 border border-[#C4C4C4] text-neutral-700 text-sm font-medium"
           >
             <Share2 className="w-4 h-4" />
             <span>Share</span>
@@ -174,13 +175,15 @@ const MerchantCard: React.FC<{ merchant: ProductDeal['merchant'] }> = ({
               className="object-cover"
             />
           ) : (
-            <div className="text-sm font-semibold text-neutral-700">
+            <Link href="/" className="text-sm font-semibold text-neutral-700">
               {merchant.name.slice(0, 2)}
-            </div>
+            </Link>
           )}
         </div>
         <div>
-          <div className="font-semibold">{merchant.name}</div>
+          <Link href={'/profile'} className="font-semibold">
+            {merchant.name}
+          </Link>
           <div className="text-xs text-neutral-500">
             Joined {new Date(merchant.dateJoined).getFullYear()} ·{' '}
             {merchant.totalDeals} deals
@@ -229,7 +232,7 @@ const PurchasePanel: React.FC<{
               ? (selOption.discountedPrice ?? deal.pricing.discountedPrice)
               : deal.pricing.discountedPrice}
           </div>
-          <div className="text-sm text-neutral-400 line-through">
+          <div className="text-sm text-black line-through">
             {deal.pricing.currency}{' '}
             {selOption
               ? (selOption.originalPrice ?? deal.pricing.originalPrice)
@@ -254,7 +257,7 @@ const PurchasePanel: React.FC<{
       </div>
 
       <div className="mt-4">
-        <label className="text-xs text-neutral-500">Options</label>
+        <label className="text-xs text-black">Options</label>
         <div className="mt-2 flex flex-col gap-2">
           {deal.options.map((o) => (
             <button
@@ -268,8 +271,8 @@ const PurchasePanel: React.FC<{
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="font-medium">{o.name}</div>
-                  <div className="text-xs text-neutral-500">
+                  <div className="font-medium text-black">{o.name}</div>
+                  <div className="text-xs text-black">
                     {deal.pricing.currency} {o.discountedPrice} ·{' '}
                     {o.available ? 'Available' : 'Sold out'}
                   </div>
@@ -287,19 +290,10 @@ const PurchasePanel: React.FC<{
         <button
           onClick={() => selected && onPurchase(selected)}
           disabled={!selOption?.available}
-          className="flex-1 rounded-md bg-emerald-600 text-white px-4 py-2 font-semibold disabled:opacity-50"
+          className="flex-1 rounded-md bg-[#4A8F5D] uppercase text-xs hover:bg-[#3e7a4e] text-white px-4 py-3 font-semibold disabled:opacity-50 cursor-pointer"
         >
-          Buy / Claim
+          Buy now
         </button>
-
-        {deal.nftDetails.mintable && (
-          <button
-            onClick={() => selected && onMint?.(selected)}
-            className="rounded-md border border-neutral-200 px-4 py-2 font-semibold"
-          >
-            Mint NFT
-          </button>
-        )}
       </div>
 
       <div className="mt-3 text-xs text-neutral-500">
@@ -441,16 +435,16 @@ export const ProductDealDetail: React.FC<{
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Gallery */}
         <div className="lg:col-span-2 space-y-4">
-          <DealGallery
-            images={deal.images}
-            banner={deal.bannerImage}
-            title={deal.title}
-          />
           <DealHeader
             deal={deal}
             liked={liked}
             onToggleWishlist={handleWishlist}
             onShare={handleShare}
+          />
+          <DealGallery
+            images={deal.images}
+            banner={deal.bannerImage}
+            title={deal.title}
           />
 
           <section className="rounded-lg border border-neutral-200 p-4 bg-white/50">

@@ -64,7 +64,7 @@ export const Searchbar = () => {
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search for deals, products, stores..."
-          className="w-full rounded-full border border-gray-300 bg-white py-3 pl-12 pr-4 text-gray-900 transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#184623]"
+          className="w-full rounded-xl border border-gray-300 py-2 pl-12 pr-4 text-gray-900 transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#184623]"
         />
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 transform text-gray-400"

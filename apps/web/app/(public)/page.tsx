@@ -12,7 +12,7 @@ export default function HomePage() {
   const featuredDeals = productDeals.slice(0, 3);
 
   return (
-    <main className="min-h-screen  text-white px-6 py-12">
+    <main className="min-h-screen   px-6 py-12">
       <CategoryLinks />
       <div className="container mx-auto flex flex-col items-center">
         <section className=" mx-auto text-center mb-16 mt-12">
