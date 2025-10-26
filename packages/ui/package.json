@@ -39,7 +39,6 @@
   "devDependencies": {
     "@monkedeals/eslint-config": "workspace:*",
     "@monkedeals/typescript-config": "workspace:*",
-    "@monkedeals/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.11",
     "@turbo/gen": "^2.5.5",
     "@types/node": "catalog:",

@@ -1,13 +1,13 @@
-# RealWorld Web App
+# monkedeals Web App
 
 ## Introduction
 
-Web frontend application for RealWorld, built with Next.js. This is part of the NestJS Turborepo monorepo.
+Web frontend application for monkedeals, built with Next.js. This is part of the NestJS Turborepo monorepo.
 
 ## Features
 
 - Modern and responsive user interface
-- Integration with RealWorld API
+- Integration with monkedeals API
 - Multi-language support
 - SEO optimization
 - Progressive Web App (PWA)
@@ -106,10 +106,10 @@ pnpm run format
 
 ```bash
 # Build image
-docker build -t realworld-web .
+docker build -t monkedeals-web .
 
 # Run container
-docker run -p 3000:3000 realworld-web
+docker run -p 3000:3000 monkedeals-web
 ```
 
 ### With Vercel

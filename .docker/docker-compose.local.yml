@@ -1,12 +1,12 @@
 services:
   db:
-    container_name: realworld-postgres
+    container_name: monkedeals-postgres
     image: postgres:17
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: realworld
+      POSTGRES_DB: monkedeals
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       TZ: "UTC"
