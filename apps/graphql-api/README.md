@@ -86,7 +86,7 @@ Important environment variables:
 PORT=3000
 
 # Database
-DATABASE_URL=postgresql://user:password@localhost:5432/monkedeals
+DATABASE_URL=postgresql://user:password@localhost:25432/monkedeals
 
 # JWT
 JWT_SECRET=your-secret-key
