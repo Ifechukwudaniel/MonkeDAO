@@ -110,4 +110,5 @@ If you encounter any issues or have questions, please create an issue on GitHub.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
 # MonkeDAO

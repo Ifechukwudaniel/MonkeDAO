@@ -1,6 +1,14 @@
 import compression from '@fastify/compress';
 import helmet from '@fastify/helmet';
 import {
+  AsyncContextProvider,
+  Environment,
+  FastifyLoggerEnv,
+  fastifyPinoOptions,
+  genReqId,
+  REQUEST_ID_HEADER,
+} from '@monkedeals/nest-common';
+import {
   HttpStatus,
   UnprocessableEntityException,
   ValidationError,
@@ -12,20 +20,13 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import {
-  AsyncContextProvider,
-  Environment,
-  FastifyLoggerEnv,
-  FastifyPinoLogger,
-  fastifyPinoOptions,
-  genReqId,
-  REQUEST_ID_HEADER,
-} from '@monkedeals/nest-common';
 import { AppModule } from './app.module';
 import { AllConfigType } from './config/config.type';
 import { GlobalGqlExceptionFilter } from './filters/global-gql-exception.filter';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './modules/auth/auth.service';
+
+import { ConsoleLogger } from '@nestjs/common';
 
 async function bootstrap() {
   const fastifyAdapter = new FastifyAdapter({
@@ -48,22 +49,24 @@ async function bootstrap() {
 
   // Configure the logger
   const asyncContext = app.get(AsyncContextProvider);
-  const logger = new FastifyPinoLogger(
-    asyncContext,
-    fastifyAdapter.getInstance().log,
-  );
+  // const logger = new FastifyPinoLogger(
+  //   asyncContext,
+  //   fastifyAdapter.getInstance().log,
+  // );
 
   // If you want to use the console logger, uncomment the following code
-  // const logger = new ConsoleLogger({
-  //   ...(configService.getOrThrow('app.nodeEnv', { infer: true }) ===
-  //     Environment.LOCAL && {
-  //     colors: true,
-  //   }),
-  //   ...(configService.getOrThrow('app.nodeEnv', { infer: true }) !==
-  //     Environment.LOCAL && {
-  //     json: true,
-  //   }),
-  // });
+
+  const logger = new ConsoleLogger({
+    ...(configService.getOrThrow('app.nodeEnv', { infer: true }) ===
+      Environment.LOCAL && {
+      colors: true,
+    }),
+    ...(configService.getOrThrow('app.nodeEnv', { infer: true }) !==
+      Environment.LOCAL && {
+      json: true,
+    }),
+  });
+
   app.useLogger(logger);
 
   fastifyAdapter.getInstance().addHook('onRequest', (request, reply, done) => {

@@ -1,3 +1,4 @@
+import { AuthOptional, Public } from '@monkedeals/nest-common';
 import {
   HttpCode,
   HttpStatus,
@@ -16,7 +17,6 @@ import {
   ApiSecurity,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { AuthOptional, Public } from '@monkedeals/nest-common';
 import { STATUS_CODES } from 'http';
 import { ErrorDto } from '../dto';
 import { CursorPaginatedDto } from '../dto/cursor-pagination/paginated.dto';

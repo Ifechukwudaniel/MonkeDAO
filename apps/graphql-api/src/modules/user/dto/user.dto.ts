@@ -1,4 +1,3 @@
-import { InputType } from '@nestjs/graphql';
 import {
   EmailField,
   EmailFieldOptional,
@@ -8,6 +7,7 @@ import {
   URLFieldOptional,
 } from '@monkedeals/graphql';
 import { lowerCaseTransformer } from '@monkedeals/nest-common';
+import { InputType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 
 @InputType({ description: 'User register request' })

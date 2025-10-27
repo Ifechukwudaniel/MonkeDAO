@@ -1,3 +1,4 @@
+import { CurrentUser } from '@monkedeals/graphql';
 import {
   Args,
   Mutation,
@@ -6,10 +7,8 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CurrentUser } from '@monkedeals/graphql';
-import { Public } from '@monkedeals/nest-common';
 import { AuthService } from '../auth/auth.service';
-import { CreateUserInput, UpdateUserInput } from './dto/user.dto';
+import { UpdateUserInput } from './dto/user.dto';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
 
@@ -28,15 +27,6 @@ export class UserResolver {
     @CurrentUser() user: { id: number; token: string },
   ): Promise<User> {
     return this.userService.get(user);
-  }
-
-  @Public()
-  @Mutation(() => User, {
-    name: 'createUser',
-    description: 'Register new user',
-  })
-  async createUser(@Args('input') input: CreateUserInput): Promise<User> {
-    return await this.userService.create(input);
   }
 
   @Mutation(() => User, {

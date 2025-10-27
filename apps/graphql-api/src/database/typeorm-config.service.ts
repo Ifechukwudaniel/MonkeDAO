@@ -1,8 +1,8 @@
 import { AllConfigType } from '@/config/config.type';
+import { TypeOrmCustomLogger } from '@monkedeals/postgresql-typeorm';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { TypeOrmCustomLogger } from '@monkedeals/postgresql-typeorm';
 import { join } from 'path';
 
 @Injectable()

@@ -1,5 +1,3 @@
-import { applyDecorators } from '@nestjs/common';
-import { EnumOptions, Field, type FieldOptions } from '@nestjs/graphql';
 import {
   Constructor,
   IsNullable,
@@ -8,6 +6,8 @@ import {
   ToLowerCase,
   ToUpperCase,
 } from '@monkedeals/nest-common';
+import { applyDecorators } from '@nestjs/common';
+import { EnumOptions, Field, type FieldOptions } from '@nestjs/graphql';
 import {
   IsBoolean,
   IsDate,

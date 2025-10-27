@@ -1,6 +1,6 @@
+import { TagEntity } from '@monkedeals/postgresql-typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TagEntity } from '@monkedeals/postgresql-typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
