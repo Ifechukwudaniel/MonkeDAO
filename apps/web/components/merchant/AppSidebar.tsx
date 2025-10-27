@@ -15,6 +15,7 @@ import {
   Wallet,
 } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // ✅ import this
 import { useState } from 'react';
 
 const navigationItems = [
@@ -25,11 +26,31 @@ const navigationItems = [
     icon: PlusCircle,
     href: '/dashboard/deals/create',
   },
-  { id: 'deals', label: 'My Deals', icon: Tag, href: '/deals' },
-  { id: 'redeem', label: 'Redeem Coupon', icon: Ticket, href: '/redeem' },
-  { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/analytics' },
-  { id: 'customers', label: 'Customers', icon: Users, href: '/customers' },
-  { id: 'payments', label: 'Payments', icon: Wallet, href: '/payments' },
+  { id: 'deals', label: 'My Deals', icon: Tag, href: '/dashboard/deals' },
+  {
+    id: 'redeem',
+    label: 'Redeem Coupon',
+    icon: Ticket,
+    href: '/dashboard/redeem',
+  },
+  {
+    id: 'analytics',
+    label: 'Analytics',
+    icon: BarChart3,
+    href: '/dashboard/analytics',
+  },
+  {
+    id: 'customers',
+    label: 'Customers',
+    icon: Users,
+    href: '/dashboard/customers',
+  },
+  {
+    id: 'payments',
+    label: 'Payments',
+    icon: Wallet,
+    href: '/dashboard/payments',
+  },
 ];
 
 const bottomNavigationItems = [
@@ -41,10 +62,14 @@ const bottomNavigationItems = [
     badge: 3,
   },
   { id: 'help', label: 'Help & Support', icon: HelpCircle, href: '/help' },
-  { id: 'settings', label: 'Settings', icon: Settings, href: '/settings' },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: Settings,
+    href: '/dashboard/settings',
+  },
 ];
 
-// Sidebar navigation item component using Link
 const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
   const Icon = item.icon;
 
@@ -69,7 +94,6 @@ const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
           )}
         </>
       )}
-
       {isCollapsed && (
         <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50">
           {item.label}
@@ -85,8 +109,11 @@ const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
 };
 
 export const AppSidebar = () => {
-  const [activeItem, setActiveItem] = useState('home');
+  const pathname = usePathname(); // ✅ get current path
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  // Function to check if the current item is active
+  const isActive = (href: string) => pathname === href;
 
   return (
     <div
@@ -118,7 +145,7 @@ export const AppSidebar = () => {
           <SidebarNavItem
             key={item.id}
             item={item}
-            isActive={activeItem === item.id}
+            isActive={isActive(item.href)}
             isCollapsed={isCollapsed}
           />
         ))}
@@ -130,7 +157,7 @@ export const AppSidebar = () => {
           <SidebarNavItem
             key={item.id}
             item={item}
-            isActive={activeItem === item.id}
+            isActive={isActive(item.href)}
             isCollapsed={isCollapsed}
           />
         ))}

@@ -1,3 +1,3 @@
 export default function Deals() {
-  return <div>aLL Deals</div>;
+  return <div>Created deals goes here</div>;
 }

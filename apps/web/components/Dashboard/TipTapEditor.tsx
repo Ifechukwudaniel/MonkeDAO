@@ -21,7 +21,6 @@ export const TiptapEditor: React.FC<TiptapEditorProps> = ({
       StarterKit,
       Link.configure({ openOnClick: false }),
       Underline,
-
       Markdown, // to support markdown in/out :contentReference[oaicite:2]{index=2}
     ],
     content: initialMarkdown,

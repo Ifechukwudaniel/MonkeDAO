@@ -70,11 +70,9 @@ export const CreateDealForm: React.FC = () => {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto border rounded-none">
+    <Card className="max-w-2xl mx-auto border border-[#C4C4C4] rounded-none">
       <CardHeader>
-        <h2 className="text-2xl font-semibold text-green-700">
-          Share a Deal or Coupon
-        </h2>
+        <h2 className="text-3xl font-semibold">Share a Deal or Coupon</h2>
         <p className="text-sm text-gray-500">
           Want to post a great deal? Keep your title clear and include price,
           store, and perks!
