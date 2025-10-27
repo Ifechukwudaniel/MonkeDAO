@@ -1,8 +1,6 @@
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { BaseContext } from '@apollo/server';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { appConfig } from '@monkedeals/graphql';
 import {
   AsyncContextProvider,
   Environment,
@@ -10,6 +8,11 @@ import {
   RequestIdMiddleware,
 } from '@monkedeals/nest-common';
 import { databaseConfig } from '@monkedeals/postgresql-typeorm';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   AcceptLanguageResolver,
   HeaderResolver,
@@ -21,12 +24,9 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { AllConfigType } from './config/config.type';
+import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { ApiModule } from './modules/api.module';
 import authConfig from './modules/auth/config/auth.config';
-import { BaseContext } from '@apollo/server';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { appConfig } from '@monkedeals/graphql';
-import { TypeOrmConfigService } from './database/typeorm-config.service';
 
 const configModule = ConfigModule.forRoot({
   isGlobal: true,

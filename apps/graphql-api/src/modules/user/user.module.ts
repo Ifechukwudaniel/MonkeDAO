@@ -1,6 +1,6 @@
+import { UserEntity } from '@monkedeals/postgresql-typeorm';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '@monkedeals/postgresql-typeorm';
 import { AuthModule } from '../auth/auth.module';
 import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';

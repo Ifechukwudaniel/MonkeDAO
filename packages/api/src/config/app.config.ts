@@ -1,5 +1,9 @@
+import {
+  Environment,
+  LogService,
+  validateConfig,
+} from '@monkedeals/nest-common';
 import { registerAs } from '@nestjs/config';
-import { Environment, LogService, validateConfig } from '@monkedeals/nest-common';
 import {
   IsBoolean,
   IsEnum,

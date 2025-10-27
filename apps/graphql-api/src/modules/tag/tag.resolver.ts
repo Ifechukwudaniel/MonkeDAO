@@ -1,5 +1,5 @@
-import { Query, Resolver } from '@nestjs/graphql';
 import { Public } from '@monkedeals/nest-common';
+import { Query, Resolver } from '@nestjs/graphql';
 import { TagService } from './tag.service';
 
 @Resolver()

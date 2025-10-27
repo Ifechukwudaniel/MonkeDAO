@@ -1,3 +1,4 @@
+import { IS_AUTH_OPTIONAL, IS_PUBLIC } from '@monkedeals/nest-common';
 import {
   CanActivate,
   ExecutionContext,
@@ -6,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { IS_AUTH_OPTIONAL, IS_PUBLIC } from '@monkedeals/nest-common';
 import { type FastifyRequest } from 'fastify';
 import { AuthService } from 'src/modules/auth/auth.service';
 
