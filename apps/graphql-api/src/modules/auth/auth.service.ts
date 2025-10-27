@@ -1,4 +1,6 @@
 import { AllConfigType } from '@/config/config.type';
+import { ErrorCode } from '@/constants/error-code.constant';
+import { ValidationException } from '@monkedeals/graphql/exceptions/validation.exception';
 import { UserEntity } from '@monkedeals/postgresql-typeorm';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -38,7 +40,7 @@ export class AuthService {
     });
 
     if (existingUser) {
-      throw new UnauthorizedException('Wallet already registered');
+      throw new ValidationException(ErrorCode.E001);
     }
 
     const messageText = `Sign up to MyApp by ${walletAddress}`;

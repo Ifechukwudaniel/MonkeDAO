@@ -5,7 +5,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AuthService } from '../auth/auth.service';
-import { CreateUserInput, UpdateUserInput } from './dto/user.dto';
+import { UpdateUserInput } from './dto/user.dto';
 import { User } from './model/user.model';
 @Injectable()
 export class UserService {
@@ -23,23 +23,6 @@ export class UserService {
     });
 
     return { ...user, token: currentUser.token };
-  }
-
-  async create(input: CreateUserInput): Promise<User> {
-    const { username, email, password } = input;
-
-    const user = await this.userRepository.findOne({
-      where: [{ username }, { email }],
-    });
-
-    if (user) {
-      throw new ValidationException(ErrorCode.E001);
-    }
-
-    const newUser = this.userRepository.create({ username, email, password });
-    const savedUser = await this.userRepository.save(newUser);
-
-    return savedUser;
   }
 
   async update(userId: number, input: UpdateUserInput) {
