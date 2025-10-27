@@ -3,6 +3,7 @@
 import { Heart } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { useRootStore } from 'store';
 import { MiniCart } from './MiniCart';
 import { MiniNotificationIcon } from './MiniNotification';
 
@@ -29,7 +30,8 @@ const ActionIcon = ({ icon, count, href, label }: ActionIconProps) => (
 );
 
 export const ActionIcons = () => {
-  const wishlistCount = 3;
+  const wishlist = useRootStore((state) => state.wishlist);
+  const wishlistCount = wishlist.length;
   const cartCount = 5;
   const notifCount = 12;
 

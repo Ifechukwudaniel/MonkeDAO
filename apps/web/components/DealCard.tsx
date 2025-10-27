@@ -9,14 +9,15 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRootStore } from 'store';
 import { ProductDeal } from '../types';
 
 export const DealCard: React.FC<{ deal: ProductDeal }> = ({ deal }) => {
   const [imgError, setImgError] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [wishlist, setWishlist] = useState(false);
-
+  const toggleWishlist = useRootStore((state) => state.toggleWishlist);
+  const isInWishlist = useRootStore((state) => state.isInWishlist(deal.id));
   const handleLike = () => {
     if (disliked) setDisliked(false);
     setLiked(!liked);
@@ -51,10 +52,13 @@ export const DealCard: React.FC<{ deal: ProductDeal }> = ({ deal }) => {
           </div>
 
           <button
-            onClick={() => setWishlist(!wishlist)}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleWishlist(deal);
+            }}
             className="absolute right-3 top-3 text-white hover:text-[#86C994] transition"
           >
-            {wishlist ? <Heart fill="#86C994" /> : <Heart />}
+            {isInWishlist ? <Heart fill="#86C994" /> : <Heart />}
           </button>
         </div>
 
