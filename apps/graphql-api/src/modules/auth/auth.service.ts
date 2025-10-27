@@ -1,13 +1,20 @@
 import { AllConfigType } from '@/config/config.type';
-import { verifyPassword } from '@monkedeals/nest-common';
 import { UserEntity } from '@monkedeals/postgresql-typeorm';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import {
+  address,
+  getPublicKeyFromAddress,
+  getUtf8Encoder,
+  isAddress,
+  signatureBytes,
+  verifySignature,
+} from '@solana/kit';
 import { Repository } from 'typeorm';
 import { User } from '../user/model/user.model';
-import { LoginInput } from './dto/auth.dto';
+import { LoginInput, SignUpInput } from './dto/auth.dto';
 import { JwtPayloadType } from './types/jwt-payload.type';
 
 @Injectable()
@@ -19,18 +26,84 @@ export class AuthService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async login(input: LoginInput): Promise<User> {
-    const { email, password } = input;
+  async signup(input: SignUpInput): Promise<User> {
+    const { signature, walletAddress, name, email } = input;
 
-    const user = await this.userRepository.findOne({
-      where: { email },
+    if (!isAddress(walletAddress)) {
+      throw new UnauthorizedException('Invalid wallet address');
+    }
+
+    const existingUser = await this.userRepository.findOne({
+      where: { walletAddress },
     });
 
-    const isPasswordValid =
-      user && (await verifyPassword(password, user.password));
+    if (existingUser) {
+      throw new UnauthorizedException('Wallet already registered');
+    }
 
-    if (!isPasswordValid) {
-      throw new UnauthorizedException();
+    const messageText = `Sign up to MyApp by ${walletAddress}`;
+    const message = getUtf8Encoder().encode(messageText);
+
+    const decodedSignature = signatureBytes(
+      new TextEncoder().encode(signature),
+    );
+    const publickKey = await getPublicKeyFromAddress(address(walletAddress));
+
+    const verified = await verifySignature(
+      publickKey,
+      decodedSignature,
+      message,
+    );
+
+    if (!verified) {
+      throw new UnauthorizedException('Invalid wallet signature');
+    }
+
+    const user = await this.userRepository.save({
+      walletAddress,
+      name,
+      email,
+    });
+
+    const token = await this.createToken({ id: user.id });
+
+    return {
+      ...user,
+      token,
+    };
+  }
+
+  async login(input: LoginInput): Promise<User> {
+    const { signature, walletAddress } = input;
+
+    if (!isAddress(walletAddress)) {
+      throw new UnauthorizedException('Invalid wallet address');
+    }
+
+    const user = await this.userRepository.findOne({
+      where: { walletAddress },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const messageText = `Login to MyApp by ${walletAddress}`;
+    const message = getUtf8Encoder().encode(messageText);
+
+    const decodedSignature = signatureBytes(
+      new TextEncoder().encode(signature),
+    );
+    const publickKey = await getPublicKeyFromAddress(address(walletAddress));
+
+    const verified = await verifySignature(
+      publickKey,
+      decodedSignature,
+      message,
+    );
+
+    if (!verified) {
+      throw new UnauthorizedException('Invalid wallet signature');
     }
 
     const token = await this.createToken({ id: user.id });
