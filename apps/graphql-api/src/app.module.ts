@@ -84,7 +84,6 @@ const graphqlModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
       includeStacktraceInErrorResponses: isLocal,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
-      // graphiql: isLocal, // Uncomment this line if you want to use GraphiQL instead of the playground or the Apollo Sandbox
       introspection: isLocal,
       playground: false,
       plugins: [

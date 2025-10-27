@@ -12,8 +12,8 @@ services:
       TZ: "UTC"
     ports:
       - "25432:5432"
-    networks:
-      - nestjs-turbo-network
+    # networks:
+    #   - nestjs-turbo-network
 
   # redis:
   #   image: redis/redis-stack:latest
@@ -52,14 +52,13 @@ services:
       PGADMIN_DEFAULT_PASSWORD: 12345678
       PGADMIN_CONFIG_WTF_CSRF_ENABLED: "False"
       PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
-    networks:
-      - nestjs-turbo-network
+    # networks:
+    #   - nestjs-turbo-network
 
 volumes:
   postgres_data:
   pgadmin_data:
-  redis_data:
-
-networks:
-  nestjs-turbo-network:
-    driver: bridge
+  # redis_data:
+# networks:
+#   nestjs-turbo-network:
+#     driver: bridge
