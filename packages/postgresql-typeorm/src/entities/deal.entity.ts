@@ -42,7 +42,7 @@ export class DealEntity extends AbstractEntity {
   description!: string;
 
   @Column({ nullable: true })
-  category?: 'flight' | 'hotel' | 'product' | 'experience';
+  category?: string;
 
   @Column({ nullable: true })
   subCategory?: string;

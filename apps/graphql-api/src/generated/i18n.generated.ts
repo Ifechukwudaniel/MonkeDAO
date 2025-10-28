@@ -41,6 +41,9 @@ export type I18nTranslations = {
             "not_found": string;
             "not_authorized_to_delete": string;
         };
+        "deals": {
+            "not_found": string;
+        };
     };
 };
 /* prettier-ignore */

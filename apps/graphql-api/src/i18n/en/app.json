@@ -33,5 +33,8 @@
   "comment": {
     "not_found": "comment not found",
     "not_authorized_to_delete": "You are not authorized to delete this comment"
+  },
+  "deals": {
+    "not_found": "Deals not found"
   }
 }
