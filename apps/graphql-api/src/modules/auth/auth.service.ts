@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
+  SignatureBytes,
   address,
   getPublicKeyFromAddress,
   getUtf8Encoder,
@@ -30,8 +31,7 @@ export class AuthService {
 
   async signup(input: SignUpInput): Promise<User> {
     const { signature, walletAddress, name, email } = input;
-
-    if (!isAddress(walletAddress)) {
+    if (isAddress(walletAddress) == false) {
       throw new UnauthorizedException('Invalid wallet address');
     }
 
@@ -46,9 +46,9 @@ export class AuthService {
     const messageText = `Sign up to MyApp by ${walletAddress}`;
     const message = getUtf8Encoder().encode(messageText);
 
-    const decodedSignature = signatureBytes(
-      new TextEncoder().encode(signature),
-    );
+    const decodedSignature = getUtf8Encoder().encode(
+      signature,
+    ) as SignatureBytes;
     const publickKey = await getPublicKeyFromAddress(address(walletAddress));
 
     const verified = await verifySignature(

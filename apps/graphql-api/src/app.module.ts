@@ -85,6 +85,7 @@ const graphqlModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       introspection: isLocal,
+      // graphiql: isLocal,
       playground: false,
       plugins: [
         ApolloServerPluginLandingPageLocalDefault({

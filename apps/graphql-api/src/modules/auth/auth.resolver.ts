@@ -11,12 +11,16 @@ export class AuthResolver {
   @Public()
   @Mutation(() => User, { name: 'signup', description: 'Sign up' })
   async signup(@Args('input') input: SignUpInput): Promise<User> {
+    const { signature, walletAddress } = input;
+    console.log(signature, walletAddress);
     return this.authService.signup(input);
   }
 
   @Public()
   @Mutation(() => User, { name: 'login', description: 'Sign in' })
   async login(@Args('input') input: LoginInput): Promise<User> {
+    const { signature, walletAddress } = input;
+    console.log(signature, walletAddress);
     return this.authService.login(input);
   }
 }

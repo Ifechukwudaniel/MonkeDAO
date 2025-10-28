@@ -7,7 +7,7 @@ input LoginInput {
   """User signature (base58/base64 encoded string)"""
   signature: String!
 
-  """User’s public key (base58 encoded Solana address)"""
+  """User’s public key (base58 encoded Solana wallet address)"""
   walletAddress: String!
 }
 
@@ -31,10 +31,10 @@ type Query {
 
 """Sign up input using a Solana wallet signature and public key"""
 input SignUpInput {
-  """Optional email for the user"""
+  """Optional email address"""
   email: String
 
-  """Optional username or display name"""
+  """Optional name"""
   name: String
 
   """User signature (base58/base64 encoded string)"""
