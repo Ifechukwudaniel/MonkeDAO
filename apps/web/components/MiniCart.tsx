@@ -24,22 +24,22 @@ export const MiniCart = () => {
       trigger={
         <div className="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-700 hover:bg-green-100/10 transition-colors ">
           <ShoppingCart size={20} />
-          {cart.length > 0 && (
+          {cart && cart?.length > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#184623] px-1 text-[10px] font-bold text-white">
-              {cart.length}
+              { cart && cart?.length}
             </span>
           )}
         </div>
       }
     >
       <div className="flex flex-col gap-3 max-h-96 overflow-y-auto">
-        {cart.length === 0 ? (
+        {cart && cart?.length === 0 ? (
           <p className="text-sm text-gray-500 text-center">
             Your cart is empty.
           </p>
         ) : (
           <>
-            {cart.map((item) => (
+            {cart && cart?.map((item) => (
               <MiniCartCard
                 key={item.deal.id}
                 product={item.deal}

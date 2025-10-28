@@ -30,7 +30,7 @@ export class AuthService {
   ) {}
 
   async signup(input: SignUpInput): Promise<User> {
-    const { signature, walletAddress, name, email } = input;
+    const { signature, walletAddress, name, email, username } = input;
     if (isAddress(walletAddress) == false) {
       throw new UnauthorizedException('Invalid wallet address');
     }
@@ -65,6 +65,7 @@ export class AuthService {
       walletAddress,
       name,
       email,
+      username,
     });
 
     const token = await this.createToken({ id: user.id });

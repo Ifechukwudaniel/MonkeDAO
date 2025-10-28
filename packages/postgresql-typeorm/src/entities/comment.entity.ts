@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   type Relation,
 } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
+import { DealReactionEntity } from './deal-reaction.entity';
 import { DealEntity } from './deal.entity';
 import { MerchantEntity } from './merchant.entity';
 import { UserEntity } from './user.entity';
@@ -41,7 +43,6 @@ export class CommentEntity extends AbstractEntity {
   })
   author!: Relation<UserEntity>;
 
-  /** Deal Relationship (optional) **/
   @Column({ name: 'deal_id', nullable: true })
   dealId?: number;
 
@@ -55,6 +56,9 @@ export class CommentEntity extends AbstractEntity {
     foreignKeyConstraintName: 'FK_comment_deal',
   })
   deal?: Relation<DealEntity>;
+
+  @OneToMany(() => DealReactionEntity, (reaction) => reaction.comment)
+  reactions!: DealReactionEntity[];
 
   /** Merchant Relationship (optional) **/
   @Column({ name: 'merchant_id', nullable: true })

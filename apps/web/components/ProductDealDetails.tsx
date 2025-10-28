@@ -222,7 +222,7 @@ const PurchasePanel: React.FC<{
   const removeFromCart = useRootStore((state) => state.removeFromCart);
   const cart = useRootStore((state) => state.cart);
 
-  const isInCart = cart.some(
+  const isInCart = cart?.some(
     (item) => item.id === deal.id && item.optionId === selected,
   );
 
