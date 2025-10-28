@@ -31,9 +31,9 @@ const categories: Category[] = [
     href: '/category/travel',
     icon: <Plane size={18} />,
     sub: [
-      { name: 'Flights', href: '/category/travel/flights' },
-      { name: 'Hotels', href: '/category/travel/hotels' },
-      { name: 'Crypto Events', href: '/category/travel/crypto-events' },
+      { name: 'Flights', href: '/categories/flights' },
+      { name: 'Hotels', href: '/categories/hotels' },
+      { name: 'Crypto Events', href: '/categories/crypto-events' },
     ],
   },
   {
@@ -41,9 +41,9 @@ const categories: Category[] = [
     href: '/category/experiences',
     icon: <Ticket size={18} />,
     sub: [
-      { name: 'Concerts', href: '/category/experiences/concerts' },
-      { name: 'Festivals', href: '/category/experiences/festivals' },
-      { name: 'Workshops', href: '/category/experiences/workshops' },
+      { name: 'Concerts', href: '/categories/concerts' },
+      { name: 'Festivals', href: '/categories/festivals' },
+      { name: 'Workshops', href: '/categories/workshops' },
     ],
   },
   {
@@ -51,9 +51,9 @@ const categories: Category[] = [
     href: '/category/digital-goods',
     icon: <ShoppingBag size={18} />,
     sub: [
-      { name: 'Software Licenses', href: '/category/digital-goods/software' },
-      { name: 'Gaming Items', href: '/category/digital-goods/gaming' },
-      { name: 'Subscriptions', href: '/category/digital-goods/subscriptions' },
+      { name: 'Software Licenses', href: '/categories/software' },
+      { name: 'Gaming Items', href: '/categories/gaming' },
+      { name: 'Subscriptions', href: '/categories/subscriptions' },
     ],
   },
   {
@@ -61,9 +61,9 @@ const categories: Category[] = [
     href: '/category/rewards',
     icon: <Wallet size={18} />,
     sub: [
-      { name: 'Merchant Tokens', href: '/category/rewards/tokens' },
-      { name: 'Cashback NFTs', href: '/category/rewards/cashback' },
-      { name: 'Loyalty Badges', href: '/category/rewards/badges' },
+      { name: 'Merchant Tokens', href: '/categories/tokens' },
+      { name: 'Cashback NFTs', href: '/categories/cashback' },
+      { name: 'Loyalty Badges', href: '/categories/badges' },
     ],
   },
   {
@@ -71,9 +71,9 @@ const categories: Category[] = [
     href: '/category/luxury',
     icon: <Gift size={18} />,
     sub: [
-      { name: 'Fashion Drops', href: '/category/luxury/fashion' },
-      { name: 'Fine Dining', href: '/category/luxury/dining' },
-      { name: 'Exclusive Access', href: '/category/luxury/exclusive' },
+      { name: 'Fashion Drops', href: '/categories/fashion' },
+      { name: 'Fine Dining', href: '/categories/dining' },
+      { name: 'Exclusive Access', href: '/categories/exclusive' },
     ],
   },
   {
@@ -81,9 +81,9 @@ const categories: Category[] = [
     href: '/category/collectibles',
     icon: <Sparkles size={18} />,
     sub: [
-      { name: 'Deal NFTs', href: '/category/collectibles/deals' },
-      { name: 'Event Passes', href: '/category/collectibles/passes' },
-      { name: 'Limited Editions', href: '/category/collectibles/limited' },
+      { name: 'Deal NFTs', href: '/categories/deals' },
+      { name: 'Event Passes', href: '/categories/passes' },
+      { name: 'Limited Editions', href: '/categories/limited' },
     ],
   },
 ];

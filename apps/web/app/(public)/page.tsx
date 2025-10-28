@@ -27,6 +27,17 @@ export default function HomePage() {
         </section>
 
         <section className=" mx-auto mb-16">
+          <h2 className="text-2xl font-semibold mb-4">Trending in Lagos</h2>
+          <div className="flex gap-6 overflow-x-auto pb-2">
+            {trendingDeals.map((deal) => (
+              <div key={deal.id} className="min-w-[280px] flex-shrink-0">
+                <DealCard deal={deal} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className=" mx-auto mb-16">
           <h2 className="text-2xl font-semibold mb-4">Trending Now</h2>
           <div className="flex gap-6 overflow-x-auto pb-2">
             {trendingDeals.map((deal) => (

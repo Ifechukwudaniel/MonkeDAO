@@ -1,5 +1,3 @@
-// types/deal.ts
-
 export type DealCategory =
   | 'travel'
   | 'food'
