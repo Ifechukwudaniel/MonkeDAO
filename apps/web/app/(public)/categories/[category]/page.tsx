@@ -1,6 +1,8 @@
 'use client';
 
-import Image from 'next/image';
+import { CategoryLinks } from 'components/CategoryLinks';
+import DealCard from 'components/DealCard';
+import { FolderOpen } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 import type { ProductDeal } from 'types';
@@ -11,25 +13,19 @@ const mockDeals: ProductDeal[] = productDeals;
 interface EmptyStateProps {
   title?: string;
   message?: string;
-  imageSrc?: string;
 }
 
 export const EmptyState = ({
   title = 'No items yet',
   message = 'Check back soon for new deals.',
-  imageSrc = '/empty-state.svg',
 }: EmptyStateProps) => {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
-      <Image
-        src={imageSrc}
-        alt={title}
-        width={160}
-        height={160}
-        className="opacity-80 mb-4"
-      />
-      <h2 className="text-lg font-medium text-gray-800">{title}</h2>
-      <p className="text-gray-500 text-sm">{message}</p>
+    <div className="flex flex-col items-center justify-center py-20 pt-5 text-center">
+      <div className="flex items-center justify-center w-24 h-24 mb-4 rounded-full bg-primary/10">
+        <FolderOpen size={48} className="text-gray-400" />
+      </div>
+      <h2 className="text-lg mb-2 font-medium text-gray-800">{title}</h2>
+      <p className="text-gray-200 font-semibold text-sm">{message}</p>
     </div>
   );
 };
@@ -39,53 +35,41 @@ export default function CategoryPage() {
   const formattedCategory = String(category).toLowerCase();
   const formattedSubcategory = String(subcategory).toLowerCase();
 
-  const filteredDeals = useMemo(
-    () =>
-      mockDeals.filter(
-        (deal) =>
-          deal.category.toLowerCase() === formattedCategory &&
-          deal.subCategory.toLowerCase() === formattedSubcategory,
-      ),
-    [formattedCategory, formattedSubcategory],
-  );
+  const filteredDeals = useMemo(() => {
+    return mockDeals.filter((deal) => {
+      const cat = deal.category.toLowerCase();
+      const sub = deal.subCategory.toLowerCase();
+
+      return (
+        cat === formattedCategory ||
+        sub === formattedCategory ||
+        cat === formattedSubcategory ||
+        sub === formattedSubcategory
+      );
+    });
+  }, [formattedCategory, formattedSubcategory]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold mb-6 capitalize">
-        {formattedCategory} Deals
-      </h1>
+    <div className="min-h-[80vh]  px-6 py-12">
+      <CategoryLinks />
+      <div className="container mx-auto mt-12 mb-5">
+        <h1 className="text-4xl font-bold mb-8 mx-auto capitalize text-center">
+          {formattedCategory} Deals
+        </h1>
 
-      {filteredDeals.length === 0 ? (
-        <EmptyState
-          title={`No ${formattedCategory} deals yet`}
-          message="Check back soon — new deals are on the way."
-        />
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {filteredDeals.map((deal) => (
-            <div
-              key={deal.id}
-              className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-all"
-            >
-              <div className="relative w-full h-40 rounded-lg overflow-hidden mb-3">
-                <Image
-                  src={deal.bannerImage}
-                  alt={deal.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="font-medium text-lg truncate">{deal.title}</h3>
-              <p className="text-sm text-gray-500 truncate">
-                {deal.shortDescription}
-              </p>
-              <p className="text-base font-semibold mt-2">
-                {deal.pricing.discountedPrice} {deal.pricing.currency}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+        {filteredDeals.length === 0 ? (
+          <EmptyState
+            title={`No ${formattedCategory} deals yet`}
+            message="Check back soon — new deals are on the way."
+          />
+        ) : (
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {filteredDeals.map((deal) => (
+              <DealCard deal={deal} key={deal.id} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -308,7 +308,7 @@ export const productDeals: ProductDeal[] = [
     id: 'deal_digital_001',
     slug: 'adobe-creative-suite-nft-license',
     category: 'collectibles',
-    subCategory: 'digital-goods',
+    subCategory: 'software',
     title:
       'Adobe Creative Suite NFT License – Lifetime Access to Photoshop, Illustrator & Premiere Pro',
     shortDescription:

@@ -18,6 +18,7 @@
 @theme {
   --color-border-default: #c4c4c4;
   --color-primary: #4a8f5d;
+  --color-secondary: #fcfbf2;
   --color-gray-200: #808080;
   --color-gray-800: #333333;
 }
@@ -52,6 +53,10 @@ body {
 }
 
 button {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.category-select {
   font-family: var(--font-space-grotesk), sans-serif;
 }
 

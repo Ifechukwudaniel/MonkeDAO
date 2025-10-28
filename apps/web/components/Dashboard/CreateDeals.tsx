@@ -7,6 +7,8 @@ import { Input } from '@monkedeals/ui/components/input';
 import { Label } from '@monkedeals/ui/components/label';
 import RichTextEditor from 'components/RichTextEditor';
 import React, { useState } from 'react';
+import { CategorySelect } from './CategorySelect';
+import FileUpload from './FileUpload';
 
 // -------------- Types --------------
 interface DealFormData {
@@ -143,70 +145,31 @@ export const CreateDealForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Coupon Type */}
-          <div>
-            <Label htmlFor="couponType mb-1">Coupon Type</Label>
-            <select
-              id="couponType"
-              name="couponType"
-              value={formData.couponType}
-              onChange={handleChange}
-              className="w-full border  rounded-md p-2 focus:ring-green-500"
-            >
-              {COUPON_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CategorySelect />
 
           {/* Categories, Stores, Brands */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <TagInput
-              label="Categories *"
-              name="categories"
-              tags={formData.categories}
-              setFormData={setFormData}
-            />
-            <TagInput
-              label="Stores"
-              name="stores"
+              label="tags"
+              name="tags"
               tags={formData.stores}
-              setFormData={setFormData}
-            />
-            <TagInput
-              label="Brands"
-              name="brands"
-              tags={formData.brands}
               setFormData={setFormData}
             />
           </div>
 
           {/* File Upload */}
-          <div>
-            <Label htmlFor="images">Images & Attachments</Label>
-            <Input
-              id="images"
-              name="images"
-              type="file"
-              multiple
-              onChange={handleFileChange}
-              className=" focus:ring-green-500"
-            />
-            <div className="flex gap-2 mt-2 flex-wrap">
-              {formData.images.map((file, i) => (
-                <Badge key={i} className="bg-green-100 text-green-700 ">
-                  {file.name}
-                </Badge>
-              ))}
-            </div>
-          </div>
+          <FileUpload
+            files={formData.images}
+            onFilesChange={(files) =>
+              setFormData((prev) => ({ ...prev, images: files }))
+            }
+            label="Images & Attachments"
+          />
 
           {/* Submit */}
           <Button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white"
+            className="w-full bg-primary uppercase font-medium uppercase hover:bg-green-700 text-white"
           >
             Post Deal
           </Button>
@@ -251,7 +214,23 @@ const TagInput: React.FC<TagInputProps> = ({
 
   return (
     <div>
-      <Label>{label}</Label>
+      <Label className="mb-1 mt-4 capitalize">{label}</Label>
+
+      <div className="flex gap-2 mt-2">
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add..."
+          className=" focus:ring-primary"
+        />
+        <Button
+          type="button"
+          onClick={addTag}
+          className="bg-primary hover:bg-primary uppercase font-medium text-white"
+        >
+          Add
+        </Button>
+      </div>
       <div className="flex gap-2 mt-1 flex-wrap">
         {tags.map((tag) => (
           <Badge
@@ -262,21 +241,6 @@ const TagInput: React.FC<TagInputProps> = ({
             {tag} ✕
           </Badge>
         ))}
-      </div>
-      <div className="flex gap-2 mt-2">
-        <Input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Add..."
-          className=" focus:ring-green-500"
-        />
-        <Button
-          type="button"
-          onClick={addTag}
-          className="bg-green-500 hover:bg-green-600 text-white"
-        >
-          Add
-        </Button>
       </div>
     </div>
   );

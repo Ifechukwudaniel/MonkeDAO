@@ -28,9 +28,9 @@ export const PublicHeader = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3">
         {/* ✦ BRAND LOGO ✦ */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="relative w-8 h-8">
+          <div className="relative w-24 h-12">
             <Image
-              src="/monkedeals-logo.svg"
+              src="/logo.svg"
               alt="MonkeDeals Logo"
               fill
               className="object-contain"
@@ -39,9 +39,6 @@ export const PublicHeader = () => {
               }}
             />
           </div>
-          <span className="font-semibold text-lg text-neutral-800">
-            MonkeDeals
-          </span>
         </Link>
 
         <Searchbar />

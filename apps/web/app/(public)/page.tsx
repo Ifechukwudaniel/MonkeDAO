@@ -27,7 +27,9 @@ export default function HomePage() {
         </section>
 
         <section className=" mx-auto mb-16">
-          <h2 className="text-2xl font-semibold mb-4">Trending in Lagos</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Trending in <span className="border-b border-dashed">Lagos</span>
+          </h2>
           <div className="flex gap-6 overflow-x-auto pb-2">
             {trendingDeals.map((deal) => (
               <div key={deal.id} className="min-w-[280px] flex-shrink-0">
@@ -57,10 +59,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="text-center mt-16">
+        <section className="text-center mt-5">
           <Link
-            href="/feed"
-            className="inline-block bg-white text-[#0b3d2e] font-semibold px-6 py-3 rounded-lg hover:bg-neutral-200 transition"
+            href="/marketplace"
+            className="text-sm text-white py-3  bg-primary rounded-md px-5 hover:bg-[#3e7a4e] transition-colors font-semibold uppercase cursor-pointer"
           >
             Browse All Deals →
           </Link>

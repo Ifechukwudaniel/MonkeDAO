@@ -107,13 +107,13 @@ export const CategoryLinks = () => {
   }, []);
 
   return (
-    <nav ref={menuRef} className="w-full border-b border-gray-200">
+    <nav ref={menuRef} className="w-full border-b border-border-default">
       <div className="flex flex-wrap justify-center gap-4 px-4 py-3">
         {categories.map((cat) => (
           <div key={cat.name} className="relative">
             <button
               onClick={() => toggleCategory(cat.name)}
-              className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-100"
+              className="flex items-center gap-2 rounded-full border border-border-default px-4 py-2 text-sm font-medium text-gray-800 transition-all hover:bg-[#4A8F5D10]"
             >
               {cat.icon}
               <span>{cat.name}</span>
@@ -125,12 +125,12 @@ export const CategoryLinks = () => {
             </button>
 
             {openCategory === cat.name && cat.sub && (
-              <div className="absolute left-0 mt-2 w-48 rounded-lg border border-gray-200 bg-white shadow-md">
+              <div className="absolute left-0 mt-2 w-48 rounded-md border border-border-default bg-secondary shadow-md">
                 {cat.sub.map((sub) => (
                   <Link
                     key={sub.name}
                     href={sub.href}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    className="block px-4 py-2 text-sm text-gray-800 hover:bg-primary/10 border-b-2 border-t-2 border-transparent hover:border-primary"
                   >
                     {sub.name}
                   </Link>
