@@ -13,6 +13,8 @@ import {
   YAxis,
 } from 'recharts';
 
+// 🎨 Interface / Props Definition
+// =====================================
 interface MerchantAnalyticsProps {
   salesData: {
     date: string;
@@ -31,8 +33,8 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ label, value }) => (
-  <div className="flex-1 bg-white rounded-none p-4  border border-[#C4C4C4] ">
-    <p className={`text-xs font-medium text-gray-500`}>{label}</p>
+  <div className="flex-1  rounded-sm p-4  border border-border-default ">
+    <p className={`text-xs font-medium text-gray-200`}>{label}</p>
     <h3 className={`text-xl font-bold mt-1 `}>{value}</h3>
   </div>
 );
@@ -88,8 +90,8 @@ export const MerchantAnalytics: React.FC<MerchantAnalyticsProps> = ({
       </div>
 
       {/* Sales & Redemption Trends */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-700 mb-4">
+      <div className="border-border-default p-6 rounded-sm border">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
           Sales & Redemption Trends
         </h3>
         <ResponsiveContainer width="100%" height={250}>
@@ -133,7 +135,7 @@ export const MerchantAnalytics: React.FC<MerchantAnalyticsProps> = ({
       </div>
 
       {/* NFT Activity */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div className="border-border-default p-6 rounded-sm border">
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
           NFT Deal Activity
         </h3>
@@ -150,7 +152,7 @@ export const MerchantAnalytics: React.FC<MerchantAnalyticsProps> = ({
       </div>
 
       {/* Top Performing Deals */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div className="border-border-default p-6 rounded-sm border">
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
           Top Performing Deals
         </h3>
