@@ -2,17 +2,10 @@
 import { Heart, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { ProductDeal } from 'types';
 
 interface MiniCartItemProps {
-  product: {
-    id: string;
-    title: string;
-    merchant: string;
-    image: string;
-    price: number;
-    discountedPrice?: number;
-    quantity: number;
-  };
+  product: ProductDeal;
   onRemove: (id: string) => void;
   onQuantityChange: (id: string, qty: number) => void;
 }
@@ -58,7 +51,7 @@ export const MiniCartCard: React.FC<MiniCartItemProps> = ({
       <div className="flex gap-3">
         <div className="relative w-20 h-20 flex-shrink-0">
           <Image
-            src={product.image}
+            src={product.bannerImage}
             alt={product.title}
             fill
             className="object-cover rounded-md"
@@ -76,7 +69,7 @@ export const MiniCartCard: React.FC<MiniCartItemProps> = ({
               {product.title}
             </h3>
             <p className="text-sm text-muted-foreground mt-0.5">
-              {product.merchant}
+              {product.merchant?.name}
             </p>
           </div>
         </div>
@@ -86,10 +79,12 @@ export const MiniCartCard: React.FC<MiniCartItemProps> = ({
         <div className="flex justify-between items-center mt-2">
           <div className="flex flex-col">
             <h3 className="text-lg font-semibold text-foreground">
-              ${product.discountedPrice ?? product.price}
-              {product.discountedPrice && (
+              $
+              {product.pricing?.discountedPrice ??
+                product?.pricing?.originalPrice}
+              {product.pricing?.discountedPrice && (
                 <span className="text-xs text-muted-foreground line-through ml-1">
-                  ${product.price}
+                  ${product.pricing.originalPrice}
                 </span>
               )}
             </h3>

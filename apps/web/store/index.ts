@@ -1,15 +1,33 @@
-'use client';
+import { ProductDeal } from 'types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { ProductDeal } from '../types';
 
-interface RootState {
-  wishlist: ProductDeal[];
-  toggleWishlist: (deal: ProductDeal) => void;
-  isInWishlist: (id: string) => boolean;
+interface CartItem {
+  id: string;
+  deal: ProductDeal;
+  optionId: string;
+  quantity: number;
 }
 
-export const useRootStore = create<RootState>()(
+interface RootStore {
+  wishlist: ProductDeal[];
+  cart: CartItem[];
+
+  toggleWishlist: (deal: ProductDeal) => void;
+  isInWishlist: (id: string) => boolean;
+
+  // Cart Actions
+  addToCart: (deal: ProductDeal, optionId: string) => void;
+  removeFromCart: (id: string, optionId?: string) => void;
+  updateQuantity: (id: string, optionId: string, quantity: number) => void;
+  clearCart: () => void;
+
+  // Derived
+  getCartTotal: () => number;
+  getCartCount: () => number;
+}
+
+export const useRootStore = create<RootStore>()(
   persist(
     (set, get) => ({
       wishlist: [],
@@ -24,9 +42,63 @@ export const useRootStore = create<RootState>()(
         }
       },
       isInWishlist: (id) => get().wishlist.some((item) => item.id === id),
+
+      // --- Cart Actions ---
+      addToCart: (deal, optionId) =>
+        set((state) => {
+          const existing = state.cart.find(
+            (item) => item.id === deal.id && item.optionId === optionId,
+          );
+
+          if (existing) {
+            // increment quantity
+            return {
+              cart: state.cart.map((item) =>
+                item.id === deal.id && item.optionId === optionId
+                  ? { ...item, quantity: item.quantity + 1 }
+                  : item,
+              ),
+            };
+          }
+
+          return {
+            cart: [...state.cart, { id: deal.id, deal, optionId, quantity: 1 }],
+          };
+        }),
+
+      removeFromCart: (id, optionId) =>
+        set((state) => ({
+          cart: state.cart.filter(
+            (item) =>
+              !(item.id === id && (!optionId || item.optionId === optionId)),
+          ),
+        })),
+
+      updateQuantity: (id, optionId, quantity) =>
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === id && item.optionId === optionId
+              ? { ...item, quantity: Math.max(quantity, 1) }
+              : item,
+          ),
+        })),
+
+      clearCart: () => set({ cart: [] }),
+
+      // --- Derived ---
+      getCartTotal: () =>
+        get().cart.reduce((total, item) => {
+          const option =
+            item.deal.options.find((o) => o.id === item.optionId) ??
+            item.deal.options[0];
+          const price =
+            option?.discountedPrice ?? item.deal.pricing.discountedPrice;
+          return total + price * item.quantity;
+        }, 0),
+
+      getCartCount: () =>
+        get().cart.reduce((count, item) => count + item.quantity, 0),
     }),
-    {
-      name: 'root-store',
-    },
+    { name: 'root-store' },
   ),
 );

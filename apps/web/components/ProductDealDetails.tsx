@@ -4,6 +4,7 @@ import { Clock, GitBranch, Heart, MapPin, Share2, Tag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
+import { useRootStore } from 'store';
 import type { ProductDeal } from '../types/index';
 
 /**
@@ -217,6 +218,13 @@ const PurchasePanel: React.FC<{
   const [selected, setSelected] = useState<string | null>(
     deal.options[0]?.id ?? null,
   );
+  const addToCart = useRootStore((state) => state.addToCart);
+  const removeFromCart = useRootStore((state) => state.removeFromCart);
+  const cart = useRootStore((state) => state.cart);
+
+  const isInCart = cart.some(
+    (item) => item.id === deal.id && item.optionId === selected,
+  );
 
   const selOption =
     deal.options.find((o) => o.id === selected) ?? deal.options[0];
@@ -293,6 +301,22 @@ const PurchasePanel: React.FC<{
           className="flex-1 rounded-md bg-[#4A8F5D] uppercase text-xs hover:bg-[#3e7a4e] text-white px-4 py-3 font-semibold disabled:opacity-50 cursor-pointer"
         >
           Buy now
+        </button>
+
+        <button
+          onClick={() =>
+            selected &&
+            (isInCart
+              ? removeFromCart(deal.id, selected)
+              : addToCart(deal, selected))
+          }
+          className={`flex-1 rounded-md uppercase text-xs font-semibold px-4 py-3 border ${
+            isInCart
+              ? 'border-red-500 text-red-600 hover:bg-red-50'
+              : 'border-emerald-600 text-emerald-600 hover:bg-emerald-50'
+          }`}
+        >
+          {isInCart ? 'Remove from cart' : 'Add to cart'}
         </button>
       </div>
 

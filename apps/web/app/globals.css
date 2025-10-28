@@ -15,6 +15,11 @@
   --apkt-tokens-core-backgroundAccentPrimary-base: #f3efcd;
 }
 
+@theme {
+  --color-border-default: #c4c4c4;
+  --color-primary: #4a8f5d;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: rgb(252, 251, 242);
