@@ -20,7 +20,7 @@ export const modal = createAppKit({
   projectId,
   networks,
   metadata,
-  themeMode: 'dark',
+  themeMode: 'light',
   features: {
     analytics: true,
   },
