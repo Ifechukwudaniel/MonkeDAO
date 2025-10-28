@@ -1,16 +1,15 @@
+import { EmailField, StringField } from '@monkedeals/graphql';
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType({
   description: 'Login input using a Solana signature and public key',
 })
 export class LoginInput {
-  @Field(() => String, {
-    description: 'User signature (base58/base64 encoded string)',
-  })
+  @StringField({ description: 'User signature (base58/base64 encoded string)' })
   readonly signature: string;
 
-  @Field(() => String, {
-    description: 'User’s public key (base58 encoded Solana address)',
+  @StringField({
+    description: 'User’s public key (base58 encoded Solana wallet address)',
   })
   readonly walletAddress: string;
 }
@@ -19,25 +18,23 @@ export class LoginInput {
   description: 'Sign up input using a Solana wallet signature and public key',
 })
 export class SignUpInput {
-  @Field(() => String, {
-    description: 'User signature (base58/base64 encoded string)',
-  })
+  @StringField({ description: 'User signature (base58/base64 encoded string)' })
   readonly signature: string;
 
-  @Field(() => String, {
+  @StringField({
     description: 'User’s public key (base58 encoded Solana wallet address)',
   })
   readonly walletAddress: string;
 
-  @Field(() => String, {
+  @StringField({
     nullable: true,
-    description: 'Optional username or display name',
+    description: 'Optional name',
   })
   readonly name?: string;
 
-  @Field(() => String, {
+  @EmailField({
     nullable: true,
-    description: 'Optional email for the user',
+    description: 'Optional email address',
   })
   readonly email?: string;
 }
