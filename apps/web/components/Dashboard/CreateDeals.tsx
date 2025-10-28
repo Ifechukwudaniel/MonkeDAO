@@ -5,8 +5,8 @@ import { Button } from '@monkedeals/ui/components/button';
 import { Card, CardContent, CardHeader } from '@monkedeals/ui/components/card';
 import { Input } from '@monkedeals/ui/components/input';
 import { Label } from '@monkedeals/ui/components/label';
+import RichTextEditor from 'components/RichTextEditor';
 import React, { useState } from 'react';
-import { TiptapEditor } from './TipTapEditor';
 
 // -------------- Types --------------
 interface DealFormData {
@@ -70,10 +70,10 @@ export const CreateDealForm: React.FC = () => {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto border border-[#C4C4C4] rounded-none">
+    <Card className="max-w-2xl mx-auto border border-[#C4C4C4] rounded-sm shadow-none">
       <CardHeader>
-        <h2 className="text-3xl font-semibold">Share a Deal or Coupon</h2>
-        <p className="text-sm text-gray-500">
+        <h2 className="text-3xl font-semibold text-center">Post a new Deal</h2>
+        <p className="text-sm  text-center text-gray-200">
           Want to post a great deal? Keep your title clear and include price,
           store, and perks!
         </p>
@@ -82,14 +82,16 @@ export const CreateDealForm: React.FC = () => {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="dealUrl">Deal URL</Label>
+            <Label htmlFor="dealUrl" className=" text-sm mb-1">
+              Deal URL (optional)
+            </Label>
             <Input
               id="dealUrl"
               name="dealUrl"
               value={formData.dealUrl}
               onChange={handleChange}
               placeholder="https://..."
-              className=" focus:ring-green-500"
+              className=" focus:ring-primary"
             />
           </div>
 
@@ -102,9 +104,15 @@ export const CreateDealForm: React.FC = () => {
               value={formData.dealTitle}
               onChange={handleChange}
               required
-              placeholder='e.g. "65” TCL QLED 4K TV + Free Shipping $549"'
-              className=" focus:ring-green-500"
+              placeholder='example. "65” TCL QLED 4K TV + Free Shipping $549"'
+              className=" focus:ring-primary"
             />
+          </div>
+
+          {/* Description */}
+          <div>
+            <Label htmlFor="description mb-1 inline-block">Description</Label>
+            <RichTextEditor />
           </div>
 
           {/* Prices */}
@@ -137,7 +145,7 @@ export const CreateDealForm: React.FC = () => {
 
           {/* Coupon Type */}
           <div>
-            <Label htmlFor="couponType">Coupon Type</Label>
+            <Label htmlFor="couponType mb-1">Coupon Type</Label>
             <select
               id="couponType"
               name="couponType"
@@ -151,17 +159,6 @@ export const CreateDealForm: React.FC = () => {
                 </option>
               ))}
             </select>
-          </div>
-
-          {/* Description */}
-          <div>
-            <Label htmlFor="description">Description</Label>
-            <TiptapEditor
-              initialMarkdown={formData.description}
-              onChange={(md) => {
-                handleChange;
-              }}
-            />
           </div>
 
           {/* Categories, Stores, Brands */}

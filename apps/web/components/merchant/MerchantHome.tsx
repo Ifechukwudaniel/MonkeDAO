@@ -5,6 +5,7 @@ import { BarChart3, Heart, ShoppingCart, Ticket, Users } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import { productDeals } from 'types';
+
 // --------------------------
 // 1️⃣ Stat Card
 // --------------------------
@@ -16,15 +17,15 @@ interface StatCardProps {
 }
 
 const StatCard = ({ title, value, icon, trend }: StatCardProps) => (
-  <div className="bg-white/5 backdrop-blur-sm border border-gray-200 rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition-all duration-200">
+  <div className=" border border-border-default rounded-sm p-4 flex flex-col justify-between hover:shadow-md transition-all duration-200">
     <div className="flex items-center justify-between">
       <div className="text-gray-700">{icon}</div>
       <div className="text-right">
-        <p className="text-2xl font-bold text-gray-900">{value}</p>
+        <h2 className="text-2xl font-bold text-gray-200">{value}</h2>
         {trend && <p className="text-xs text-green-500">{trend}</p>}
       </div>
     </div>
-    <p className="mt-2 text-sm text-gray-500">{title}</p>
+    <p className="mt-2 text-sm text-gray-800">{title}</p>
   </div>
 );
 
@@ -90,7 +91,7 @@ interface ActivityItemProps {
 }
 
 const ActivityItem = ({ user, action, deal, time }: ActivityItemProps) => (
-  <div className="flex items-center justify-between p-2 rounded-md hover:bg-gray-50 transition">
+  <div className="flex items-center justify-between p-2 rounded-sm hover:bg-primary/10  border border-transparent hover:border-primary transition">
     <div className="flex items-center gap-2">
       <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
         {user.charAt(0)}
@@ -206,34 +207,22 @@ export const MerchantDashboardHome = () => {
         ))}
       </div>
 
-      {/* 2️⃣ Quick Actions */}
-      <div className="flex gap-4">
-        {quickActions.map((action, i) => (
-          <ActionButton
-            key={i}
-            label={action.label}
-            icon={action.icon}
-            onClick={action.onClick}
-          />
-        ))}
-      </div>
-
       {/* 3️⃣ Analytics Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white/5 border border-gray-200 rounded-xl p-4 min-h-[200px] flex flex-col">
-          <h3 className="text-lg font-bold text-gray-900 mb-2">
-            Redemptions Over Time
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <div className="border border-border-default rounded-sm p-4 min-h-[200px] flex flex-col">
+          <h3 className="text-lg font-bold text-gray-800 mb-2">
+            Sales Over Time
           </h3>
-          <div className="flex-1 flex items-center justify-center text-gray-400">
+          <div className="flex-1 flex items-center justify-center text-gray-200">
             {/* TODO: Mini Chart */}
             Chart placeholder
           </div>
         </div>
-        <div className="bg-white/5 border border-gray-200 rounded-xl p-4 min-h-[200px] flex flex-col">
-          <h3 className="text-lg font-bold text-gray-900 mb-2">
+        <div className="border border-border-default rounded-sm p-4 min-h-[200px] flex flex-col">
+          <h3 className="text-lg font-bold text-gray-800 mb-2">
             Recent Activity
           </h3>
-          <div className="flex-1 flex-col flex  justify-center text-gray-400">
+          <div className="flex-1 flex-col flex  justify-center text-gray-200">
             {recentActivity.map((act, i) => (
               <ActivityItem key={i} {...act} />
             ))}
@@ -243,7 +232,7 @@ export const MerchantDashboardHome = () => {
 
       {/* 4️⃣ Top Deals */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-2">Top Deals</h3>
+        <h3 className="text-lg font-bold text-gray-800 mb-2">Top Deals</h3>
         <div className="flex gap-4 overflow-x-auto">
           {productDeals?.map((f) => (
             <DealCard key={f.id} deal={f} />
