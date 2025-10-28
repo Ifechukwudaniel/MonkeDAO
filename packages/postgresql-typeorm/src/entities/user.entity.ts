@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { CommentEntity } from './comment.entity';
+import { DealReactionEntity } from './deal-reaction.entity';
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
@@ -35,6 +36,9 @@ export class UserEntity extends AbstractEntity {
 
   @OneToMany(() => CommentEntity, (comment) => comment.author)
   comments!: Relation<CommentEntity[]>;
+
+  @OneToMany(() => DealReactionEntity, (reaction) => reaction.user)
+  reactions!: DealReactionEntity[];
 
   @CreateDateColumn({
     name: 'created_at',

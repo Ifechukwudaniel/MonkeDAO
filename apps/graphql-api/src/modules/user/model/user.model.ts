@@ -8,6 +8,9 @@ export class User {
   email?: string;
 
   @Field(() => String, { nullable: true })
+  walletAddress?: string;
+
+  @Field(() => String, { nullable: true })
   token?: string;
 
   @Field(() => String, { nullable: true })

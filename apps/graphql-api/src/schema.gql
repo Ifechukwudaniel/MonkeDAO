@@ -2,6 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comment {
+  author: User!
+  body: String!
+  createdAt: DateTime!
+  id: ID!
+  rating: Int!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Deal {
+  active: Boolean!
+  category: String
+  createdAt: DateTime!
+  currency: String
+  description: String
+  discountPercent: Float
+  discountedPrice: Float
+  endDate: DateTime
+  externalId: String
+  externalUrl: String
+  featured: Boolean!
+  id: ID!
+  imageUrl: String
+  originalPrice: Float
+  slug: String!
+  source: String!
+  startDate: DateTime
+  subCategory: String
+  title: String!
+  updatedAt: DateTime!
+}
+
 """Login input using a Solana signature and public key"""
 input LoginInput {
   """User signature (base58/base64 encoded string)"""
@@ -9,6 +46,22 @@ input LoginInput {
 
   """User’s public key (base58 encoded Solana wallet address)"""
   walletAddress: String!
+}
+
+type Merchant {
+  city: String
+  country: String
+  createdAt: DateTime!
+  description: String
+  externalId: String
+  id: ID!
+  logoUrl: String
+  name: String!
+  slug: String!
+  updatedAt: DateTime!
+  verifiedMerchant: Boolean!
+  walletAddress: String
+  website: String
 }
 
 type Mutation {
@@ -25,6 +78,21 @@ type Mutation {
 type Query {
   """Get current user (from token)"""
   currentUser: User!
+
+  """Get Deal by Id"""
+  getDeal(id: Float!): Deal!
+
+  """Get all comments for a deal by deal ID"""
+  getDealComments(dealId: Float!): [Comment!]!
+
+  """Get all deals under a specific category"""
+  getDealsByCategory(category: String!): [Deal!]!
+
+  """Get merchant by ID"""
+  getMerchant(id: Float!): Merchant!
+
+  """Get all comments for a merchant by merchant ID"""
+  getMerchantComments(merchantId: Float!): [Comment!]!
   hello: String!
   tags: [String!]!
 }
@@ -39,6 +107,9 @@ input SignUpInput {
 
   """User signature (base58/base64 encoded string)"""
   signature: String!
+
+  """User’s username"""
+  username: String!
 
   """User’s public key (base58 encoded Solana wallet address)"""
   walletAddress: String!

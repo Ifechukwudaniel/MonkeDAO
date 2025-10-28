@@ -27,6 +27,11 @@ export class SignUpInput {
   readonly walletAddress: string;
 
   @StringField({
+    description: 'User’s username',
+  })
+  readonly username: string;
+
+  @StringField({
     nullable: true,
     description: 'Optional name',
   })
