@@ -43,23 +43,23 @@ export class AuthService {
       throw new ValidationException(ErrorCode.E001);
     }
 
-    // const messageText = `Sign up to MyApp by ${walletAddress}`;
-    // const message = getUtf8Encoder().encode(messageText);
+    const messageText = `Sign up to MyApp by ${walletAddress}`;
+    const message = getUtf8Encoder().encode(messageText);
 
-    // const decodedSignature = getUtf8Encoder().encode(
-    //   signature,
-    // ) as SignatureBytes;
-    // const publickKey = await getPublicKeyFromAddress(address(walletAddress));
+    const decodedSignature = getUtf8Encoder().encode(
+      signature,
+    ) as SignatureBytes;
+    const publickKey = await getPublicKeyFromAddress(address(walletAddress));
 
-    // const verified = await verifySignature(
-    //   publickKey,
-    //   decodedSignature,
-    //   message,
-    // );
+    const verified = await verifySignature(
+      publickKey,
+      decodedSignature,
+      message,
+    );
 
-    // if (!verified) {
-    //   throw new UnauthorizedException('Invalid wallet signature');
-    // }
+    if (!verified) {
+      throw new UnauthorizedException('Invalid wallet signature');
+    }
 
     const user = await this.userRepository.save({
       walletAddress,
@@ -91,23 +91,23 @@ export class AuthService {
       throw new UnauthorizedException('User not found');
     }
 
-    // const messageText = `Login to MyApp by ${walletAddress}`;
-    // const message = getUtf8Encoder().encode(messageText);
+    const messageText = `Login to MyApp by ${walletAddress}`;
+    const message = getUtf8Encoder().encode(messageText);
 
-    // const decodedSignature = signatureBytes(
-    //   new TextEncoder().encode(signature),
-    // );
-    // const publickKey = await getPublicKeyFromAddress(address(walletAddress));
+    const decodedSignature = signatureBytes(
+      new TextEncoder().encode(signature),
+    );
+    const publickKey = await getPublicKeyFromAddress(address(walletAddress));
 
-    // const verified = await verifySignature(
-    //   publickKey,
-    //   decodedSignature,
-    //   message,
-    // );
+    const verified = await verifySignature(
+      publickKey,
+      decodedSignature,
+      message,
+    );
 
-    // if (!verified) {
-    //   throw new UnauthorizedException('Invalid wallet signature');
-    // }
+    if (!verified) {
+      throw new UnauthorizedException('Invalid wallet signature');
+    }
 
     const token = await this.createToken({ id: user.id });
 
