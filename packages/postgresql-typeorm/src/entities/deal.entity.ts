@@ -18,6 +18,7 @@ import { CommentEntity } from './comment.entity';
 import { DealLocationEntity } from './deal-location.entity';
 import { DealNFTEntity } from './deal-nft.entity';
 import { DealOptionEntity } from './deal-option.entity';
+import { DealReactionEntity } from './deal-reaction.entity';
 import { MerchantEntity } from './merchant.entity';
 import { TagEntity } from './tag.entity';
 
@@ -107,6 +108,9 @@ export class DealEntity extends AbstractEntity {
     cascade: true,
   })
   options!: Relation<DealOptionEntity[]>;
+
+  @OneToMany(() => DealReactionEntity, (reaction) => reaction.deal)
+  reactions!: Relation<DealReactionEntity[]>;
 
   @ManyToMany(() => TagEntity)
   @JoinTable({
