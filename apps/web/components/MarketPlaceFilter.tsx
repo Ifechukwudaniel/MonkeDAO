@@ -287,7 +287,7 @@ export default function MarketplaceFilter({
   ];
 
   return (
-    <aside className="w-90  border rounded-sm border-border-default h-screen overflow-y-auto flex-shrink-0">
+    <aside className="w-80  border rounded-sm border-border-default h-screen overflow-y-auto flex-shrink-0">
       <div className="sticky top-0 bg-secondary border-b border-border-default p-4 z-10">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
