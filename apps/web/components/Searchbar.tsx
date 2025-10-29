@@ -4,6 +4,7 @@ import { Clock, Search, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { useRootStore } from 'store';
 import { LocationSearchSelect } from './LocationPicker';
 
 export const Searchbar = () => {
@@ -14,7 +15,7 @@ export const Searchbar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const { setLocation } = useRootStore();
 
   // 🔁 handle outside click
   // =====================================
@@ -55,8 +56,6 @@ export const Searchbar = () => {
     'Restaurants',
   ];
 
-  const [location, setLocation] = useState<Location | null>(null);
-
   useEffect(() => {
     // Load Google Maps API
     const script = document.createElement('script');
@@ -70,6 +69,11 @@ export const Searchbar = () => {
     };
   }, []);
 
+  const handleLocationSelect = (selectedLocation: Location) => {
+    setLocation(selectedLocation);
+    console.log('Location saved to store:', selectedLocation);
+  };
+
   return (
     <div className="relative mx-auto w-full max-w-xl">
       <div className="relative">
@@ -81,18 +85,13 @@ export const Searchbar = () => {
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search for deals, products, stores..."
-          className="w-full rounded-sm border border-gray-300 py-2 pl-12 pr-4 text-gray-900 transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#184623] text-sm font-medium"
+          className="w-full rounded-sm border border-border-default py-2 pl-12 pr-4 text-gray-900 transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#184623] text-sm font-medium"
         />
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 transform text-gray-400"
           size={20}
         />
-        <LocationSearchSelect
-          onLocationSelect={(loc: Location) => {
-            setLocation(loc);
-            console.log('Selected:', loc);
-          }}
-        />
+        <LocationSearchSelect onLocationSelect={handleLocationSelect} />
         {searchTerm && (
           <button
             onClick={() => setSearchTerm('')}

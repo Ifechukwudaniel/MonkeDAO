@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import { useRootStore } from 'store';
 import { CategoryLinks } from '../../components/CategoryLinks';
 import DealCard from '../../components/DealCard';
 import { productDeals } from '../../types';
 
 export default function HomePage() {
+  const { location, setLocation } = useRootStore();
   const trendingDeals = productDeals
     .filter((deal) => deal.purchaseStats.trending)
     .slice(0, 5);
@@ -28,7 +30,10 @@ export default function HomePage() {
 
         <section className=" mx-auto mb-16">
           <h2 className="text-2xl font-semibold mb-4">
-            Trending in <span className="border-b border-dashed">Lagos</span>
+            Trending in{' '}
+            <span className="border-b border-dashed">
+              {location?.name || 'Worldwide'}
+            </span>
           </h2>
           <div className="flex gap-6 overflow-x-auto pb-2">
             {trendingDeals.map((deal) => (

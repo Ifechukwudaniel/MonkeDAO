@@ -2,6 +2,7 @@ import { ProductDeal } from 'types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+// -------------------- Types --------------------
 interface CartItem {
   id: string;
   deal: ProductDeal;
@@ -9,27 +10,38 @@ interface CartItem {
   quantity: number;
 }
 
-interface RootStore {
-  wishlist: ProductDeal[];
-  cart: CartItem[];
+export interface Location {
+  name: string;
+  lat: number;
+  lng: number;
+}
 
+interface RootStore {
+  // Wishlist
+  wishlist: ProductDeal[];
   toggleWishlist: (deal: ProductDeal) => void;
   isInWishlist: (id: string) => boolean;
 
-  // Cart Actions
+  // Cart
+  cart: CartItem[];
   addToCart: (deal: ProductDeal, optionId: string) => void;
   removeFromCart: (id: string, optionId?: string) => void;
   updateQuantity: (id: string, optionId: string, quantity: number) => void;
   clearCart: () => void;
-
-  // Derived
   getCartTotal: () => number;
   getCartCount: () => number;
+
+  // Location
+  location: Location | null;
+  setLocation: (location: Location) => void;
+  clearLocation: () => void;
 }
 
+// -------------------- Store --------------------
 export const useRootStore = create<RootStore>()(
   persist(
     (set, get) => ({
+      // --- Wishlist ---
       wishlist: [],
       toggleWishlist: (deal) => {
         const { wishlist } = get();
@@ -43,7 +55,8 @@ export const useRootStore = create<RootStore>()(
       },
       isInWishlist: (id) => get().wishlist.some((item) => item.id === id),
 
-      // --- Cart Actions ---
+      // --- Cart ---
+      cart: [],
       addToCart: (deal, optionId) =>
         set((state) => {
           const existing = state.cart.find(
@@ -85,7 +98,6 @@ export const useRootStore = create<RootStore>()(
 
       clearCart: () => set({ cart: [] }),
 
-      // --- Derived ---
       getCartTotal: () =>
         get().cart.reduce((total, item) => {
           const option =
@@ -98,7 +110,14 @@ export const useRootStore = create<RootStore>()(
 
       getCartCount: () =>
         get().cart.reduce((count, item) => count + item.quantity, 0),
+
+      // --- Location ---
+      location: null,
+      setLocation: (location) => set({ location }),
+      clearLocation: () => set({ location: null }),
     }),
-    { name: 'root-store' },
+    {
+      name: 'root-store', // everything persisted together
+    },
   ),
 );
