@@ -12,7 +12,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --apkt-tokens-core-backgroundAccentPrimary-base: #f3efcd;
+  /*   --apkt-tokens-core-backgroundAccentPrimary-base: #f3efcd;
+ */
 }
 
 @theme {

@@ -24,9 +24,7 @@ export const modal = createAppKit({
   features: {
     analytics: true,
   },
-  themeVariables: {
-    '--w3m-accent': '#ffffff20',
-  },
+  themeVariables: {},
 });
 
 // AppProvider
