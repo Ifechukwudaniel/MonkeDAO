@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk as SpaceGrotesk } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Footer } from '../components/Footer';
 import AppProvider from '../providers/AppProvider';
 
@@ -11,6 +12,11 @@ const spaceGrotesk = SpaceGrotesk({
   adjustFontFallback: false,
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-space-grotesk',
+});
+
+const CPMono = localFont({
+  src: './fonts/CPMono_v07_Light.otf',
+  variable: '--font-cp-mono',
 });
 
 export const metadata: Metadata = {
@@ -26,9 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AppProvider>
-        <body
-          className={`${spaceGrotesk.className} ${spaceGrotesk.variable} text-black `}
-        >
+        <body className={`${CPMono.variable} ${CPMono.className} text-black `}>
           {children}
           <Footer />
         </body>

@@ -20,8 +20,10 @@
   --color-border-default: #c4c4c4;
   --color-primary: #4a8f5d;
   --color-secondary: #fcfbf2;
+  --color-tertiary: #9adcab;
   --color-gray-200: #808080;
   --color-gray-800: #333333;
+  --color-text-translucent: #ffffffbb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +40,7 @@ body {
   font-optical-sizing: auto;
 }
 
-h1,
+/* h1,
 h2,
 h3 {
   font-family: 'Taviraj', serif;
@@ -46,7 +48,7 @@ h3 {
 
 .tajiraj {
   font-family: 'Taviraj', serif;
-}
+} */
 
 body {
   color: var(--foreground);
