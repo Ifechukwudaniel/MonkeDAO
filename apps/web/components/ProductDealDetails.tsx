@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 import { useRootStore } from 'store';
 import type { ProductDeal } from '../types/index';
+import { ReviewBox } from './ReviewBox';
 
 /**
  * ProductDealDetail.tsx
@@ -37,7 +38,7 @@ const DealGallery: React.FC<{
     <div className="w-full">
       <div className="relative aspect-video rounded-lg overflow-hidden bg-neutral-100">
         <Image
-          src={gallery[active]}
+          src={gallery[active] ?? '/image-placeholder.png'}
           alt={`${title} image ${active}`}
           fill
           className="object-cover"
@@ -58,7 +59,7 @@ const DealGallery: React.FC<{
               }`}
             >
               <Image
-                src={src}
+                src={src ?? '/image-placeholder.png'}
                 alt={`thumb-${i}`}
                 fill
                 className="object-cover"
@@ -169,7 +170,7 @@ const MerchantCard: React.FC<{ merchant: ProductDeal['merchant'] }> = ({
         <div className="h-12 w-12 rounded-full overflow-hidden bg-neutral-100 flex items-center justify-center">
           {merchant.logoUrl ? (
             <Image
-              src={merchant.logoUrl}
+              src={merchant.logoUrl ?? '/avatar-placeholder.png'}
               alt={merchant.name}
               width={48}
               height={48}
@@ -381,7 +382,7 @@ const ReviewsList: React.FC<{ reviews: ProductDeal['reviews'] }> = ({
 }) => {
   if (!reviews || reviews.length === 0)
     return (
-      <div className="text-sm text-neutral-500">
+      <div className="text-sm text-neutral-300">
         No reviews yet — be the first to drop feedback.
       </div>
     );
@@ -495,6 +496,16 @@ export const ProductDealDetail: React.FC<{
               Reviews ({deal.reviews.length})
             </h3>
             <ReviewsList reviews={deal.reviews} />
+            <ReviewBox
+              user={{
+                image: deal.merchant.logoUrl ?? '/avatar-placeholder.png',
+                name: deal.merchant.name,
+                reputation: (deal.merchant as any).merchantRating ?? 0,
+                joined: new Date(deal.merchant.dateJoined)
+                  .getFullYear()
+                  .toString(),
+              }}
+            />
           </section>
         </div>
 
