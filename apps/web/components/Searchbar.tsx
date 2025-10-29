@@ -4,7 +4,7 @@ import { Clock, Search, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { LocationSearchSelect } from './LocationSelect';
+import { LocationSearchSelect } from './LocationPicker';
 
 export const Searchbar = () => {
   // 🌿 State Management
@@ -55,6 +55,21 @@ export const Searchbar = () => {
     'Restaurants',
   ];
 
+  const [location, setLocation] = useState<Location | null>(null);
+
+  useEffect(() => {
+    // Load Google Maps API
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_APIKEY}&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="relative mx-auto w-full max-w-xl">
       <div className="relative">
@@ -73,7 +88,10 @@ export const Searchbar = () => {
           size={20}
         />
         <LocationSearchSelect
-          onLocationSelect={(loc) => setSelectedLocation(loc.name)}
+          onLocationSelect={(loc: Location) => {
+            setLocation(loc);
+            console.log('Selected:', loc);
+          }}
         />
         {searchTerm && (
           <button
