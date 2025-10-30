@@ -4,6 +4,7 @@
    ║ CONTRIBUTOR: Open Source
    ╚════════════════════════════════════════════╝ */
 
+'use client';
 import { MiniCartCard } from 'components/MiniCartCard';
 import { useRootStore } from 'store';
 
@@ -12,8 +13,8 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto">
-      <h3 className="text-3xl mb-8">Carts</h3>
-      <div className="flex flex-col gap-3 max-h-96 overflow-y-auto ">
+      <h3 className="text-3xl uppercase font-bold mb-8 mt-5">Carts</h3>
+      <div className="flex flex-col gap-3  overflow-y-auto ">
         {cart?.length === 0 ? (
           <p className="text-sm text-gray-500 text-center">
             Your cart is empty.
