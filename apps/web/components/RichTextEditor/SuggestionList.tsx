@@ -50,7 +50,7 @@ const SuggestionList = forwardRef<SuggestionListRef, SuggestionListProps>(
         id: suggestion?.id || '',
         label: suggestion?.mentionLabel,
       };
-      // @ts-expect-error there is currently a bug in the Tiptap SuggestionProps
+
       // type where if you specify the suggestion type (like
       // `SuggestionProps<MentionSuggestion>`), it will incorrectly require that
       // type variable for `command`'s argument as well (whereas instead the

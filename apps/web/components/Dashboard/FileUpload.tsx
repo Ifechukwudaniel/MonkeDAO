@@ -93,7 +93,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
               key={index}
               className="group relative flex items-center gap-2 bg-green-50 border border-primary rounded-lg px-3 py-2 pr-8 hover:bg-primary transition-colors"
             >
-              <File className="w-4 h-4 text-primary flex-shrink-0" />
+              <File className="w-4 h-4 text-primary shrink-0" />
               <span className="text-sm text-primary truncate max-w-[200px]">
                 {file.name}
               </span>

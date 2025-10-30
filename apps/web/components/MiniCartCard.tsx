@@ -6,6 +6,7 @@ import { ProductDeal } from 'types';
 
 interface MiniCartItemProps {
   product: ProductDeal;
+  quantity: number;
   onRemove: (id: string) => void;
   onQuantityChange: (id: string, qty: number) => void;
 }
@@ -41,6 +42,7 @@ export const QuantitySelector = ({
 
 export const MiniCartCard: React.FC<MiniCartItemProps> = ({
   product,
+  quantity,
   onRemove,
   onQuantityChange,
 }) => {
@@ -92,7 +94,7 @@ export const MiniCartCard: React.FC<MiniCartItemProps> = ({
 
           <div className="flex space-x-3">
             <QuantitySelector
-              quantity={product.quantity}
+              quantity={quantity}
               onChange={(qty) => onQuantityChange(product.id, qty)}
             />
             <button

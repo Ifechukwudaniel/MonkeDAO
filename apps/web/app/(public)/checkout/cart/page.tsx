@@ -21,6 +21,7 @@ export default function CartPage() {
         ) : (
           cart.map((item) => (
             <MiniCartCard
+              quantity={item.quantity}
               key={item.id}
               product={item.deal}
               onRemove={removeFromCart}

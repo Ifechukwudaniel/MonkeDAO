@@ -1,14 +1,9 @@
 import { Crosshair, MapPin, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import type { Location } from 'store';
 
 // 🎨 Interface / Props Definition
 // =====================================
-interface Location {
-  name: string;
-  lat: number;
-  lng: number;
-}
-
 interface LocationPickerProps {
   onSelect: (location: Location) => void;
   defaultLocations?: Location[];
@@ -229,7 +224,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
 };
 
 /* ╔════════════════════════════════════════════╗
-   ║ ⬢ Locstion Search Select Component
+   ║ ⬢ Location Search Select Component
    ╚════════════════════════════════════════════╝ */
 export const LocationSearchSelect: React.FC<LocationSearchSelectProps> = ({
   onLocationSelect,

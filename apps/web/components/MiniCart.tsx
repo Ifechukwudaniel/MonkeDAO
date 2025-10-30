@@ -44,6 +44,7 @@ export const MiniCart = () => {
                 <MiniCartCard
                   key={item.deal.id}
                   product={item.deal}
+                  quantity={item.quantity}
                   onRemove={removeFromCart}
                   onQuantityChange={(id, qty) =>
                     updateQuantity(id, item.optionId, qty)

@@ -2,15 +2,6 @@ import DealCard from 'components/DealCard';
 import React from 'react';
 import { ProductDeal } from 'types';
 
-/* type Store = {
-  id: number;
-
-  name: string;
-  location: string;
-  phonenumber: number;
-  distance?: number;
-}; */
-
 type DealListsProps = {
   stores: ProductDeal[];
   query: string;
@@ -25,7 +16,7 @@ export const DealLists: React.FC<DealListsProps> = ({
   locationQuery,
 }) => {
   return (
-    <div className="border-[1.5px] border-neutral rounded-3xl lg:py-6 py-5 px-4 lg:px-5 max-h-[35rem] overflow-y-scroll storelist">
+    <div className="border-[1.5px] border-neutral rounded-3xl lg:py-6 py-5 px-4 lg:px-5 max-h-140 overflow-y-scroll storelist">
       <p className="text-neutral-600 text-xl">
         Store list: {stores.length} results
       </p>

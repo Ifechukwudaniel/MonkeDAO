@@ -1,3 +1,9 @@
+/* ╔════════════════════════════════════════════╗
+   ║ FILE: Merchant Deals Page
+   ║ DESC: Find Deals Created
+   ║ CONTRIBUTOR: Open Source
+   ╚════════════════════════════════════════════╝ */
+
 import { Button } from '@monkedeals/ui/components/button';
 import { PackageSearch } from 'lucide-react';
 

@@ -144,6 +144,32 @@ export interface ProductDeal {
   blockchain: BlockchainMetadata;
 }
 
+/* ╔════════════════════════════════════════════╗
+   ║               Redemption Types             ║
+   ╚════════════════════════════════════════════╝ */
+export interface RedemptionPayload {
+  dealId: string;
+  couponId: string;
+  user: string;
+  timestamp: number;
+  signature?: string;
+  dealTitle?: string;
+  dealValue?: string;
+  expiresAt?: number;
+}
+
+export interface VerificationResult {
+  success: boolean;
+  message: string;
+  warnings?: string[];
+  details?: {
+    alreadyRedeemed?: boolean;
+    expired?: boolean;
+    invalidSignature?: boolean;
+    ownership?: boolean;
+  };
+}
+
 export const productDeals: ProductDeal[] = [
   {
     id: 'deal_001',

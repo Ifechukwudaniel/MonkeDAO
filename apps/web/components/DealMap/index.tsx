@@ -44,7 +44,7 @@ type Store = {
 };
 
 type StoreLocatorProps = {
-  stores: Store[];
+  stores: ProductDeal[];
 };
 
 export function DealLocator({ stores }: StoreLocatorProps) {
@@ -52,7 +52,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
   const [storeNameQuery, setStoreNameQuery] = useState<string>('');
   const [locationQuery, setLocationQuery] = useState<string>('');
   const [radius, setRadius] = useState<number>(1000);
-  const [filteredStores, setFilteredStores] = useState<Store[]>(stores);
+  const [filteredStores, setFilteredStores] = useState<ProductDeal[]>(stores);
   const { isLoaded, loadError } = useLoadScript({
     id: 'google-maps-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_APIKEY as string,
@@ -98,14 +98,14 @@ export function DealLocator({ stores }: StoreLocatorProps) {
   const handleSearch = () => {
     if (selectedOption === 'store name') {
       const filtered = stores.filter((store) =>
-        store.deal.title.toLowerCase().includes(storeNameQuery.toLowerCase()),
+        store.title.toLowerCase().includes(storeNameQuery.toLowerCase()),
       );
       setFilteredStores(filtered);
     } else if (selectedOption === 'location' && selectedCoords) {
       const filtered = stores
         .map((store) => {
-          const storeLat = store.deal.location.coordinates?.lat;
-          const storeLng = store.deal.location.coordinates?.lng;
+          const storeLat = store.location.coordinates?.lat;
+          const storeLng = store.location.coordinates?.lng;
           if (storeLat == null || storeLng == null) {
             return { ...store, distance: Infinity };
           }

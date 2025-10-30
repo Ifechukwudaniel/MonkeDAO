@@ -4,6 +4,7 @@ import { Clock, Search, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import type { Location } from 'store';
 import { useRootStore } from 'store';
 import { LocationSearchSelect } from './LocationPicker';
 

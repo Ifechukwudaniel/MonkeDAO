@@ -13,7 +13,7 @@ import {
   Ticket,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // ✅ import this
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const navigationItems = [
@@ -56,7 +56,21 @@ const bottomNavigationItems = [
   },
 ];
 
-const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
+const SidebarNavItem = ({
+  item,
+  isActive,
+  isCollapsed,
+}: {
+  item: {
+    id: string;
+    label: string;
+    icon: React.ElementType;
+    href: string;
+    badge?: number;
+  };
+  isActive: boolean;
+  isCollapsed: boolean;
+}) => {
   const Icon = item.icon;
 
   return (

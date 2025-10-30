@@ -1,5 +1,5 @@
 import type { FilterState } from 'components/MarketPlaceFilter';
-import type { ProductDeal } from 'types';
+import type { ProductDeal, RedemptionPayload, VerificationResult } from 'types';
 
 /* ╔════════════════════════════════════════════╗
    ║                Parse Filters.              ║
@@ -109,4 +109,107 @@ export const applyDealFilters = (
 
     return true;
   });
+};
+
+/* ╔════════════════════════════════════════════╗
+   ║                Validation.                 ║
+   ╚════════════════════════════════════════════╝ */
+export const validateQrPayload = (data: string): RedemptionPayload | null => {
+  try {
+    const parsed = JSON.parse(data);
+
+    if (
+      !parsed.dealId ||
+      !parsed.couponId ||
+      !parsed.user ||
+      !parsed.timestamp
+    ) {
+      throw new Error('Missing required fields');
+    }
+
+    return parsed;
+  } catch (err) {
+    console.error('Invalid QR payload:', err);
+    return null;
+  }
+};
+
+/* ╔════════════════════════════════════════════╗
+   ║                Formatter                   ║
+   ╚════════════════════════════════════════════╝ */
+export const formatTimestamp = (timestamp: number) =>
+  new Date(timestamp).toLocaleString();
+
+export const formatTimeAgo = (timestamp: number) => {
+  const seconds = Math.floor((Date.now() - timestamp) / 1000);
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  return `${hours}h ago`;
+};
+
+/* ╔════════════════════════════════════════════╗
+   ║                Verify Redemption             ║
+   ╚════════════════════════════════════════════╝ */
+
+export const verifyRedemption = async (
+  payload: RedemptionPayload,
+): Promise<VerificationResult> => {
+  // TODO: Replace with actual backend/blockchain verification
+  // This should include:
+  // 1. Verify signature authenticity
+  // 2. Check NFT/coupon ownership on-chain
+  // 3. Verify coupon hasn't been redeemed (check redemption status)
+  // 4. Validate timestamp and expiration
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  const now = Date.now();
+  const qrAge = now - payload.timestamp;
+  const qrExpired = qrAge > 1000 * 60 * 5;
+  const dealExpired = payload.expiresAt && now > payload.expiresAt;
+  const alreadyRedeemed = Math.random() > 0.7;
+  const validSignature = payload.signature && payload.signature.length > 20;
+  const validOwnership = payload.user && payload.user.length > 10;
+
+  const warnings: string[] = [];
+  if (qrAge > 1000 * 60 * 2) warnings.push('QR code is older than 2 minutes');
+
+  if (alreadyRedeemed)
+    return {
+      success: false,
+      message: 'Coupon Already Redeemed',
+      details: { alreadyRedeemed: true },
+    };
+  if (qrExpired)
+    return {
+      success: false,
+      message: 'QR Code Expired',
+      details: { expired: true },
+    };
+  if (dealExpired)
+    return {
+      success: false,
+      message: 'Deal Has Expired',
+      details: { expired: true },
+    };
+  if (!validSignature)
+    return {
+      success: false,
+      message: 'Invalid Signature',
+      details: { invalidSignature: true },
+    };
+  if (!validOwnership)
+    return {
+      success: false,
+      message: 'Ownership Verification Failed',
+      details: { ownership: false },
+    };
+
+  return {
+    success: true,
+    message: 'Redemption Verified Successfully',
+    warnings: warnings.length > 0 ? warnings : undefined,
+  };
 };

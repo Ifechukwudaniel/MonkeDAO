@@ -1,19 +1,9 @@
 import { LocationEditIcon, PhoneIcon } from 'lucide-react';
 import React from 'react';
+import { ProductDeal } from 'types';
 
-type DealCardProps = {
-  id: number;
-  lat: number;
-  lng: number;
-  name: string;
-  location: string;
-  phonenumber: number;
-  distance?: number;
-};
-
-export const DealCard: React.FC<DealCardProps> = ({
-  name,
-  phonenumber,
+export const DealCard: React.FC<ProductDeal & { distance?: number }> = ({
+  title,
   location,
   distance,
 }) => {
@@ -24,18 +14,18 @@ export const DealCard: React.FC<DealCardProps> = ({
 
   return (
     <div className="py-4 px-4 border-neutral border-[3px] rounded-2xl bg-white active">
-      <h3 className="uppercase font-semibold text-2xl mb-1">{name}</h3>
+      <h3 className="uppercase font-semibold text-2xl mb-1">{title}</h3>
       <div className="py-[2px] text-neutral-600 text-xl flex items-center">
         <span className="mr-2">
           <LocationEditIcon />
         </span>
-        <p>{location} </p>
+        <p>{location.address} </p>
       </div>
       <div className="py-[2px] text-neutral-600 text-xl flex items-center">
         <span className="mr-2">
           <PhoneIcon />
         </span>
-        <p>{formatPhoneNumber(phonenumber)}</p>
+        <p>{formatPhoneNumber(903)}</p>
       </div>
       {distance !== undefined && (
         <div className="py-[2px] text-neutral-600 text-xl">

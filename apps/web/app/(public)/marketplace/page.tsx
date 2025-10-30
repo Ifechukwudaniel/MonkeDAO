@@ -15,7 +15,7 @@ import {
   applyDealFilters,
   filtersToParams,
   parseFiltersFromParams,
-} from 'utils/marketplace';
+} from 'utils';
 
 // 🎨 Constants
 // =====================================

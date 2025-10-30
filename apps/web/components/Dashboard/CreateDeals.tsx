@@ -19,7 +19,7 @@ interface DealFormData {
   listPrice: string;
   description: string;
   categories: string[];
-  stores: string[];
+  tags: string[];
   brands: string[];
   couponType: string;
   merchantWallet: string;
@@ -43,28 +43,19 @@ export const CreateDealForm: React.FC = () => {
     listPrice: '',
     description: '',
     categories: [],
-    stores: [],
+    tags: [],
     brands: [],
-    couponType: COUPON_TYPES[0],
-    merchantWallet: '', // from wallet kit later
+    couponType: COUPON_TYPES[0] ?? '',
+    merchantWallet: '',
     images: [],
   });
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep] = useState(1);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFormData((prev) => ({
-        ...prev,
-        images: Array.from(e.target.files),
-      }));
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -156,7 +147,7 @@ export const CreateDealForm: React.FC = () => {
             <TagInput
               label="tags"
               name="tags"
-              tags={formData.stores}
+              tags={formData.tags}
               setFormData={setFormData}
             />
           </div>
@@ -173,7 +164,7 @@ export const CreateDealForm: React.FC = () => {
           {/* Submit */}
           <Button
             type="submit"
-            className="w-full bg-primary uppercase font-medium uppercase hover:bg-green-700 text-white"
+            className="w-full bg-primary uppercase font-medium  hover:bg-green-700 text-white"
           >
             Post Deal
           </Button>

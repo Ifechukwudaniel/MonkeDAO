@@ -33,7 +33,7 @@ export const Marketplace = ({
             <p className="text-gray-500 text-lg">No deals match your filters</p>
             <button
               onClick={() => onFiltersChange(defaultFilters)}
-              className="mt-4 text-blue-600 hover:text-blue-700"
+              className="mt-4 text-primary hover:text-primary"
             >
               Clear all filters
             </button>
