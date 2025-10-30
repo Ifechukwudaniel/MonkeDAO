@@ -6,10 +6,17 @@
   "license": "MIT", 
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "deploy": "anchor deploy",
+    "deploy:devnet": "anchor deploy --provider.cluster devnet",
+    "deploy:mainnet": "anchor deploy --provider.cluster mainnet",
+    "init": "ts-node scripts/deploy.ts",
+    "mint": "ts-node scripts/mint.ts",
+    "test": "anchor test",
+    "build": "anchor build"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.30.1"
+    "@coral-xyz/anchor": "^0.32.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
