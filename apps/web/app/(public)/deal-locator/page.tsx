@@ -1,29 +1,19 @@
+/* ╔════════════════════════════════════════════╗
+   ║ FILE: Deal Locator Page
+   ║ DESC: This page shows you deal maps
+   ║ CONTRIBUTOR: Open Source
+   ╚════════════════════════════════════════════╝ */
+
 'use client';
 
 import { DealLocator } from 'components/DealMap';
 import 'react-dropdown/style.css';
 import { productDeals } from 'types';
 
-type Store = {
-  siteInfo: {
-    address: string;
-    email: string | null;
-    name: string;
-    phoneNumber: number;
-    website: string;
-    distance: number | null;
-  };
-  coordinates: { latitude: number; longitude: number };
-};
-
-type StoreProps = {
-  stores: any;
-};
-
-export default function Store({ stores }: StoreProps) {
+export default function Store() {
   return (
     <>
-      <DealLocator stores={productDeals} />
+      <DealLocator stores={productDeals.map((deal) => ({ deal }))} />
     </>
   );
 }

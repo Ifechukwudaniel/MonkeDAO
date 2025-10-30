@@ -16,7 +16,7 @@ interface Product {
 }
 
 export const MiniCart = () => {
-  const { cart, removeFromCart, updateQuantity, totalPrice } = useRootStore();
+  const { cart, removeFromCart, updateQuantity } = useRootStore();
   console.log('Rendering MiniCart', cart);
 
   return (
@@ -26,7 +26,7 @@ export const MiniCart = () => {
           <ShoppingCart size={20} />
           {cart && cart?.length > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#184623] px-1 text-[10px] font-bold text-white">
-              { cart && cart?.length}
+              {cart && cart?.length}
             </span>
           )}
         </div>
@@ -39,14 +39,17 @@ export const MiniCart = () => {
           </p>
         ) : (
           <>
-            {cart && cart?.map((item) => (
-              <MiniCartCard
-                key={item.deal.id}
-                product={item.deal}
-                onRemove={removeFromCart}
-                onQuantityChange={updateQuantity}
-              />
-            ))}
+            {cart &&
+              cart?.map((item) => (
+                <MiniCartCard
+                  key={item.deal.id}
+                  product={item.deal}
+                  onRemove={removeFromCart}
+                  onQuantityChange={(id, qty) =>
+                    updateQuantity(id, item.optionId, qty)
+                  }
+                />
+              ))}
             <Link
               href="/checkout/cart"
               className="text-xs text-white text-center mt-4 py-3  bg-[#4A8F5D] rounded-md px-5 hover:bg-[#3e7a4e] transition-colors font-semibold uppercase cursor-pointer"

@@ -1,42 +1,28 @@
+/* ╔════════════════════════════════════════════╗
+   ║ FILE: Category Page
+   ║ DESC: Filter Page for each Component
+   ║ CONTRIBUTOR: Open Source
+   ╚════════════════════════════════════════════╝ */
+
 'use client';
 
 import { CategoryLinks } from 'components/CategoryLinks';
 import DealCard from 'components/DealCard';
-import { FolderOpen } from 'lucide-react';
+import { EmptyState } from 'components/EmptyState';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
-import type { ProductDeal } from 'types';
 import { productDeals } from 'types';
 
-const mockDeals: ProductDeal[] = productDeals;
-
-interface EmptyStateProps {
-  title?: string;
-  message?: string;
-}
-
-export const EmptyState = ({
-  title = 'No items yet',
-  message = 'Check back soon for new deals.',
-}: EmptyStateProps) => {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 pt-5 text-center">
-      <div className="flex items-center justify-center w-24 h-24 mb-4 rounded-full bg-primary/10">
-        <FolderOpen size={48} className="text-gray-400" />
-      </div>
-      <h2 className="text-lg mb-2 font-medium text-gray-800">{title}</h2>
-      <p className="text-gray-200 font-semibold text-sm">{message}</p>
-    </div>
-  );
-};
-
 export default function CategoryPage() {
+  // 🌿 State Management
+  // =====================================
   const { category, subcategory } = useParams();
   const formattedCategory = String(category).toLowerCase();
   const formattedSubcategory = String(subcategory).toLowerCase();
 
+  // ═══ 🌿 Filter Deals ═══
   const filteredDeals = useMemo(() => {
-    return mockDeals.filter((deal) => {
+    return productDeals.filter((deal) => {
       const cat = deal.category.toLowerCase();
       const sub = deal.subCategory.toLowerCase();
 
