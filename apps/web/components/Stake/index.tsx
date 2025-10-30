@@ -1,5 +1,9 @@
 'use client';
 
+import { PublicKey } from '@solana/web3.js';
+import { useFetchRewardPools } from 'hooks/useFetchRewardPool';
+import { useFetchStakeEntries } from 'hooks/useFetchStakeEntries';
+import { useFetchStakePool } from 'hooks/useFetchStakePool';
 import {
   Clock,
   Coins,
@@ -11,7 +15,7 @@ import {
   Users,
   Wallet,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -22,10 +26,28 @@ import {
   YAxis,
 } from 'recharts';
 
+export const STAKE_POOL_DETAILS = {
+  stakePool: '2H29y5auDTCKox8vxZP2h5acrDai385KLpjiNKEtRqUj',
+  stakePoolMint: 'So11111111111111111111111111111111111111112',
+};
+
 export const Stake = () => {
   const [selectedTab, setSelectedTab] = useState('token');
   const [stakeAmount, setStakeAmount] = useState('');
   const [stakeDuration, setStakeDuration] = useState('90');
+  const stakePool = new PublicKey(
+    '2H29y5auDTCKox8vxZP2h5acrDai385KLpjiNKEtRqUj',
+  );
+
+  const { stakepool } = useFetchStakePool(STAKE_POOL_DETAILS.stakePool);
+  const { rewardPools } = useFetchRewardPools({ stakePool });
+  const { stakeEntries } = useFetchStakeEntries(stakePool);
+
+  useEffect(() => {
+    console.log(stakepool, 'yoooo');
+    console.log(rewardPools, ' reward pool yoooo');
+    console.log(stakeEntries, 'stake entied yoooo');
+  });
 
   const rewardsData = [
     { day: 0, rewards: 0 },

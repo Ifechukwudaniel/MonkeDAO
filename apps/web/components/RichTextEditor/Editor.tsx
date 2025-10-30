@@ -131,6 +131,9 @@ export default function Editor() {
         editorProps={{
           handleDrop: handleDrop,
           handlePaste: handlePaste,
+          attributes: {
+            class: 'prose prose-sm focus:outline-none p-4 px-6 min-h-[200px]',
+          },
         }}
         renderControls={() => <EditorMenuControls />}
         RichTextFieldProps={{
@@ -139,6 +142,26 @@ export default function Editor() {
           // field border from the editor
           MenuBarProps: {
             hide: !showMenuBar,
+            sx: {
+              backgroundColor: ' #fcfbf2',
+              borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+            },
+          },
+
+          sx: {
+            '& .MuiOutlinedInput-root': {
+              borderRadius: '12px',
+              backgroundColor: '#fcfbf2',
+              '& fieldset': {
+                borderColor: 'rgba(0,0,0,0.1)',
+              },
+              '&:hover fieldset': {
+                borderColor: 'rgba(0,0,0,0.2)',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: ' #4a8f5d',
+              },
+            },
           },
           // Below is an example of adding a toggle within the outlined field
           // for showing/hiding the editor menu bar, and a "submit" button for
