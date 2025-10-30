@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from '@monkedeals/ui/components/card';
 import { Input } from '@monkedeals/ui/components/input';
 import { Label } from '@monkedeals/ui/components/label';
 import RichTextEditor from 'components/RichTextEditor';
+import StepperIndicator from 'components/StepperIndicator';
 import React, { useState } from 'react';
 import { CategorySelect } from './CategorySelect';
 import FileUpload from './FileUpload';
@@ -48,6 +49,7 @@ export const CreateDealForm: React.FC = () => {
     merchantWallet: '', // from wallet kit later
     images: [],
   });
+  const [activeStep, setActiveStep] = useState(1);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -82,6 +84,8 @@ export const CreateDealForm: React.FC = () => {
       </CardHeader>
 
       <CardContent>
+        <StepperIndicator activeStep={activeStep} />
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <Label htmlFor="dealUrl" className=" text-sm mb-1">

@@ -47,7 +47,7 @@ export const DealCard: React.FC<{ deal: ProductDeal }> = ({ deal }) => {
             </div>
           )}
 
-          <div className="absolute left-3 top-3 bg-[#f3efcd] border border-black text-black px-3 py-1 rounded-full text-xs font-semibold">
+          <div className="absolute left-3 top-3 bg-[#FFC919] border  text-black px-3 py-1 rounded-full text-xs font-semibold">
             {deal.pricing.discountPercentage}% OFF
           </div>
 

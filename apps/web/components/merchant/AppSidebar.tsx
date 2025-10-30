@@ -11,8 +11,6 @@ import {
   Settings,
   Tag,
   Ticket,
-  Users,
-  Wallet,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; // ✅ import this
@@ -38,18 +36,6 @@ const navigationItems = [
     label: 'Analytics',
     icon: BarChart3,
     href: '/dashboard/analytics',
-  },
-  {
-    id: 'customers',
-    label: 'Customers',
-    icon: Users,
-    href: '/dashboard/customers',
-  },
-  {
-    id: 'payments',
-    label: 'Payments',
-    icon: Wallet,
-    href: '/dashboard/payments',
   },
 ];
 
@@ -78,15 +64,15 @@ const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
       href={item.href}
       className={`
         w-full flex items-center gap-3 px-3 py-2.5 rounded-lg
-        transition-all duration-200 relative group
-        ${isActive ? 'text-white bg-[#4A8F5D] font-medium' : 'text-gray-700 hover:bg-[#4A8F5D20]'}
+        transition-all duration-200 relative group uppercase  font-semibold
+        ${isActive ? 'text-white bg-[#4A8F5D] font-semibold' : 'text-gray-800 hover:bg-[#4A8F5D20] '}
         ${isCollapsed ? 'justify-center' : ''}
       `}
     >
       <Icon className="w-5 h-5 flex-shrink-0" />
       {!isCollapsed && (
         <>
-          <span className="flex-1 text-left text-sm">{item.label}</span>
+          <span className="flex-1 text-left text-xs">{item.label}</span>
           {item.badge && (
             <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 min-w-[20px] text-center">
               {item.badge}
@@ -95,7 +81,7 @@ const SidebarNavItem = ({ item, isActive, isCollapsed }) => {
         </>
       )}
       {isCollapsed && (
-        <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50">
+        <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50">
           {item.label}
           {item.badge && (
             <span className="ml-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
@@ -117,10 +103,10 @@ export const AppSidebar = () => {
 
   return (
     <div
-      className={`h-screen border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}
+      className={`h-screen border-r border-border-default flex flex-col transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+      <div className="p-4 border-b border-border-default flex items-center justify-between">
         {!isCollapsed && (
           <div>
             <h1 className="text-xl font-bold text-gray-900">Monkedeals</h1>
@@ -152,7 +138,7 @@ export const AppSidebar = () => {
       </nav>
 
       {/* Bottom Navigation */}
-      <div className="p-3 border-t border-gray-200 space-y-1">
+      <div className="p-3 border-t border-border-default space-y-1">
         {bottomNavigationItems.map((item) => (
           <SidebarNavItem
             key={item.id}
@@ -165,16 +151,16 @@ export const AppSidebar = () => {
 
       {/* User Profile */}
       {!isCollapsed && (
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-border-default">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
               JD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-medium text-gray-800 truncate">
                 John's Diner
               </p>
-              <p className="text-xs text-gray-500 truncate">john@diner.com</p>
+              <p className="text-xs text-gray-200 truncate">john@diner.com</p>
             </div>
           </div>
         </div>

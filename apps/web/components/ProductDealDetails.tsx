@@ -274,13 +274,15 @@ const PurchasePanel: React.FC<{
               onClick={() => setSelected(o.id)}
               className={`text-left rounded-md px-3 py-2 border ${
                 selected === o.id
-                  ? 'border-indigo-400 bg-indigo-50'
-                  : 'border-neutral-200 bg-white'
+                  ? 'border-green-500 bg-green-100'
+                  : 'border-border-default bg-secondary'
               }`}
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="font-medium text-black">{o.name}</div>
+                  <div className="font-bold uppercase text-sm text-black">
+                    {o.name}
+                  </div>
                   <div className="text-xs text-black">
                     {deal.pricing.currency} {o.discountedPrice} ·{' '}
                     {o.available ? 'Available' : 'Sold out'}
