@@ -1,13 +1,16 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::{self, Mint, Token, TokenAccount};
 use anchor_spl::associated_token::AssociatedToken;
+use anchor_spl::token::{self, Mint, Token, TokenAccount};
 use mpl_token_metadata::{
     instructions::{
-        CreateMetadataAccountV3Cpi, CreateMetadataAccountV3CpiAccounts, CreateMetadataAccountV3InstructionArgs,
-        CreateMasterEditionV3Cpi, CreateMasterEditionV3CpiAccounts, CreateMasterEditionV3InstructionArgs,
+        CreateMasterEditionV3Cpi, CreateMasterEditionV3CpiAccounts,
+        CreateMasterEditionV3InstructionArgs, CreateMetadataAccountV3Cpi,
+        CreateMetadataAccountV3CpiAccounts, CreateMetadataAccountV3InstructionArgs,
     },
     types::DataV2,
 };
+
+use crate::instructions::mint_collections::{NFTFactory, NftMetadata};
 
 #[derive(Accounts)]
 pub struct MintNFT<'info> {
@@ -64,41 +67,10 @@ pub struct MintNFT<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
-    
+
     /// CHECK: Metaplex token metadata program
     pub token_metadata_program: UncheckedAccount<'info>,
 }
-
-#[account]
-pub struct NFTFactory {
-    pub authority: Pubkey,          // 32
-    pub collection_name: String,    // 4 + 50
-    pub collection_symbol: String,  // 4 + 10 (NEW)
-    pub base_uri: String,           // 4 + 200 (NEW)
-    pub nft_count: u64,             // 8
-    pub bump: u8,                   // 1
-}
-
-#[account]
-pub struct NftMetadata {
-    pub mint: Pubkey,           // 32
-    pub name: String,           // 4 + 50
-    pub symbol: String,         // 4 + 10
-    pub uri: String,            // 4 + 200 (points to full metadata)
-    pub minted_at: i64,         // 8
-    pub owner: Pubkey,          // 32
-    pub factory: Pubkey,        // 32
-    pub token_id: u64,          // 8
-    pub redeemed: bool,         // 1 (NEW)
-    pub redeemed_at: Option<i64>, // 1 + 8 = 9 (NEW - optional timestamp)
-    pub bump: u8,               // 1
-}
-
-impl NftMetadata {
-    pub const SIZE: usize = 8 + 32 + 54 + 14 + 204 + 8 + 32 + 32 + 8 + 1 + 9 + 1;
-}
-
-
 
 pub fn mint_deal_nft(ctx: Context<MintNFT>, token_id_suffix: String) -> Result<()> {
     let factory = &mut ctx.accounts.factory;
@@ -156,7 +128,8 @@ pub fn mint_deal_nft(ctx: Context<MintNFT>, token_id_suffix: String) -> Result<(
             is_mutable: true,
             collection_details: None,
         },
-    ).invoke()?;
+    )
+    .invoke()?;
 
     CreateMasterEditionV3Cpi::new(
         &ctx.accounts.token_metadata_program.to_account_info(),
@@ -174,7 +147,8 @@ pub fn mint_deal_nft(ctx: Context<MintNFT>, token_id_suffix: String) -> Result<(
         CreateMasterEditionV3InstructionArgs {
             max_supply: Some(0),
         },
-    ).invoke()?;
+    )
+    .invoke()?;
 
     factory.nft_count += 1;
 

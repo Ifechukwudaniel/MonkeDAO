@@ -2,7 +2,6 @@
 
 [features]
 resolution = true
-skip-lint = false
 
 [programs.localnet]
 contracts = "9mPHcXYZkfYU9BBuFbT8driwX2ddL42pAs6JXXTseQwK"
