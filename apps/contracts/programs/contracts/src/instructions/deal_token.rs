@@ -1,13 +1,14 @@
+use crate::error::DealError;
 use anchor_lang::prelude::*;
 use anchor_spl::{
-    token::{self, Mint, Token, TokenAccount, MintTo, Burn, Transfer},
-    metadata::{create_metadata_accounts_v3, CreateMetadataAccountsV3,},
+    metadata::{create_metadata_accounts_v3, CreateMetadataAccountsV3},
+    token::{self, Burn, Mint, MintTo, Token, TokenAccount, Transfer},
 };
 use mpl_token_metadata::types::DataV2;
-use crate::error::DealError;
 
 #[derive(Accounts)]
 pub struct InitializeTokenMint<'info> {
+    /// CHECK: Created via CPI
     #[account(mut)]
     pub authority: Signer<'info>,
 
@@ -39,6 +40,8 @@ pub struct InitializeTokenMint<'info> {
     pub fee_wallet: Account<'info, TokenAccount>,
 
     pub token_program: Program<'info, Token>,
+
+    /// CHECK: Created via CPI
     #[account(address = mpl_token_metadata::ID)]
     pub metadata_program: UncheckedAccount<'info>,
 
@@ -139,7 +142,7 @@ pub fn initialize_mint(ctx: Context<InitializeTokenMint>) -> Result<()> {
             seller_fee_basis_points: 0,
             creators: None,
             collection: None,
-            uses: None
+            uses: None,
         },
         true,
         true,
@@ -151,7 +154,7 @@ pub fn initialize_mint(ctx: Context<InitializeTokenMint>) -> Result<()> {
 }
 
 pub fn mint_tokens(ctx: Context<MintTokens>, amount: u64) -> Result<()> {
-    let config_seeds : &[&[u8]] = &[b"deal_config", &[ctx.accounts.config.bump]];
+    let config_seeds: &[&[u8]] = &[b"deal_config", &[ctx.accounts.config.bump]];
     let signer_seeds = &[&config_seeds[..]];
 
     let cpi_ctx = CpiContext::new_with_signer(
@@ -165,7 +168,11 @@ pub fn mint_tokens(ctx: Context<MintTokens>, amount: u64) -> Result<()> {
     );
 
     token::mint_to(cpi_ctx, amount)?;
-    msg!("✅ Minted {} DEAL to {}", amount, ctx.accounts.recipient.key());
+    msg!(
+        "✅ Minted {} DEAL to {}",
+        amount,
+        ctx.accounts.recipient.key()
+    );
     Ok(())
 }
 
