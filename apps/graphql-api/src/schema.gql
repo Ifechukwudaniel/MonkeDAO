@@ -130,4 +130,5 @@ type User {
   image: String
   token: String
   username: String
+  walletAddress: String
 }

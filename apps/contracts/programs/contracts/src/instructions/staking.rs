@@ -1,8 +1,11 @@
+use crate::error::StakingError;
 use anchor_lang::prelude::*;
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::token::{self, Burn, Mint, MintTo, Token, TokenAccount, Transfer};
 
-use crate::{error::StakingError, instructions::mint_collections::NftMetadata, state::StakingPool};
+// ============================================================================
+// Account Structs
+// ============================================================================
 
 #[derive(Accounts)]
 pub struct InitializeStakingPool<'info> {
@@ -15,11 +18,9 @@ pub struct InitializeStakingPool<'info> {
     )]
     pub staking_pool: Account<'info, StakingPool>,
 
-    /// The DEAL token mint
     #[account(mut)]
     pub deal_token_mint: Account<'info, Mint>,
 
-    /// DEAL config account (has minting authority)
     #[account(seeds = [b"deal_config"], bump = deal_config.bump)]
     pub deal_config: Account<'info, DealConfig>,
 
@@ -65,14 +66,12 @@ pub struct StakeNFT<'info> {
     )]
     pub vault_nft_account: Account<'info, TokenAccount>,
 
-    /// DEAL token mint
     #[account(
         mut,
         address = staking_pool.deal_token_mint
     )]
     pub deal_token_mint: Account<'info, Mint>,
 
-    /// DEAL config with mint authority
     #[account(
         seeds = [b"deal_config"],
         bump = deal_config.bump,
@@ -80,7 +79,6 @@ pub struct StakeNFT<'info> {
     )]
     pub deal_config: Account<'info, DealConfig>,
 
-    /// User's DEAL token account
     #[account(
         init_if_needed,
         payer = user,
@@ -128,14 +126,12 @@ pub struct UnstakeNFT<'info> {
     )]
     pub user_nft_account: Account<'info, TokenAccount>,
 
-    /// DEAL token mint for burning
     #[account(
         mut,
         address = staking_pool.deal_token_mint
     )]
     pub deal_token_mint: Account<'info, Mint>,
 
-    /// User's DEAL token account (must have enough to burn)
     #[account(
         mut,
         associated_token::mint = deal_token_mint,
@@ -180,14 +176,12 @@ pub struct EmergencyUnstake<'info> {
     )]
     pub user_nft_account: Account<'info, TokenAccount>,
 
-    /// DEAL token mint for burning
     #[account(
         mut,
         address = staking_pool.deal_token_mint
     )]
     pub deal_token_mint: Account<'info, Mint>,
 
-    /// User's DEAL token account (must have 150% for penalty)
     #[account(
         mut,
         associated_token::mint = deal_token_mint,
@@ -213,15 +207,19 @@ pub struct LinkStreamFlow<'info> {
     pub user: Signer<'info>,
 }
 
+// ============================================================================
+// State Structs
+// ============================================================================
+
 #[account]
 pub struct StakingPool {
-    pub authority: Pubkey,        // 32
-    pub deal_token_mint: Pubkey,  // 32
-    pub deal_config: Pubkey,      // 32
-    pub base_tokens_per_day: u64, // 8 (with 6 decimals)
-    pub total_nfts_staked: u64,   // 8
-    pub total_deal_minted: u64,   // 8
-    pub bump: u8,                 // 1
+    pub authority: Pubkey,
+    pub deal_token_mint: Pubkey,
+    pub deal_config: Pubkey,
+    pub base_tokens_per_day: u64,
+    pub total_nfts_staked: u64,
+    pub total_deal_minted: u64,
+    pub bump: u8,
 }
 
 impl StakingPool {
@@ -230,23 +228,22 @@ impl StakingPool {
 
 #[account]
 pub struct StakeAccount {
-    pub user: Pubkey,                  // 32
-    pub nft_mint: Pubkey,              // 32
-    pub staked_at: i64,                // 8
-    pub unlock_time: i64,              // 8
-    pub lock_duration_days: u64,       // 8
-    pub reward_multiplier: u64,        // 8 (100 = 1.0x)
-    pub deal_tokens_received: u64,     // 8 (total DEAL minted)
-    pub streamflow_vesting_id: Pubkey, // 32 (optional StreamFlow integration)
-    pub is_active: bool,               // 1
-    pub bump: u8,                      // 1
+    pub user: Pubkey,
+    pub nft_mint: Pubkey,
+    pub staked_at: i64,
+    pub unlock_time: i64,
+    pub lock_duration_days: u64,
+    pub reward_multiplier: u64,
+    pub deal_tokens_received: u64,
+    pub streamflow_vesting_id: Pubkey,
+    pub is_active: bool,
+    pub bump: u8,
 }
 
 impl StakeAccount {
     pub const SIZE: usize = 32 + 32 + 8 + 8 + 8 + 8 + 8 + 32 + 1 + 1;
 }
 
-/// DEAL Token Config (matches your token contract)
 #[account]
 pub struct DealConfig {
     pub authority: Pubkey,
@@ -254,10 +251,15 @@ pub struct DealConfig {
     pub fee_wallet: Pubkey,
     pub bump: u8,
 }
+
+// ============================================================================
+// Instruction Handlers
+// ============================================================================
+
 /// Initialize the staking pool with DEAL token rewards
 pub fn initialize_staking_pool(
     ctx: Context<InitializeStakingPool>,
-    base_tokens_per_day: u64, // Base DEAL tokens per day (with 6 decimals)
+    base_tokens_per_day: u64,
 ) -> Result<()> {
     let pool = &mut ctx.accounts.staking_pool;
     pool.authority = ctx.accounts.authority.key();
@@ -276,12 +278,19 @@ pub fn initialize_staking_pool(
 }
 
 /// Stake NFT and receive immediate DEAL token rewards based on lock duration
-pub fn stake_nft_for_deal(ctx: Context<StakeNFT>, lock_duration_days: u64) -> Result<()> {
-    require!(lock_duration_days >= 1, StakingError::LockPeriodTooShort);
-    require!(lock_duration_days <= 1825, StakingError::LockPeriodTooLong); // Max 5 years
+pub fn stake_nft_for_deal(
+    ctx: Context<StakeNFT>,
+    lock_duration_days: u64,
+) -> Result<()> {
+    require!(
+        lock_duration_days >= 1,
+        StakingError::LockPeriodTooShort
+    );
+    require!(
+        lock_duration_days <= 1825,
+        StakingError::LockPeriodTooLong
+    );
 
-    let pool = &mut ctx.accounts.staking_pool;
-    let stake_account = &mut ctx.accounts.stake_account;
     let clock = Clock::get()?;
 
     // Transfer NFT from user to program vault
@@ -299,12 +308,15 @@ pub fn stake_nft_for_deal(ctx: Context<StakeNFT>, lock_duration_days: u64) -> Re
 
     // Calculate reward multiplier and total DEAL tokens to mint
     let multiplier = calculate_multiplier(lock_duration_days);
-    let total_deal_tokens =
-        calculate_total_deal_reward(pool.base_tokens_per_day, lock_duration_days, multiplier)?;
+    let total_deal_tokens = calculate_total_deal_reward(
+        ctx.accounts.staking_pool.base_tokens_per_day,
+        lock_duration_days,
+        multiplier,
+    )?;
 
     // Mint DEAL tokens immediately to user
-    let config_key = pool.deal_config.key();
-    let deal_config_seeds = &[b"deal_config".as_ref(), &[ctx.accounts.deal_config.bump]];
+    let deal_config_bump = ctx.accounts.deal_config.bump;
+    let deal_config_seeds = &[b"deal_config".as_ref(), &[deal_config_bump]];
     let config_signer = &[&deal_config_seeds[..]];
 
     token::mint_to(
@@ -321,6 +333,7 @@ pub fn stake_nft_for_deal(ctx: Context<StakeNFT>, lock_duration_days: u64) -> Re
     )?;
 
     // Initialize stake account
+    let stake_account = &mut ctx.accounts.stake_account;
     stake_account.user = ctx.accounts.user.key();
     stake_account.nft_mint = ctx.accounts.nft_mint.key();
     stake_account.staked_at = clock.unix_timestamp;
@@ -328,10 +341,12 @@ pub fn stake_nft_for_deal(ctx: Context<StakeNFT>, lock_duration_days: u64) -> Re
     stake_account.lock_duration_days = lock_duration_days;
     stake_account.reward_multiplier = multiplier;
     stake_account.deal_tokens_received = total_deal_tokens;
-    stake_account.streamflow_vesting_id = Pubkey::default(); // Can be set later
+    stake_account.streamflow_vesting_id = Pubkey::default();
     stake_account.is_active = true;
     stake_account.bump = ctx.bumps.stake_account;
 
+    // Update pool stats
+    let pool = &mut ctx.accounts.staking_pool;
     pool.total_nfts_staked += 1;
     pool.total_deal_minted += total_deal_tokens;
 
@@ -346,9 +361,8 @@ pub fn stake_nft_for_deal(ctx: Context<StakeNFT>, lock_duration_days: u64) -> Re
 
 /// Unstake NFT after lock period ends - MUST return all DEAL tokens
 pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
-    let stake_account = &mut ctx.accounts.stake_account;
-    let pool = &mut ctx.accounts.staking_pool;
     let clock = Clock::get()?;
+    let stake_account = &ctx.accounts.stake_account;
 
     require!(stake_account.is_active, StakingError::StakeNotActive);
     require!(
@@ -367,7 +381,7 @@ pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
     token::burn(
         CpiContext::new(
             ctx.accounts.token_program.to_account_info(),
-            token::Burn {
+            Burn {
                 mint: ctx.accounts.deal_token_mint.to_account_info(),
                 from: ctx.accounts.user_deal_account.to_account_info(),
                 authority: ctx.accounts.user.to_account_info(),
@@ -377,8 +391,9 @@ pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
     )?;
 
     // PDA seeds for signing
-    let authority_key = pool.authority.key();
-    let seeds = &[b"staking_pool", authority_key.as_ref(), &[pool.bump]];
+    let authority_key = ctx.accounts.staking_pool.authority;
+    let pool_bump = ctx.accounts.staking_pool.bump;
+    let seeds = &[b"staking_pool", authority_key.as_ref(), &[pool_bump]];
     let signer = &[&seeds[..]];
 
     // Transfer NFT back to user
@@ -395,6 +410,9 @@ pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
         1,
     )?;
 
+    // Update state after successful transfer
+    let stake_account = &mut ctx.accounts.stake_account;
+    let pool = &mut ctx.accounts.staking_pool;
     stake_account.is_active = false;
     pool.total_nfts_staked -= 1;
 
@@ -427,8 +445,7 @@ pub fn link_streamflow_vesting(
 
 /// Emergency unstake with penalty - must return 150% of DEAL tokens received
 pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
-    let stake_account = &mut ctx.accounts.stake_account;
-    let pool = &mut ctx.accounts.staking_pool;
+    let stake_account = &ctx.accounts.stake_account;
 
     require!(stake_account.is_active, StakingError::StakeNotActive);
 
@@ -448,7 +465,7 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
     token::burn(
         CpiContext::new(
             ctx.accounts.token_program.to_account_info(),
-            token::Burn {
+            Burn {
                 mint: ctx.accounts.deal_token_mint.to_account_info(),
                 from: ctx.accounts.user_deal_account.to_account_info(),
                 authority: ctx.accounts.user.to_account_info(),
@@ -457,8 +474,10 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
         penalty_amount,
     )?;
 
-    let authority_key = pool.authority.key();
-    let seeds = &[b"staking_pool", authority_key.as_ref(), &[pool.bump]];
+    // PDA seeds for signing
+    let authority_key = ctx.accounts.staking_pool.authority;
+    let pool_bump = ctx.accounts.staking_pool.bump;
+    let seeds = &[b"staking_pool", authority_key.as_ref(), &[pool_bump]];
     let signer = &[&seeds[..]];
 
     // Transfer NFT back to user
@@ -475,6 +494,9 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
         1,
     )?;
 
+    // Update state after successful transfer
+    let stake_account = &mut ctx.accounts.stake_account;
+    let pool = &mut ctx.accounts.staking_pool;
     stake_account.is_active = false;
     pool.total_nfts_staked -= 1;
 
@@ -482,6 +504,10 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
     msg!("🔥 Burned {} DEAL tokens (150% penalty)", penalty_amount);
     Ok(())
 }
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
 
 /// Calculate reward multiplier based on lock duration
 fn calculate_multiplier(lock_duration_days: u64) -> u64 {
