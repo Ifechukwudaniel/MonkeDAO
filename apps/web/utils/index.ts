@@ -1,4 +1,3 @@
-import { Provider } from '@reown/appkit-adapter-solana/react';
 import type { FilterState } from 'components/MarketPlaceFilter';
 import type { ProductDeal, RedemptionPayload, VerificationResult } from 'types';
 
@@ -214,62 +213,62 @@ export const verifyRedemption = async (
     warnings: warnings.length > 0 ? warnings : undefined,
   };
 };
+// /*
+// /**
+//  * Signs a message using the Solana wallet provider.
+//  * @param {object} walletProvider - The connected wallet provider.
+//  * @param {string} nonce - A unique nonce for the message.
+//  * @returns {Promise<string>} - The signed message in hexadecimal format.
+//  */
+// export const signMessage = async (walletProvider: Provider, nonce: string) => {
+//   try {
+//     const message = `Sign this message to authenticate to Paystream. This request will not trigger a blockchain transaction or cost any gas fees. iat: ${nonce}`;
 
-/**
- * Signs a message using the Solana wallet provider.
- * @param {object} walletProvider - The connected wallet provider.
- * @param {string} nonce - A unique nonce for the message.
- * @returns {Promise<string>} - The signed message in hexadecimal format.
- */
-export const signMessage = async (walletProvider: Provider, nonce: string) => {
-  try {
-    const message = `Sign this message to authenticate to Paystream. This request will not trigger a blockchain transaction or cost any gas fees. iat: ${nonce}`;
+//     const encodedMessage = new TextEncoder().encode(message);
 
-    const encodedMessage = new TextEncoder().encode(message);
+//     const signature = await walletProvider.signMessage(encodedMessage);
 
-    const signature = await walletProvider.signMessage(encodedMessage);
+//     const signatureHex = Buffer.from(signature).toString('hex');
 
-    const signatureHex = Buffer.from(signature).toString('hex');
+//     return signatureHex;
+//   } catch (error) {
+//     console.error('Error signing message:', error);
+//     throw error;
+//   }
+// };
 
-    return signatureHex;
-  } catch (error) {
-    console.error('Error signing message:', error);
-    throw error;
-  }
-};
+// import { PublicKey } from '@solana/web3.js';
+// import nacl from 'tweetnacl';
 
-import { PublicKey } from '@solana/web3.js';
-import nacl from 'tweetnacl';
+// /**
+//  * Verifies a signed message using the wallet's public key.
+//  * @param {string} publicKey - The wallet's public key.
+//  * @param {string} signatureHex - The signed message in hexadecimal format.
+//  * @param {string} nonce - The nonce used in the original message.
+//  * @returns {boolean} - True if the signature is valid, false otherwise.
+//  */
+// export const verifyMessage = (
+//   publicKey: string,
+//   signatureHex: string,
+//   nonce: string,
+// ) => {
+//   try {
+//     const message = `Sign this message to authenticate to Monkedeal. This request will not trigger a blockchain transaction or cost any gas fees. iat: ${nonce}`;
 
-/**
- * Verifies a signed message using the wallet's public key.
- * @param {string} publicKey - The wallet's public key.
- * @param {string} signatureHex - The signed message in hexadecimal format.
- * @param {string} nonce - The nonce used in the original message.
- * @returns {boolean} - True if the signature is valid, false otherwise.
- */
-export const verifyMessage = (
-  publicKey: string,
-  signatureHex: string,
-  nonce: string,
-) => {
-  try {
-    const message = `Sign this message to authenticate to Monkedeal. This request will not trigger a blockchain transaction or cost any gas fees. iat: ${nonce}`;
+//     const encodedMessage = new TextEncoder().encode(message);
 
-    const encodedMessage = new TextEncoder().encode(message);
+//     const signatureBuffer = Buffer.from(signatureHex, 'hex');
+//     const publicKeyBytes = new PublicKey(publicKey).toBytes();
 
-    const signatureBuffer = Buffer.from(signatureHex, 'hex');
-    const publicKeyBytes = new PublicKey(publicKey).toBytes();
+//     const isValid = nacl.sign.detached.verify(
+//       encodedMessage,
+//       signatureBuffer,
+//       publicKeyBytes,
+//     );
 
-    const isValid = nacl.sign.detached.verify(
-      encodedMessage,
-      signatureBuffer,
-      publicKeyBytes,
-    );
-
-    return isValid;
-  } catch (error) {
-    console.error('Error verifying message:', error);
-    return false;
-  }
-};
+//     return isValid;
+//   } catch (error) {
+//     console.error('Error verifying message:', error);
+//     return false;
+//   }
+// }; */

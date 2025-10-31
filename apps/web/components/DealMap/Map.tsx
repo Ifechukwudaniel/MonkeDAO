@@ -15,6 +15,8 @@ type MapProps = {
 const Map: React.FC<MapProps> = ({ stores, isLoaded }) => {
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
+  console.log('ap', stores, isLoaded);
+
   if (!isLoaded)
     return (
       <div className="h-[600px] w-[100%] flex items-center justify-center rounded-2xl animate-pulse">
@@ -27,6 +29,12 @@ const Map: React.FC<MapProps> = ({ stores, isLoaded }) => {
   const mapOptions = {
     styles: MapStyles.styles,
   };
+
+  const storesWithCoords = stores.filter(
+    (s) =>
+      s.deal.location?.coordinates?.lat != null &&
+      s.deal.location?.coordinates?.lng != null,
+  );
 
   return (
     <div
@@ -47,26 +55,26 @@ const Map: React.FC<MapProps> = ({ stores, isLoaded }) => {
           width: '100%',
           height: '600px',
           margin: 'auto',
-          borderRadius: '1.5rem',
-          border: '3px solid #0a0b33',
+          borderRadius: '5px',
+          border: '1.5px solid #c4c4c4',
         }}
       >
-        {stores.map((store) => (
+        {storesWithCoords.map((store) => (
           <MarkerF
             key={store.deal.title}
             position={{
-              lat: store.deal.location.coordinates?.lat,
-              lng: store.deal.location.coordinates?.lng,
+              lat: store.deal.location.coordinates!.lat,
+              lng: store.deal.location.coordinates!.lng,
             }}
             onClick={() => setSelectedStore(store)}
           ></MarkerF>
         ))}
 
-        {selectedStore && (
+        {selectedStore && selectedStore.deal.location.coordinates && (
           <InfoWindowF
             position={{
-              lat: selectedStore.deal.location.coordinates?.lat,
-              lng: selectedStore.deal.location.coordinates?.lat,
+              lat: selectedStore.deal.location.coordinates.lat,
+              lng: selectedStore.deal.location.coordinates.lng,
             }}
             onCloseClick={() => setSelectedStore(null)}
           >

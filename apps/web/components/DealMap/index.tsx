@@ -24,7 +24,7 @@ export const SearchBar: React.FC<SearchProps> = ({
   ...rest
 }) => {
   return (
-    <div className="flex border py-[0.6rem] px-3 rounded-xl border-black w-full items-center">
+    <div className="flex border py-1.5 px-3 rounded-sm border-border-default w-full items-center">
       <div className="mr-3">
         <SearchIcon />
       </div>
@@ -33,7 +33,7 @@ export const SearchBar: React.FC<SearchProps> = ({
         onChange={onChange}
         {...rest}
         placeholder={placeholder ? placeholder : 'search'}
-        className="min-w-[16rem] focus:border-none focus:outline-none placeholder:text-neutral-600 placeholder:font-light bg-transparent buddy-champion-regular text-lg"
+        className="min-w-[16rem] focus:border-none focus:outline-none placeholder:text-gray-200  bg-transparent  text-sm"
       />
     </div>
   );
@@ -64,6 +64,8 @@ export function DealLocator({ stores }: StoreLocatorProps) {
     lng: number;
   } | null>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+
+  console.log('fil', filteredStores);
 
   const handleSelect = (option: { value: string; label: string }) => {
     setSelectedOption(option.value);
@@ -163,9 +165,10 @@ export function DealLocator({ stores }: StoreLocatorProps) {
   if (loadError) {
     // eslint-disable-next-line no-console
     console.error('[DealLocator] Google Maps load error:', loadError);
+    console.log('blac');
   }
 
-  if (!isLoaded) {
+  /*   if (!isLoaded) {
     return (
       <div className="min-h-[60vh] bg-accent-1300  border-t-2 border-neutral store lg:pb-24 py-16">
         <div className="container mx-auto">
@@ -177,7 +180,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
         </div>
       </div>
     );
-  }
+  } */
 
   const handleUseMyLocation = () => {
     if (navigator.geolocation) {
@@ -205,7 +208,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
   };
 
   return (
-    <section className="bg-accent-1300 border-t-2 border-neutral store lg:pb-24">
+    <section className="bg-secondary border-t-2 border-border-default lg:pb-24">
       <div className="container mx-auto px-4 lg:px-0">
         <div className="flex flex-col md:flex-row gap-x-3 mt-10 items-center lg:gap-y-3 gap-y-6">
           <Dropdown
@@ -214,26 +217,39 @@ export function DealLocator({ stores }: StoreLocatorProps) {
             value={selectedOption}
             placeholder="Select an option"
             className="mt-1 w-full lg:w-[19rem]"
-            controlClassName="buddy-champion select-input"
-            menuClassName="select-menu buddy-champion"
+            controlClassName="buddy-champion select-input border-2 border-border-default"
+            menuClassName="select-menu buddy-champion border-2 border-border-default"
           />
           <div className="lg:w-[50%] w-full">
             {selectedOption === 'location' ? (
-              <Autocomplete
-                options={{ fields: ['geometry', 'formatted_address', 'name'] }}
-                onLoad={(autocomplete) => {
-                  autocompleteRef.current = autocomplete;
-                }}
-                onPlaceChanged={handlePlaceChanged}
-              >
+              isLoaded ? (
+                <Autocomplete
+                  options={{
+                    fields: ['geometry', 'formatted_address', 'name'],
+                  }}
+                  onLoad={(autocomplete) => {
+                    autocompleteRef.current = autocomplete;
+                  }}
+                  onPlaceChanged={handlePlaceChanged}
+                >
+                  <SearchBar
+                    type="text"
+                    placeholder="Search by Location"
+                    value={locationQuery}
+                    onChange={handleLocationChange}
+                    className="search-bar"
+                  />
+                </Autocomplete>
+              ) : (
                 <SearchBar
                   type="text"
-                  placeholder="Search by Location"
+                  placeholder="Loading location search..."
                   value={locationQuery}
                   onChange={handleLocationChange}
                   className="search-bar"
+                  disabled
                 />
-              </Autocomplete>
+              )
             ) : (
               <SearchBar
                 placeholder="Search by Name"
@@ -248,9 +264,9 @@ export function DealLocator({ stores }: StoreLocatorProps) {
               selectedOption !== 'location' ? 'invisible' : ''
             }`}
           >
-            <p className="lg:text-xl mb-1">
-              <span className="text-neutral-600">Radius:</span>{' '}
-              <span>{radius} Kilometers</span>
+            <p className="lg:text-base mb-1">
+              <span className="text-gray-600 font-bold">Radius:</span>{' '}
+              <span className="font-bold">{radius} Kilometers</span>
             </p>
 
             <div className="range__slider">
@@ -266,30 +282,33 @@ export function DealLocator({ stores }: StoreLocatorProps) {
           </div>
 
           <button
-            className="bg-darkblue text-white rounded-2xl px-6 lg:py-2 font-semibold cursor-pointer uppercase inline-block mt-1 border-neutral border-[2.5px] w-full lg:w-auto text-2xl py-[4px] ml-3"
+            className="bg-primary text-white px-6 lg:py-1.5 font-bold cursor-pointer  inline-block mt-1 border-2 border-primary w-full lg:w-auto text-sm uppercase py-[4px] ml-3 transition-all hover:border-primary"
             onClick={handleSearch}
           >
             Search
           </button>
         </div>
 
-        <div className="mt-2 text-xl">
+        <div className="mt-2 text-sm font-semibold">
           <button
-            className="flex items-center gap-x-1 cursor-pointer"
+            className="flex items-center gap-x-1 cursor-pointer font-medium mr-2 "
             onClick={handleUseMyLocation}
           >
             <GpsFixed /> Use my location
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-[40%,60%] my-14 gap-10 ">
+        <div className="grid grid-cols-2 my-14 gap-10">
           <DealLists
             stores={filteredStores}
             query={storeNameQuery}
             locationQuery={locationQuery}
             selectedOption={selectedOption}
           />
-          <Map stores={filteredStores} isLoaded={isLoaded} />
+          <Map
+            stores={filteredStores.map((deal) => ({ deal }))}
+            isLoaded={isLoaded}
+          />
         </div>
       </div>
     </section>

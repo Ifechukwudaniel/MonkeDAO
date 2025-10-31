@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { ActionIcons } from '../ActionIcons';
-import { Searchbar } from '../Searchbar';
 
 // 🎨 Interface / Props Definition
 // =====================================
@@ -40,8 +39,8 @@ export const PublicHeader = () => {
           </div>
         </Link>
 
-        <Searchbar />
-
+        {/*         <Searchbar />
+         */}
         {/* ✦ CONNECT BUTTON ✦ */}
         <div className="hidden md:flex items-center">
           <ActionIcons />

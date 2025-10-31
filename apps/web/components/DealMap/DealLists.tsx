@@ -1,6 +1,6 @@
-import DealCard from 'components/DealCard';
 import React from 'react';
 import { ProductDeal } from 'types';
+import { DealCard } from './DealCard';
 
 type DealListsProps = {
   stores: ProductDeal[];
@@ -16,22 +16,17 @@ export const DealLists: React.FC<DealListsProps> = ({
   locationQuery,
 }) => {
   return (
-    <div className="border-[1.5px] border-neutral rounded-3xl lg:py-6 py-5 px-4 lg:px-5 max-h-140 overflow-y-scroll storelist">
-      <p className="text-neutral-600 text-xl">
+    <div className="border border-border-default rounded-sm lg:py-6 py-5 px-4 lg:px-5 max-h-120 overflow-y-scroll ">
+      <p className="text-gray-800 text-sm uppercase">
         Store list: {stores.length} results
       </p>
       {stores.length > 0 ? (
         <div className="grid gap-y-4 mt-6">
-          {stores.map((store: ProductDeal, index: any) => (
+          {stores.map((store: ProductDeal) => (
             <DealCard
               key={store.id}
-              id={store.id}
-              lat={store.location.coordinates?.lat}
-              lng={store.location.coordinates?.lng}
-              name={store.title}
-              location={store.location.address}
-              phonenumber={124}
-              distance={200}
+              {...store}
+              distance={(store as any).distance}
             />
           ))}
         </div>

@@ -387,6 +387,8 @@ export const productDeals: ProductDeal[] = [
       address: 'Digital Product – No Physical Location',
       city: 'Remote',
       country: 'Global',
+      coordinates: { lat: 41.8868, lng: -87.6217 },
+      distanceFromCenter: 0.5,
     },
     description:
       'SoftVault brings Web3 utility to software licensing. Own your Adobe Creative Suite license as an NFT that’s verifiable, transferable, and tradable. You can even stake your license NFT to earn upgrade credits. Perfect for creators who value permanence and flexibility.',
@@ -504,6 +506,8 @@ export const productDeals: ProductDeal[] = [
       address: 'On-chain',
       city: 'Decentralized',
       country: 'Global',
+      coordinates: { lat: 41.8868, lng: -87.6217 },
+      distanceFromCenter: 0.5,
     },
     description:
       'The CashLoop Tier 1 NFT unlocks lifetime cashback rewards and special access to merchant airdrops. Redeem on partner stores, or stake the NFT to earn governance tokens. Holders receive bonus multipliers during campaigns.',

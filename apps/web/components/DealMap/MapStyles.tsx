@@ -1,133 +1,83 @@
 const styles = [
   {
     featureType: 'water',
-    elementType: 'geometry',
     stylers: [
       {
-        color: '#F2F2F4',
+        saturation: 43,
       },
       {
-        lightness: 0,
+        lightness: -11,
+      },
+      {
+        hue: '#0088ff',
       },
     ],
   },
   {
-    featureType: 'landscape',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#ffffff',
-      },
-      {
-        lightness: 20,
-      },
-    ],
-  },
-  {
-    featureType: 'road.highway',
+    featureType: 'road',
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#555555',
+        hue: '#ff0000',
       },
       {
-        lightness: 17,
+        saturation: -100,
+      },
+      {
+        lightness: 99,
       },
     ],
   },
   {
-    featureType: 'road.highway',
+    featureType: 'road',
     elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#ffffff',
+        color: '#808080',
       },
       {
-        lightness: 29,
-      },
-      {
-        weight: 0.2,
+        lightness: 54,
       },
     ],
   },
   {
-    featureType: 'road.arterial',
-    elementType: 'geometry',
+    featureType: 'landscape.man_made',
+    elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#ffffff',
-      },
-      {
-        lightness: 18,
-      },
-    ],
-  },
-  {
-    featureType: 'road.local',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#ffffff',
-      },
-      {
-        lightness: 16,
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#f5f5f5',
-      },
-      {
-        lightness: 21,
+        color: '#ece2d9',
       },
     ],
   },
   {
     featureType: 'poi.park',
-    elementType: 'geometry',
+    elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#dedede',
-      },
-      {
-        lightness: 21,
+        color: '#ccdca1',
       },
     ],
   },
   {
-    elementType: 'labels.text.stroke',
-    stylers: [
-      {
-        visibility: 'on',
-      },
-      {
-        color: '#ffffff',
-      },
-      {
-        lightness: 16,
-      },
-    ],
-  },
-  {
+    featureType: 'road',
     elementType: 'labels.text.fill',
     stylers: [
       {
-        saturation: 36,
-      },
-      {
-        color: '#333333',
-      },
-      {
-        lightness: 40,
+        color: '#767676',
       },
     ],
   },
   {
-    elementType: 'labels.icon',
+    featureType: 'road',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        color: '#ffffff',
+      },
+    ],
+  },
+  {
+    featureType: 'poi',
     stylers: [
       {
         visibility: 'off',
@@ -135,59 +85,47 @@ const styles = [
     ],
   },
   {
-    featureType: 'transit',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#f2f2f2',
-      },
-      {
-        lightness: 19,
-      },
-    ],
-  },
-  {
-    featureType: 'administrative',
+    featureType: 'landscape.natural',
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#fefefe',
+        visibility: 'on',
       },
       {
-        lightness: 20,
-      },
-    ],
-  },
-  {
-    featureType: 'administrative',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#000000',
-      },
-      {
-        lightness: 17,
-      },
-      {
-        weight: 0.2,
+        color: '#b8cb93',
       },
     ],
   },
   {
-    featureType: 'administrative.country',
-    elementType: 'geometry.stroke',
+    featureType: 'poi.park',
     stylers: [
       {
-        color: '#000000',
+        visibility: 'on',
       },
+    ],
+  },
+  {
+    featureType: 'poi.sports_complex',
+    stylers: [
       {
-        lightness: 0,
+        visibility: 'on',
       },
+    ],
+  },
+  {
+    featureType: 'poi.medical',
+    stylers: [
       {
-        weight: 0.2,
+        visibility: 'on',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.business',
+    stylers: [
+      {
+        visibility: 'simplified',
       },
     ],
   },
 ];
-
-export default { styles };

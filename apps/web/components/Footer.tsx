@@ -32,6 +32,9 @@ export const Footer = () => {
           <Link href="/dashboard" className="hover:text-white">
             Merchant Dashboard
           </Link>
+          <Link href="/deal-locator" className="hover:text-white">
+            Deal Locator
+          </Link>
         </nav>
 
         <nav className="flex flex-col gap-4 text-sm font-medium border-l h-full border-[#1f492a]  text-text-translucent px-6 py-10 ">
