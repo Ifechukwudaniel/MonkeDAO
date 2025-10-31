@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Solana Contracts",
   "private": true,
-  "license": "MIT", 
+  "license": "MIT",
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
@@ -12,8 +12,7 @@
     "deploy:mainnet": "anchor deploy --provider.cluster mainnet",
     "init": "ts-node scripts/deploy.ts",
     "mint": "ts-node scripts/mint.ts",
-    "test": "anchor test",
-    "build": "anchor build"
+    "test": "anchor test"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.32.1"

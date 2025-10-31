@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { ActionIcons } from '../ActionIcons';
-import ConnectButton from '../ConnectButton';
 import { Searchbar } from '../Searchbar';
 
 // 🎨 Interface / Props Definition
@@ -46,7 +45,6 @@ export const PublicHeader = () => {
         {/* ✦ CONNECT BUTTON ✦ */}
         <div className="hidden md:flex items-center">
           <ActionIcons />
-          <ConnectButton />
         </div>
 
         {/* ✦ MENU TOGGLE ✦ */}
@@ -73,9 +71,7 @@ export const PublicHeader = () => {
                 {item.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-neutral-200">
-              <ConnectButton />
-            </div>
+            <div className="pt-4 border-t border-neutral-200"></div>
           </nav>
         </div>
       )}

@@ -2,8 +2,7 @@ import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
 import type { AppKitNetwork } from '@reown/appkit/networks';
 import { solana, solanaDevnet, solanaTestnet } from '@reown/appkit/networks';
 
-export const projectId =
-  process.env.NEXT_PUBLIC_PROJECT_ID || 'b56e18d47c72ab683b10814fe9495694';
+export const projectId = '37cda0bf-dd8b-437a-ad00-bfb444180510';
 
 if (!projectId) {
   throw new Error('Project ID is not defined');

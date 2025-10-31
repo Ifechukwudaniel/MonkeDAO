@@ -6,30 +6,27 @@
 
 import ProductDealDetail from 'components/ProductDealDetails';
 import { notFound } from 'next/navigation';
-import type { ProductDeal } from 'types';
 import { productDeals } from 'types';
 
 // 🎨 Interface / Props Definition
 // =====================================
 interface ProductPageProps {
-  params: {
-    product: string;
-  };
+  params: Promise<{ product: string }> | { product: string };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product: ProductDeal | undefined = productDeals.find(
-    (deal) => deal.id === params.product || deal.slug === params.product,
-  );
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { product } = await params;
 
-  if (!product) {
-    console.log('No product found for', params.product);
+  const deal = productDeals.find((d) => d.id === product || d.slug === product);
+
+  if (!deal) {
+    console.log('No product found for', product);
     notFound();
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ProductDealDetail deal={product!} />
+      <ProductDealDetail deal={deal} />
     </div>
   );
 }

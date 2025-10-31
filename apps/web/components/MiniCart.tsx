@@ -17,7 +17,6 @@ interface Product {
 
 export const MiniCart = () => {
   const { cart, removeFromCart, updateQuantity } = useRootStore();
-  console.log('Rendering MiniCart', cart);
 
   return (
     <PopoverBox

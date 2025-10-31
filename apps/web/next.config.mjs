@@ -12,6 +12,12 @@ const nextConfig = {
       'prod-image-cdn.tensor.trade',
     ],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

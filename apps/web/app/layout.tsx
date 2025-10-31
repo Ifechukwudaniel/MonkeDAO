@@ -6,7 +6,6 @@
 
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import AppProvider from '../providers/AppProvider';
 
 import './globals.css';
 
@@ -27,11 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AppProvider>
-        <body className={`${CPMono.variable} ${CPMono.className} text-black `}>
-          {children}
-        </body>
-      </AppProvider>
+      <body className={`${CPMono.variable} ${CPMono.className} text-black `}>
+        {children}
+      </body>
     </html>
   );
 }
