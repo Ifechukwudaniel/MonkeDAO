@@ -1,5 +1,5 @@
-use crate::instructions::mint_collections::NftMetadata;
 use anchor_lang::prelude::*;
+use crate::NftMetadata;
 
 #[derive(Accounts)]
 pub struct CheckRedemption<'info> {

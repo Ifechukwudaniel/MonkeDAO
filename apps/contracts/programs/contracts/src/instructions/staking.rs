@@ -32,13 +32,16 @@ pub struct InitializeStakingPool<'info> {
 
 #[derive(Accounts)]
 pub struct StakeNFT<'info> {
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
     #[account(
         mut,
         seeds = [b"staking_pool", staking_pool.authority.as_ref()],
         bump = staking_pool.bump,
     )]
     pub staking_pool: Account<'info, StakingPool>,
-
+    
     #[account(
         init,
         payer = user,
@@ -47,49 +50,41 @@ pub struct StakeNFT<'info> {
         bump
     )]
     pub stake_account: Account<'info, StakeAccount>,
-
+    
     pub nft_mint: Account<'info, Mint>,
-
+    
     #[account(
         mut,
         associated_token::mint = nft_mint,
-        associated_token::authority = user,
-        constraint = user_nft_account.amount == 1 @ StakingError::NoNFTToStake
+        associated_token::authority = user
     )]
     pub user_nft_account: Account<'info, TokenAccount>,
-
+    
     #[account(
-        init_if_needed,
+        init,
         payer = user,
         associated_token::mint = nft_mint,
-        associated_token::authority = staking_pool,
+        associated_token::authority = staking_pool
     )]
     pub vault_nft_account: Account<'info, TokenAccount>,
-
+    
     #[account(
         mut,
         address = staking_pool.deal_token_mint
     )]
     pub deal_token_mint: Account<'info, Mint>,
-
+    
     #[account(
-        seeds = [b"deal_config"],
-        bump = deal_config.bump,
-        constraint = deal_config.mint == deal_token_mint.key() @ StakingError::InvalidDealMint
-    )]
-    pub deal_config: Account<'info, DealConfig>,
-
-    #[account(
-        init_if_needed,
+        init,
         payer = user,
         associated_token::mint = deal_token_mint,
-        associated_token::authority = user,
+        associated_token::authority = user
     )]
     pub user_deal_account: Account<'info, TokenAccount>,
-
-    #[account(mut)]
-    pub user: Signer<'info>,
-
+    
+    #[account(seeds = [b"deal_config"], bump = deal_config.bump)]
+    pub deal_config: Account<'info, DealConfig>,
+    
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
@@ -109,6 +104,7 @@ pub struct UnstakeNFT<'info> {
         seeds = [b"stake", user.key().as_ref(), stake_account.nft_mint.as_ref()],
         bump = stake_account.bump,
         has_one = user,
+        close = user
     )]
     pub stake_account: Account<'info, StakeAccount>,
 
@@ -159,6 +155,7 @@ pub struct EmergencyUnstake<'info> {
         seeds = [b"stake", user.key().as_ref(), stake_account.nft_mint.as_ref()],
         bump = stake_account.bump,
         has_one = user,
+        close = user
     )]
     pub stake_account: Account<'info, StakeAccount>,
 
@@ -195,17 +192,6 @@ pub struct EmergencyUnstake<'info> {
     pub token_program: Program<'info, Token>,
 }
 
-#[derive(Accounts)]
-pub struct LinkStreamFlow<'info> {
-    #[account(
-        mut,
-        seeds = [b"stake", user.key().as_ref(), stake_account.nft_mint.as_ref()],
-        bump = stake_account.bump,
-    )]
-    pub stake_account: Account<'info, StakeAccount>,
-
-    pub user: Signer<'info>,
-}
 
 // ============================================================================
 // State Structs
@@ -410,10 +396,8 @@ pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
         1,
     )?;
 
-    // Update state after successful transfer
-    let stake_account = &mut ctx.accounts.stake_account;
+    // Update pool stats (stake_account will be auto-closed due to `close = user` constraint)
     let pool = &mut ctx.accounts.staking_pool;
-    stake_account.is_active = false;
     pool.total_nfts_staked -= 1;
 
     msg!("✅ NFT unstaked successfully!");
@@ -424,24 +408,6 @@ pub fn unstake_nft(ctx: Context<UnstakeNFT>) -> Result<()> {
     Ok(())
 }
 
-/// Link StreamFlow vesting contract to stake (optional integration)
-pub fn link_streamflow_vesting(
-    ctx: Context<LinkStreamFlow>,
-    vesting_contract_id: Pubkey,
-) -> Result<()> {
-    let stake_account = &mut ctx.accounts.stake_account;
-
-    require!(stake_account.is_active, StakingError::StakeNotActive);
-    require!(
-        stake_account.user == ctx.accounts.user.key(),
-        StakingError::Unauthorized
-    );
-
-    stake_account.streamflow_vesting_id = vesting_contract_id;
-
-    msg!("🔗 StreamFlow vesting linked: {}", vesting_contract_id);
-    Ok(())
-}
 
 /// Emergency unstake with penalty - must return 150% of DEAL tokens received
 pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
@@ -450,10 +416,10 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
     require!(stake_account.is_active, StakingError::StakeNotActive);
 
     // PENALTY: Must return 150% of DEAL tokens for early withdrawal
-    let penalty_amount = stake_account
-        .deal_tokens_received
+    let penalty_amount = (stake_account.deal_tokens_received as u128)
         .checked_mul(150)
         .and_then(|v| v.checked_div(100))
+        .and_then(|v| u64::try_from(v).ok())
         .ok_or(StakingError::CalculationOverflow)?;
 
     require!(
@@ -494,10 +460,8 @@ pub fn emergency_unstake(ctx: Context<EmergencyUnstake>) -> Result<()> {
         1,
     )?;
 
-    // Update state after successful transfer
-    let stake_account = &mut ctx.accounts.stake_account;
+    // Update pool stats (stake_account will be auto-closed due to `close = user` constraint)
     let pool = &mut ctx.accounts.staking_pool;
-    stake_account.is_active = false;
     pool.total_nfts_staked -= 1;
 
     msg!("⚠️ Emergency unstake executed (early withdrawal)");
@@ -535,5 +499,5 @@ fn calculate_total_deal_reward(
         .and_then(|r| r.checked_div(100))
         .ok_or(StakingError::CalculationOverflow)?;
 
-    Ok(total_tokens as u64)
+    u64::try_from(total_tokens).map_err(|_| StakingError::RewardTooLarge.into())
 }

@@ -22,4 +22,6 @@ pub enum StakingError {
     InsufficientDealTokens,
     #[msg("Insufficient DEAL tokens for emergency unstake - requires 150% penalty")]
     InsufficientDealTokensForPenalty,
+    #[msg("Reward too large")]
+    RewardTooLarge
 }

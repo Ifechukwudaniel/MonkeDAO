@@ -1,4 +1,4 @@
-use crate::{error::CollectionError, instructions::mint_collections::NftMetadata};
+use crate::{error::CollectionError, NftMetadata};
 use anchor_lang::prelude::*;
 use anchor_spl::token::TokenAccount;
 

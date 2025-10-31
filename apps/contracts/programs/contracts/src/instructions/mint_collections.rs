@@ -9,8 +9,8 @@ use mpl_token_metadata::{
     },
     types::DataV2,
 };
-
-use crate::instructions::mint_collections::{NFTFactory, NftMetadata};
+use crate::NFTFactory;
+use crate::NftMetadata;
 
 #[derive(Accounts)]
 pub struct MintNFT<'info> {
