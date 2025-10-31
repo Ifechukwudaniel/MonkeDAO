@@ -32,6 +32,18 @@ pub mod contracts {
     pub fn initialize_token_mint(ctx: Context<InitializeTokenMint>) -> Result<()> {
         instructions::deal_token::initialize_mint(ctx)
     }
+
+    pub fn mint_tokens(ctx: Context<MintTokens>, amount: u64) -> Result<()> {
+        instructions::deal_token::mint_tokens(ctx, amount)
+    }
+
+    pub fn burn(ctx: Context<BurnTokens>, amount: u64) -> Result<()> {
+        instructions::deal_token::burn(ctx, amount)
+    }
+
+    pub fn transfer(ctx: Context<TransferTokens>, amount: u64, fee_bps: u16) -> Result<()> {
+        instructions::deal_token::transfer(ctx, amount, fee_bps)
+    }
 }
 
 #[derive(Accounts)]
