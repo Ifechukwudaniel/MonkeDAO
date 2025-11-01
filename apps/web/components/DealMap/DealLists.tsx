@@ -1,40 +1,40 @@
-import React from 'react';
 import { ProductDeal } from 'types';
 import { DealCard } from './DealCard';
 
 type DealListsProps = {
-  stores: ProductDeal[];
+  deals: ProductDeal[];
   query: string;
   selectedOption: string;
   locationQuery: string;
 };
 
 export const DealLists: React.FC<DealListsProps> = ({
-  stores,
+  deals,
   query,
   selectedOption,
   locationQuery,
 }) => {
+  console.log(deals, 'check');
+
   return (
-    <div className="border border-border-default rounded-sm lg:py-6 py-5 px-4 lg:px-5 max-h-120 overflow-y-scroll ">
+    <div className="border border-border-default rounded-sm lg:py-6 py-5 px-4 lg:px-5 max-h-120 overflow-y-scroll">
       <p className="text-gray-800 text-sm uppercase">
-        Store list: {stores.length} results
+        Deals list: {deals.length} results
       </p>
-      {stores.length > 0 ? (
+
+      {deals.length > 0 ? (
         <div className="grid gap-y-4 mt-6">
-          {stores.map((store: ProductDeal) => (
-            <DealCard
-              key={store.id}
-              {...store}
-              distance={(store as any).distance}
-            />
-          ))}
+          {deals.map((deal) => {
+            return (
+              <DealCard key={deal.id} {...deal} distance={deal.distance} />
+            );
+          })}
         </div>
       ) : (
         <p className="text-neutral-600 mt-6">
           {selectedOption === 'store name'
-            ? `There is no store containing the store name: "${query}"`
-            : `There are no stores near "${locationQuery}"`}
+            ? `There is no deals containing the name: "${query}"`
+            : `There are no deals near "${locationQuery}"`}
         </p>
       )}
     </div>

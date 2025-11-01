@@ -1,40 +1,114 @@
-import { GoogleMap, InfoWindowF, MarkerF } from '@react-google-maps/api';
-import React, { useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductDeal } from 'types';
-import MapStyles from './MapStyles';
 
 type Store = {
   deal: ProductDeal;
 };
 
 type MapProps = {
-  stores: Store[];
+  stores: { deal: ProductDeal }[];
   isLoaded: boolean;
+  accessToken: string;
 };
 
-const Map: React.FC<MapProps> = ({ stores, isLoaded }) => {
+const Map: React.FC<MapProps> = ({ stores, isLoaded, accessToken }) => {
+  console.log(stores, 'map');
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<mapboxgl.Map | null>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const popupRef = useRef<mapboxgl.Popup | null>(null);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
-  console.log('ap', stores, isLoaded);
+  // Initialize map
+  useEffect(() => {
+    if (!isLoaded || !mapContainerRef.current || mapRef.current) return;
 
-  if (!isLoaded)
-    return (
-      <div className="h-[600px] w-[100%] flex items-center justify-center rounded-2xl animate-pulse">
-        <div className=" bg-slate-500 w-full h-full rounded-2xl"></div>
-      </div>
+    mapboxgl.accessToken = accessToken;
+
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: 'mapbox://styles/mapbox/streets-v12', // or 'mapbox://styles/mapbox/dark-v11'
+      center: [0, 40], // [lng, lat]
+      zoom: 6.7,
+    });
+
+    return () => {
+      mapRef.current?.remove();
+    };
+  }, [isLoaded, accessToken]);
+
+  // Update markers when stores change
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    // Clear existing markers
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+
+    const storesWithCoords = stores.filter(
+      (s) =>
+        s.deal.location?.coordinates?.lat != null &&
+        s.deal.location?.coordinates?.lng != null,
     );
 
-  const center = { lat: 40, lng: 0 };
+    // Add new markers
+    storesWithCoords.forEach((store) => {
+      const marker = new mapboxgl.Marker()
+        .setLngLat([
+          store.deal.location.coordinates!.lng,
+          store.deal.location.coordinates!.lat,
+        ])
+        .addTo(mapRef.current!);
 
-  const mapOptions = {
-    styles: MapStyles.styles,
-  };
+      marker.getElement().addEventListener('click', () => {
+        setSelectedStore(store);
+      });
 
-  const storesWithCoords = stores.filter(
-    (s) =>
-      s.deal.location?.coordinates?.lat != null &&
-      s.deal.location?.coordinates?.lng != null,
-  );
+      markersRef.current.push(marker);
+    });
+  }, [stores]);
+
+  // Handle popup for selected store
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    // Remove existing popup
+    if (popupRef.current) {
+      popupRef.current.remove();
+    }
+
+    if (selectedStore && selectedStore.deal.location.coordinates) {
+      const popupContent = `
+        <div style="padding-right: 16px;">
+          <h3 style="font-size: 1.25rem; font-weight: bold;">${selectedStore.deal.title}</h3>
+          <p style="font-size: 1.125rem; color: #525252;">${selectedStore.deal.shortDescription}</p>
+          <p style="margin-bottom: 16px; font-size: 1.125rem; color: #525252;">${selectedStore.deal.merchant}</p>
+        </div>
+      `;
+
+      popupRef.current = new mapboxgl.Popup({ offset: 25 })
+        .setLngLat([
+          selectedStore.deal.location.coordinates.lng,
+          selectedStore.deal.location.coordinates.lat,
+        ])
+        .setHTML(popupContent)
+        .addTo(mapRef.current);
+
+      popupRef.current.on('close', () => {
+        setSelectedStore(null);
+      });
+    }
+  }, [selectedStore]);
+
+  if (!isLoaded) {
+    return (
+      <div className="h-[600px] w-[100%] flex items-center justify-center rounded-2xl animate-pulse">
+        <div className="bg-slate-500 w-full h-full rounded-2xl"></div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -46,50 +120,17 @@ const Map: React.FC<MapProps> = ({ stores, isLoaded }) => {
         gap: '20px',
       }}
     >
-      <GoogleMap
-        zoom={1.7}
-        center={center}
-        options={mapOptions}
-        mapContainerClassName="map"
-        mapContainerStyle={{
+      <div
+        ref={mapContainerRef}
+        className="map"
+        style={{
           width: '100%',
           height: '600px',
           margin: 'auto',
           borderRadius: '5px',
           border: '1.5px solid #c4c4c4',
         }}
-      >
-        {storesWithCoords.map((store) => (
-          <MarkerF
-            key={store.deal.title}
-            position={{
-              lat: store.deal.location.coordinates!.lat,
-              lng: store.deal.location.coordinates!.lng,
-            }}
-            onClick={() => setSelectedStore(store)}
-          ></MarkerF>
-        ))}
-
-        {selectedStore && selectedStore.deal.location.coordinates && (
-          <InfoWindowF
-            position={{
-              lat: selectedStore.deal.location.coordinates.lat,
-              lng: selectedStore.deal.location.coordinates.lng,
-            }}
-            onCloseClick={() => setSelectedStore(null)}
-          >
-            <div className="pr-4">
-              <h3 className="text-xl font-bold">{selectedStore.deal.title}</h3>
-              <p className="text-lg text-neutral-600">
-                {selectedStore.deal.shortDescription}
-              </p>
-              <p className="mb-4 text-lg text-neutral-600">
-                {selectedStore.deal.merchant}
-              </p>
-            </div>
-          </InfoWindowF>
-        )}
-      </GoogleMap>
+      />
     </div>
   );
 };

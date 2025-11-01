@@ -18,6 +18,8 @@ type SearchProps = InputHTMLAttributes<HTMLInputElement> & {
   placeholder?: string;
 };
 
+type Deal = { deal: ProductDeal };
+
 export const SearchBar: React.FC<SearchProps> = ({
   onChange,
   placeholder,
@@ -39,26 +41,23 @@ export const SearchBar: React.FC<SearchProps> = ({
   );
 };
 
-type Store = {
-  deal: ProductDeal;
-};
-
 type StoreLocatorProps = {
-  stores: ProductDeal[];
+  deals: ProductDeal[];
 };
 
-export function DealLocator({ stores }: StoreLocatorProps) {
+export function DealLocator({ deals }: StoreLocatorProps) {
   const [selectedOption, setSelectedOption] = useState<string>(defaultOption);
   const [storeNameQuery, setStoreNameQuery] = useState<string>('');
   const [locationQuery, setLocationQuery] = useState<string>('');
   const [radius, setRadius] = useState<number>(1000);
-  const [filteredStores, setFilteredStores] = useState<ProductDeal[]>(stores);
+  const [filteredStores, setFilteredStores] = useState<ProductDeal[]>(deals);
   const { isLoaded, loadError } = useLoadScript({
     id: 'google-maps-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_APIKEY as string,
     libraries: ['places', 'geometry'],
     version: 'weekly',
   });
+  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY;
   const [selectedCoords, setSelectedCoords] = useState<{
     lat: number;
     lng: number;
@@ -69,7 +68,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
 
   const handleSelect = (option: { value: string; label: string }) => {
     setSelectedOption(option.value);
-    setFilteredStores(stores);
+    setFilteredStores(deals);
 
     setLocationQuery('');
     setStoreNameQuery('');
@@ -99,17 +98,17 @@ export function DealLocator({ stores }: StoreLocatorProps) {
 
   const handleSearch = () => {
     if (selectedOption === 'store name') {
-      const filtered = stores.filter((store) =>
-        store.title.toLowerCase().includes(storeNameQuery.toLowerCase()),
+      const filtered = deals.filter((deal) =>
+        deal.title.toLowerCase().includes(storeNameQuery.toLowerCase()),
       );
       setFilteredStores(filtered);
     } else if (selectedOption === 'location' && selectedCoords) {
-      const filtered = stores
-        .map((store) => {
-          const storeLat = store.location.coordinates?.lat;
-          const storeLng = store.location.coordinates?.lng;
+      const filtered = deals
+        .map((deal) => {
+          const storeLat = deal.location.coordinates?.lat;
+          const storeLng = deal.location.coordinates?.lng;
           if (storeLat == null || storeLng == null) {
-            return { ...store, distance: Infinity };
+            return { ...deal, distance: Infinity };
           }
           const distance =
             getDistance(
@@ -122,12 +121,12 @@ export function DealLocator({ stores }: StoreLocatorProps) {
                 longitude: storeLng,
               },
             ) / 1000;
-          return { ...store, distance };
+          return { ...deal, distance };
         })
         .filter((store) => store.distance! <= radius); // Filter stores within the selected radius
       setFilteredStores(filtered);
     } else {
-      setFilteredStores(stores);
+      setFilteredStores(deals);
     }
   };
 
@@ -208,7 +207,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
   };
 
   return (
-    <section className="bg-secondary border-t-2 border-border-default lg:pb-24">
+    <section className="bg-secondary border-t border-border-default lg:pb-24">
       <div className="container mx-auto px-4 lg:px-0">
         <div className="flex flex-col md:flex-row gap-x-3 mt-10 items-center lg:gap-y-3 gap-y-6">
           <Dropdown
@@ -217,7 +216,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
             value={selectedOption}
             placeholder="Select an option"
             className="mt-1 w-full lg:w-[19rem]"
-            controlClassName="buddy-champion select-input border-2 border-border-default"
+            controlClassName=" select-input border-2 border-border-default"
             menuClassName="select-menu buddy-champion border-2 border-border-default"
           />
           <div className="lg:w-[50%] w-full">
@@ -264,8 +263,8 @@ export function DealLocator({ stores }: StoreLocatorProps) {
               selectedOption !== 'location' ? 'invisible' : ''
             }`}
           >
-            <p className="lg:text-base mb-1">
-              <span className="text-gray-600 font-bold">Radius:</span>{' '}
+            <p className=" mb-1 text-sm">
+              <span className="text-gray-800 font-bold">Radius:</span>{' '}
               <span className="font-bold">{radius} Kilometers</span>
             </p>
 
@@ -300,7 +299,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
 
         <div className="grid grid-cols-2 my-14 gap-10">
           <DealLists
-            stores={filteredStores}
+            deals={filteredStores}
             query={storeNameQuery}
             locationQuery={locationQuery}
             selectedOption={selectedOption}
@@ -308,6 +307,7 @@ export function DealLocator({ stores }: StoreLocatorProps) {
           <Map
             stores={filteredStores.map((deal) => ({ deal }))}
             isLoaded={isLoaded}
+            accessToken={accessToken}
           />
         </div>
       </div>

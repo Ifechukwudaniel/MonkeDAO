@@ -142,6 +142,7 @@ export interface ProductDeal {
   reviews: Review[];
   purchaseStats: PurchaseStats;
   blockchain: BlockchainMetadata;
+  distance?: number;
 }
 
 /* ╔════════════════════════════════════════════╗

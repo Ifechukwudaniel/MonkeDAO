@@ -64,6 +64,58 @@ button {
   font-family: var(--font-space-grotesk), sans-serif;
 }
 
+.range {
+  height: 1.2rem;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 10px;
+  z-index: 20;
+}
+
+.range__slider [type='range'] {
+  width: 100%;
+  height: 13px;
+  border-radius: 6px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  accent-color: #4a8f5d;
+}
+
+.range__slider [type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #4a8f5d;
+  border: #fff 3px solid;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+.range__slider [type='range']::-webkit-slider-thumb:hover {
+  background: #2e3092;
+}
+
+.range__slider [type='range']::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 50%;
+  background: #4a8f5d;
+  border: #fff 5px solid;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+.range__slider [type='range']::-moz-range-thumb:hover {
+  background: #2e3092;
+}
+
 @layer base {
   * {
     margin: 0;
